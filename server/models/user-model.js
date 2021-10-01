@@ -20,14 +20,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.methods.isStudent = function () {
-  return this.role == "student";
-};
-
-userSchema.methods.isInstructor = function () {
-  return this.role == "instructor";
-};
-
 userSchema.methods.isAdmin = function () {
   return this.role == "admin";
 };

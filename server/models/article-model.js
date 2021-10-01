@@ -1,6 +1,27 @@
 const mongoose = require("mongoose");
 
 const articleSchema = new mongoose.Schema({
+  board: {
+    type: String,
+    enum: [
+      "NBA",
+      "健身",
+      "外送",
+      "居家",
+      "心情",
+      "感情",
+      "星座",
+      "時事",
+      "有趣",
+      "梗圖",
+      "烹飪",
+      "理財",
+      "穿搭",
+      "網購",
+      "西斯",
+    ],
+    required: true,
+  },
   title: {
     type: String,
     minLength: 6,
@@ -18,8 +39,11 @@ const articleSchema = new mongoose.Schema({
     ref: "User", // 連結到User Model, User => 一定要符合開頭大寫,不可複數的格式
     required: true,
   },
-  like: {
+  likes: {
     type: [String], // 裝按讚的user_id
+  },
+  image: {
+    type: [String], // 文章的圖片
   },
   comment: {
     type: [
@@ -35,7 +59,7 @@ const articleSchema = new mongoose.Schema({
           maxLength: 100,
           required: true,
         },
-        like: {
+        likes: {
           type: [String], // 裝按讚的user_id
         },
       },

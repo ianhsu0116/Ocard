@@ -23,6 +23,25 @@ const loginValidation = (data) => {
 // article insert Validation
 const articleValidation = (data) => {
   const schema = Joi.object({
+    board: Joi.string()
+      .required()
+      .valid(
+        "NBA",
+        "健身",
+        "外送",
+        "居家",
+        "心情",
+        "感情",
+        "星座",
+        "時事",
+        "有趣",
+        "梗圖",
+        "烹飪",
+        "理財",
+        "穿搭",
+        "網購",
+        "西斯"
+      ),
     title: Joi.string().min(6).max(50).required(),
     content: Joi.string().min(10).max(1000).required(),
     author: Joi.string().required(),
