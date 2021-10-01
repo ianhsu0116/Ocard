@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background: #00324e;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #006aa6;
+  padding: 0.75rem;
+}
+
+.header .logo {
+  width: 85px;
+  margin: 0.2rem 1rem;
+  position: relative;
+}
+
+.header .logo img {
+  width: 100%;
+}
+
+.header .header-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-left .ham_menu {
+  display: none;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  cursor: pointer;
+}
+
+.header .header-left .ham_menu img {
+  position: absolute;
+  width: 100%;
+}
+
+.header .header-left .search input,
+.header .header-left .search button {
+  display: inline-block;
+  font-size: 16px;
+  padding: 5px;
+  color: white;
+}
+
+.header .header-left .search input {
+  width: 650px;
+  background-color: #00588a;
+  border: 1px solid #00588a;
+  border-radius: 5px 0 0 5px;
+}
+
+.header .header-left .search button {
+  padding: 5px 10px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  background-color: #006aa6;
+  border: 1px solid #00588a;
+  border-radius: 0 5px 5px 0;
+}
+
+.header .header-right a {
+  color: white;
+  font-weight: 100;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 950px) {
+  .search input {
+    width: 500px !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header-left .ham_menu {
+    display: block !important;
+  }
+  .header-left .search {
+    display: none;
+  }
+}
+
+.sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 200px;
+  margin: 1rem 0;
+  margin-left: 2rem;
+  max-height: 90vh;
+  overflow: scroll;
+}
+
+.sidebar a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sidebar a:hover {
+  background: black;
+}
+
+.sidebar a div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sidebar a div .boardSecond {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sidebar a div .board-icon-con {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.sidebar a div .board-icon-con img {
+  background: white;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.sidebar a div .board-icon-con2 {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.sidebar a div .board-icon-con2 img {
+  background: white;
+  width: 100%;
+}
+
+.sidebar a div span {
+  font-size: 18px;
+  color: white;
+}
+/*# sourceMappingURL=style.css.map */

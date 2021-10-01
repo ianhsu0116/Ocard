@@ -1,0 +1,61 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 200px;
+  margin: 1rem 0;
+  margin-left: 2rem;
+  max-height: 90vh;
+  overflow: scroll;
+
+  a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    width: 100%;
+    &:hover {
+      background: black;
+    }
+
+    div {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .boardSecond {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .board-icon-con {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+
+        img {
+          background: white;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+
+      .board-icon-con2 {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          background: white;
+          width: 100%;
+        }
+      }
+
+      span {
+        font-size: 18px;
+        color: white;
+      }
+    }
+  }
+}

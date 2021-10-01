@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background: rgb(0, 50, 78);
+}
+
+a {
+  text-decoration: none;
+}
+
+@import "./header";
+@import "./sidebar";
