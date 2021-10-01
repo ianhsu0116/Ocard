@@ -1,15 +1,14 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import NavigationIcons from "./icons/NavigationIcons";
 import ocardLogo from "./images/Ocard.svg";
-import ham_menu from "./images/ham-menu.svg";
+//import ham_menu from "./images/ham-menu.svg";
 
 const HeaderComponent = () => {
   return (
     <header className="header">
       <div className="header-left">
-        <div className="ham_menu">
-          <img src={ham_menu} alt="ham_menu "></img>
-        </div>
+        <div className="ham_menu">{NavigationIcons.HamMenuIcon()}</div>
         <div className="logo">
           <Link to="/">
             <img src={ocardLogo} alt="Ocard Logo"></img>
@@ -17,7 +16,7 @@ const HeaderComponent = () => {
         </div>
         <div className="search">
           <input placeholder="搜尋"></input>
-          <button>搜尋</button>
+          <button>{NavigationIcons.SearchIcon()}</button>
         </div>
       </div>
       <div className="header-right">

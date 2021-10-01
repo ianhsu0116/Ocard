@@ -4,6 +4,8 @@ import ham_menu from "./images/ham-menu.svg";
 import mouse from "./images/mouse.jpg";
 
 const SidebarComponent = () => {
+  const API_URL = "http://localhost:7777/api/article";
+  console.log(require("./images/NBA.jpeg"));
   let boards = [
     "NBA",
     "健身",
@@ -32,17 +34,20 @@ const SidebarComponent = () => {
           <span>所有看板</span>
         </div>
       </a>
-      <a>
+      <div className="boardSecond">
         <div>
-          <span className="boardSecond">Ocard 精選看板</span>
+          <span>Ocard 精選看板</span>
         </div>
-      </a>
+      </div>
 
       {boards.map((board) => (
         <a>
           <div>
             <div className="board-icon-con2">
-              <img src={mouse} alt={board} />
+              <img
+                src={require(`./images/${board}.jpeg`).default}
+                alt={board}
+              />
             </div>
             <span>{board}</span>
           </div>

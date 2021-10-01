@@ -55,9 +55,21 @@ a {
   cursor: pointer;
 }
 
+.header .header-left .ham_menu svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .header .header-left .ham_menu img {
   position: absolute;
   width: 100%;
+}
+
+.header .header-left .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .header .header-left .search input,
@@ -82,6 +94,22 @@ a {
   background-color: #006aa6;
   border: 1px solid #00588a;
   border-radius: 0 5px 5px 0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-left .search button svg {
+  position: relative;
+  height: 22px;
+  width: 22px;
 }
 
 .header .header-right a {
@@ -120,13 +148,13 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 200px;
-  margin: 1rem 0;
+  margin: 2rem 0;
   margin-left: 2rem;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow: scroll;
 }
 
-.sidebar a {
+.sidebar .boardSecond {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,10 +167,26 @@ a {
   padding: 1rem;
   cursor: pointer;
   width: 100%;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sidebar a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 100%;
 }
 
 .sidebar a:hover {
-  background: black;
+  background: #002033;
 }
 
 .sidebar a div {
@@ -155,10 +199,6 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.sidebar a div .boardSecond {
-  color: rgba(255, 255, 255, 0.35);
 }
 
 .sidebar a div .board-icon-con {
@@ -184,6 +224,7 @@ a {
 .sidebar a div .board-icon-con2 img {
   background: white;
   width: 100%;
+  height: 100%;
 }
 
 .sidebar a div span {
