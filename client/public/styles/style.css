@@ -129,7 +129,7 @@ a {
     display: block !important;
   }
   .header-left .search {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -147,7 +147,7 @@ a {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  width: 200px;
+  min-width: 15vw;
   margin: 2rem 0;
   margin-left: 2rem;
   max-height: 85vh;
@@ -230,5 +230,190 @@ a {
 .sidebar a div span {
   font-size: 18px;
   color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {
+    display: none !important;
+  }
+}
+
+div.d-flex {
+  max-width: 1000px;
+}
+
+div.d-flex div.main {
+  padding: 2rem 0;
+  padding-left: 0;
+  max-width: 75vw;
+}
+
+div.d-flex div.main div.main_nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background: white;
+  border-radius: 10px 10px 0 0;
+  height: 85px;
+}
+
+div.d-flex div.main div.main_nav div.middle {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 16px;
+}
+
+div.d-flex div.main div.main_nav div.middle div.right span,
+div.d-flex div.main div.main_nav div.middle div.right button {
+  display: inline-block;
+  margin: 1rem 0rem;
+  padding: 0.3rem 0.5rem;
+}
+
+div.d-flex div.main div.main_nav div.middle div.right span {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+div.d-flex div.main div.main_nav div.middle div.right button {
+  border: none;
+  border-radius: 5px;
+}
+
+div.d-flex div.main div.main_banner {
+  position: relative;
+  max-height: 350px;
+  border-bottom: 2px solid black;
+  overflow: hidden;
+}
+
+div.d-flex div.main div.main_banner img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+div.d-flex div.main div.article_con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: white;
+  position: relative;
+  padding: 1rem 0;
+}
+
+div.d-flex div.main div.article_con div.middle {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+div.d-flex div.main div.article_con div.middle div.left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.mid {
+  position: relative;
+  width: 100%;
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.mid div.article_title {
+  font-size: 1.15rem;
+  font-weight: bolder;
+  padding: 1rem 0;
+}
+
+div.d-flex div.main div.article_con div.middle div.left div.mid div.article_content {
+  color: rgba(0, 0, 0, 0.5);
+  max-height: 25px;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+div.d-flex div.main div.article_con div.middle div.right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.d-flex div.main div.article_con div.middle div.right div.imgContainer {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  div.main {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

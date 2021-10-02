@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 200px;
+  min-width: 15vw;
+  //min-width: 200px;
   margin: 2rem 0;
   margin-left: 2rem;
   max-height: 85vh;
@@ -65,5 +66,16 @@
         color: rgb(255, 255, 255);
       }
     }
+  }
+}
+
+// @media screen and (max-width: 950px) {
+//   .sidebar {
+//     min-width: 170px;
+//   }
+// }
+@media screen and (max-width: 800px) {
+  .sidebar {
+    display: none !important;
   }
 }
