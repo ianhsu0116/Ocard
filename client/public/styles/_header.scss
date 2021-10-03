@@ -2,13 +2,13 @@ div.header-con {
   position: fixed;
   display: flex;
   justify-content: center;
-  position: relative;
+  z-index: 10;
   background-color: rgb(0, 106, 166);
+  width: 100vw;
   .header {
     top: 0;
     width: 100%;
     max-width: 1440px;
-    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
