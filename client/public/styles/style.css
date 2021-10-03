@@ -15,6 +15,9 @@ a {
 }
 
 .header {
+  position: fixed;
+  width: 100vw;
+  z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -147,7 +150,7 @@ a {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  min-width: 15vw;
+  min-width: 200px;
   margin: 2rem 0;
   margin-left: 2rem;
   max-height: 85vh;
@@ -232,23 +235,39 @@ a {
   color: white;
 }
 
+@media screen and (max-width: 950px) {
+  .sidebar {
+    min-width: 170px;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .sidebar {
     display: none !important;
   }
 }
 
-div.d-flex {
-  max-width: 1000px;
+div.main-con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-div.d-flex div.main {
-  padding: 2rem 0;
+div.main-con div.d-flex {
+  padding-top: 3rem;
+  max-width: 1440px;
+}
+
+div.main-con div.d-flex div.main {
+  padding: 2rem;
   padding-left: 0;
-  max-width: 75vw;
+  max-width: 800px;
 }
 
-div.d-flex div.main div.main_nav {
+div.main-con div.d-flex div.main div.main_nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -263,7 +282,7 @@ div.d-flex div.main div.main_nav {
   height: 85px;
 }
 
-div.d-flex div.main div.main_nav div.middle {
+div.main-con div.d-flex div.main div.main_nav div.middle {
   width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -277,36 +296,36 @@ div.d-flex div.main div.main_nav div.middle {
   font-size: 16px;
 }
 
-div.d-flex div.main div.main_nav div.middle div.right span,
-div.d-flex div.main div.main_nav div.middle div.right button {
+div.main-con div.d-flex div.main div.main_nav div.middle div.right span,
+div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
   display: inline-block;
   margin: 1rem 0rem;
   padding: 0.3rem 0.5rem;
 }
 
-div.d-flex div.main div.main_nav div.middle div.right span {
+div.main-con div.d-flex div.main div.main_nav div.middle div.right span {
   color: rgba(0, 0, 0, 0.35);
 }
 
-div.d-flex div.main div.main_nav div.middle div.right button {
+div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
   border: none;
   border-radius: 5px;
 }
 
-div.d-flex div.main div.main_banner {
+div.main-con div.d-flex div.main div.main_banner {
   position: relative;
   max-height: 350px;
   border-bottom: 2px solid black;
   overflow: hidden;
 }
 
-div.d-flex div.main div.main_banner img {
+div.main-con div.d-flex div.main div.main_banner img {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-div.d-flex div.main div.article_con {
+div.main-con div.d-flex div.main div.article_con {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -318,7 +337,7 @@ div.d-flex div.main div.article_con {
   padding: 1rem 0;
 }
 
-div.d-flex div.main div.article_con div.middle {
+div.main-con div.d-flex div.main div.article_con div.middle {
   width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -328,7 +347,7 @@ div.d-flex div.main div.article_con div.middle {
           justify-content: space-between;
 }
 
-div.d-flex div.main div.article_con div.middle div.left {
+div.main-con div.d-flex div.main div.article_con div.middle div.left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -345,7 +364,7 @@ div.d-flex div.main div.article_con div.middle div.left {
   white-space: nowrap;
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.top {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.top {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -355,29 +374,29 @@ div.d-flex div.main div.article_con div.middle div.left div.top {
   color: rgba(0, 0, 0, 0.5);
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon {
   width: 25px;
   height: 25px;
   margin-right: 10px;
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon svg {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon svg {
   width: 100% !important;
   height: 100% !important;
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.mid {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid {
   position: relative;
   width: 100%;
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.mid div.article_title {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_title {
   font-size: 1.15rem;
   font-weight: bolder;
   padding: 1rem 0;
 }
 
-div.d-flex div.main div.article_con div.middle div.left div.mid div.article_content {
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_content {
   color: rgba(0, 0, 0, 0.5);
   max-height: 25px;
   width: 95%;
@@ -386,7 +405,7 @@ div.d-flex div.main div.article_con div.middle div.left div.mid div.article_cont
   white-space: nowrap;
 }
 
-div.d-flex div.main div.article_con div.middle div.right {
+div.main-con div.d-flex div.main div.article_con div.middle div.right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -398,14 +417,14 @@ div.d-flex div.main div.article_con div.middle div.right {
           align-items: center;
 }
 
-div.d-flex div.main div.article_con div.middle div.right div.imgContainer {
+div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer {
   width: 100px;
   height: 100px;
   border-radius: 10px;
   overflow: hidden;
 }
 
-div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
+div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
   width: 100%;
   height: 100%;
 }
