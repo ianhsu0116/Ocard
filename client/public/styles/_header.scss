@@ -1,83 +1,91 @@
-.header {
+div.header-con {
   position: fixed;
-  width: 100vw;
-  z-index: 10;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
   background-color: rgb(0, 106, 166);
-  padding: 0.75rem;
-
-  .logo {
-    width: 85px;
-    margin: 0.2rem 1rem;
-    position: relative;
-    img {
-      width: 100%;
-    }
-  }
-
-  .header-left {
+  .header {
+    width: 100%;
+    z-index: 10;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    .ham_menu {
-      display: none;
-      width: 35px;
-      height: 35px;
+    background-color: rgb(0, 106, 166);
+    padding: 0.75rem;
+
+    .logo {
+      width: 85px;
+      margin: 0.2rem 1rem;
       position: relative;
-      cursor: pointer;
-      svg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
       img {
-        position: absolute;
         width: 100%;
       }
     }
 
-    .search {
+    .header-left {
       display: flex;
-
-      input,
-      button {
-        display: inline-block;
-        font-size: 16px;
-        padding: 5px;
-        color: white;
-      }
-      input {
-        width: 650px;
-        background-color: rgb(0, 88, 138);
-        border: 1px solid rgb(0, 88, 138);
-        border-radius: 5px 0 0 5px;
-      }
-
-      button {
-        padding: 5px 10px;
-        box-sizing: content-box;
-        background-color: rgb(0, 106, 166);
-        border: 1px solid rgb(0, 88, 138);
-        border-radius: 0 5px 5px 0;
+      align-items: center;
+      .ham_menu {
+        display: none;
+        width: 35px;
+        height: 35px;
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+        cursor: pointer;
         svg {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+        img {
+          position: absolute;
+          width: 100%;
+        }
+      }
+
+      .search {
+        display: flex;
+
+        input,
+        button {
+          display: inline-block;
+          font-size: 16px;
+          padding: 5px;
+          color: white;
+        }
+        input {
+          width: 650px;
+          background-color: rgb(0, 88, 138);
+          border: 1px solid rgb(0, 88, 138);
+          border-radius: 5px 0 0 5px;
+        }
+
+        button {
+          padding: 5px 10px;
+          box-sizing: content-box;
+          background-color: rgb(0, 106, 166);
+          border: 1px solid rgb(0, 88, 138);
+          border-radius: 0 5px 5px 0;
           position: relative;
-          height: 22px;
-          width: 22px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            position: relative;
+            height: 22px;
+            width: 22px;
+          }
         }
       }
     }
-  }
-  .header-right {
-    a {
-      color: white;
-      font-weight: 100;
-      font-size: 20px;
+    .header-right {
+      a {
+        color: white;
+        font-weight: 100;
+        font-size: 20px;
+      }
     }
   }
 }

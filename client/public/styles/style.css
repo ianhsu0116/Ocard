@@ -14,9 +14,22 @@ a {
   text-decoration: none;
 }
 
-.header {
+div.header-con {
   position: fixed;
-  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  background-color: #006aa6;
+}
+
+div.header-con .header {
+  width: 100%;
   z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,17 +44,17 @@ a {
   padding: 0.75rem;
 }
 
-.header .logo {
+div.header-con .header .logo {
   width: 85px;
   margin: 0.2rem 1rem;
   position: relative;
 }
 
-.header .logo img {
+div.header-con .header .logo img {
   width: 100%;
 }
 
-.header .header-left {
+div.header-con .header .header-left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,7 +63,7 @@ a {
           align-items: center;
 }
 
-.header .header-left .ham_menu {
+div.header-con .header .header-left .ham_menu {
   display: none;
   width: 35px;
   height: 35px;
@@ -58,39 +71,39 @@ a {
   cursor: pointer;
 }
 
-.header .header-left .ham_menu svg {
+div.header-con .header .header-left .ham_menu svg {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.header .header-left .ham_menu img {
+div.header-con .header .header-left .ham_menu img {
   position: absolute;
   width: 100%;
 }
 
-.header .header-left .search {
+div.header-con .header .header-left .search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.header .header-left .search input,
-.header .header-left .search button {
+div.header-con .header .header-left .search input,
+div.header-con .header .header-left .search button {
   display: inline-block;
   font-size: 16px;
   padding: 5px;
   color: white;
 }
 
-.header .header-left .search input {
+div.header-con .header .header-left .search input {
   width: 650px;
   background-color: #00588a;
   border: 1px solid #00588a;
   border-radius: 5px 0 0 5px;
 }
 
-.header .header-left .search button {
+div.header-con .header .header-left .search button {
   padding: 5px 10px;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
@@ -109,13 +122,13 @@ a {
           align-items: center;
 }
 
-.header .header-left .search button svg {
+div.header-con .header .header-left .search button svg {
   position: relative;
   height: 22px;
   width: 22px;
 }
 
-.header .header-right a {
+div.header-con .header .header-right a {
   color: white;
   font-weight: 100;
   font-size: 20px;
@@ -254,17 +267,20 @@ div.main-con {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 div.main-con div.d-flex {
-  padding-top: 3rem;
-  max-width: 1440px;
+  margin-top: 3rem;
+  max-width: 100%;
 }
 
 div.main-con div.d-flex div.main {
-  padding: 2rem;
-  padding-left: 0;
-  max-width: 800px;
+  margin: 2rem;
+  margin-left: 0;
+  min-width: 300px;
 }
 
 div.main-con div.d-flex div.main div.main_nav {
@@ -432,7 +448,7 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
 @media screen and (max-width: 800px) {
   div.main {
     max-width: 100%;
-    padding: 0.5rem;
+    margin: 0 !important;
   }
 }
 /*# sourceMappingURL=style.css.map */
