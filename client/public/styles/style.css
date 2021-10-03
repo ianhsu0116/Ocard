@@ -23,13 +23,13 @@ div.header-con {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
   background-color: #006aa6;
 }
 
 div.header-con .header {
+  top: 0;
   width: 100%;
+  max-width: 1440px;
   z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -273,7 +273,6 @@ div.main-con {
 }
 
 div.main-con div.d-flex {
-  margin-top: 3rem;
   max-width: 100%;
 }
 
@@ -449,6 +448,9 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
   div.main {
     max-width: 100%;
     margin: 0 !important;
+  }
+  div.main div.main_nav {
+    border-radius: 0 !important;
   }
 }
 /*# sourceMappingURL=style.css.map */
