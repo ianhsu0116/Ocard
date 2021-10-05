@@ -45,27 +45,30 @@ const articleSchema = new mongoose.Schema({
   image: {
     type: [String], // 文章的圖片
   },
-  comment: {
-    type: [
-      {
-        user_id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-          required: true,
-        },
-        text: {
-          type: String,
-          minLength: 1,
-          maxLength: 100,
-          required: true,
-        },
-        likes: {
-          type: [String], // 裝按讚的user_id
-        },
+  comment: [
+    {
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
       },
-    ],
-    default: [],
-  },
+      text: {
+        type: String,
+        minLength: 1,
+        maxLength: 100,
+        required: true,
+      },
+      likes: {
+        type: [String], // 裝按讚的user_id
+      },
+      image: {
+        type: [String], // 留言的圖片
+      },
+      date: {
+        type: String,
+      },
+    },
+  ],
   date: {
     // type: Date,
     // default: Date.now,

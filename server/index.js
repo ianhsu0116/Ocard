@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const authRoute = require("./routes").auth;
 const articleRoute = require("./routes").article;
+const openArticleRoute = require("./routes").openArticle;
 const passport = require("passport");
 require("./config/passport")(passport);
 const cors = require("cors");
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(cors());
 app.use("/api/user", authRoute);
+app.use("/api/open-article", openArticleRoute); // 給未登入者看文章用
 app.use(
   "/api/article",
   passport.authenticate("jwt", { session: false }),

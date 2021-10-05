@@ -53,7 +53,9 @@ const articleValidation = (data) => {
 const commentValidation = (data) => {
   const schema = Joi.object({
     user_id: Joi.string().required(),
-    text: Joi.string().min(1).max(100).required(),
+    text: Joi.string().min(1).max(200).required(),
+    image: Joi.string(),
+    date: Joi.string(),
   });
   return schema.validate(data);
 };

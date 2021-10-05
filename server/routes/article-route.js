@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Article = require("../models").articleModel;
 const articleValidation = require("../validation").articleValidation;
+const commentValidation = require("../validation").commentValidation;
 
 router.use((req, res, next) => {
   console.log("A request is coming in article-route");
@@ -16,16 +17,16 @@ router.get("/testAPI", (req, res) => {
 });
 
 // 拿到所有文章
-router.get("/", (req, res) => {
-  Article.find({})
-    .populate("author", ["email"])
-    .then((article) => {
-      res.status(200).send(article);
-    })
-    .catch((err) => {
-      res.status(500).send("can not find any article");
-    });
-});
+// router.get("/", (req, res) => {
+//   Article.find({})
+//     .populate("author", ["email"])
+//     .then((article) => {
+//       res.status(200).send(article);
+//     })
+//     .catch((err) => {
+//       res.status(500).send("can not find any article");
+//     });
+// });
 
 // 依照文章ID
 router.get("/:_id", (req, res) => {
@@ -68,7 +69,7 @@ router.get("/user/:_user_id", (req, res) => {
 
 // post新文章
 router.post("/", async (req, res) => {
-  // validate the input before making a new course
+  // validate the input before making a new article
   const { error } = articleValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -99,6 +100,41 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 文章留言
+// 新增文章留言
+router.post("/comment/:_id", async (req, res) => {
+  // validate the input before making a new comment
+  const { error } = commentValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let { _id } = req.params;
+  let { user_id, text, date, image } = req.body;
+  let newComment;
+  if (req.body.hasOwnProperty("image")) {
+    newComment = {
+      user_id,
+      text,
+      image,
+      date,
+    };
+  } else {
+    newComment = {
+      user_id,
+      text,
+      date,
+    };
+  }
+
+  try {
+    let article = await Article.findById({ _id });
+    await article.comment.push(newComment);
+    article.save();
+    res.status(200).send("New Comment has been saved!");
+  } catch (err) {
+    res.status(400).send("cannot save article");
+  }
+});
+
+// 新增按讚
+// 取消按讚
 
 module.exports = router;

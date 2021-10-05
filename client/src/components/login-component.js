@@ -55,7 +55,7 @@ const LoginComponent = (props) => {
   return (
     <div className="LoginComponent">
       {!currentUser && (
-        <div className="d-flex">
+        <div className="login-con">
           <div className="login-left">
             <div className="img-con">
               <img src={require("./images/lazy.svg").default} />

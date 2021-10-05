@@ -6,7 +6,7 @@ import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
 
 const HomeComponent = (props) => {
-  let { boards } = props;
+  let { currentUser, setCurrentUser, boards } = props;
   let [currentData, setCurrentData] = useState([]); // 當前fatch到的資料
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
@@ -30,7 +30,7 @@ const HomeComponent = (props) => {
 
     ArticleService.getById(article_id)
       .then((data) => {
-        console.log(data.data);
+        //console.log(data.data);
         setCurrentDetailData(data.data);
       })
       .catch((err) => {
@@ -43,7 +43,7 @@ const HomeComponent = (props) => {
       <div className="d-flex">
         {articleDetailOpen && (
           <ArticleDetailComponent
-            articleDetailOpen={articleDetailOpen}
+            currentUser={currentUser}
             setArticleDetailOpen={setArticleDetailOpen}
             currentDetailData={currentDetailData}
             setCurrentDetailData={setCurrentDetailData}

@@ -5,7 +5,8 @@ div.LoginComponent {
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
-  div.d-flex {
+  div.login-con {
+    display: flex;
     margin-top: 10rem;
     max-width: 100%;
     align-items: center;

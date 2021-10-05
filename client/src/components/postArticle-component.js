@@ -13,6 +13,7 @@ const PostArticleComponent = (props) => {
   let [currentTitle, setCurrentTitle] = useState("");
   let [currentContent, setCurrentContent] = useState("");
   let [currentImage, setCurrentImage] = useState(null);
+  let [buttonStatus, setButtonStatus] = useState("disabled"); // 送出按鈕狀態
   let [now, setNow] = useState(
     date.toLocaleDateString() + " " + date.toLocaleTimeString()
   );
@@ -34,11 +35,9 @@ const PostArticleComponent = (props) => {
       currentTitle.length >= 6 &&
       currentContent.length >= 10
     ) {
-      submitBtn.disabled = false;
-      submitBtn.classList.remove("disabled");
+      setButtonStatus(false);
     } else {
-      submitBtn.disabled = true;
-      submitBtn.classList.add("disabled");
+      setButtonStatus("disabled");
     }
   }, [currentBoard, currentTitle, currentContent]);
 
@@ -193,7 +192,8 @@ const PostArticleComponent = (props) => {
                 id="submit-btn"
                 onClick={handleSubmit}
                 type="button"
-                className="disabled"
+                className={buttonStatus}
+                disabled={buttonStatus}
               >
                 發布文章
               </button>

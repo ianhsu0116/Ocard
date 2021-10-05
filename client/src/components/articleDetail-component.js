@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import ArticleService from "../services/article.service";
 import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
@@ -6,16 +7,72 @@ import CloseButtonIcon from "./icons/CloseButtonIcon";
 import UploadImgIcon from "./icons/UploadImgIcon";
 
 const ArticleDetailComponent = (prop) => {
-  let { setArticleDetailOpen, currentDetailData, setCurrentDetailData } = prop;
+  let {
+    currentUser,
+    setArticleDetailOpen,
+    currentDetailData,
+    setCurrentDetailData,
+  } = prop;
+  let [currentComment, setCurrentComment] = useState("");
+  let [newComment, setNewComment] = useState([]);
+  let [buttonStatus, setButtonStatus] = useState("disabled");
+  let history = useHistory();
+  let date = new Date();
+  // 按下關閉鈕時
   const handleClose = () => {
     setArticleDetailOpen(false);
     setCurrentDetailData(null);
   };
+
+  // 判斷資料是否有填寫
+  useEffect(() => {
+    if (currentComment.length >= 1) {
+      setButtonStatus(false);
+    } else {
+      setButtonStatus("disabled");
+    }
+  }, [currentComment]);
+
+  // 即時追蹤comment內容
+  const handleCommentText = (e) => {
+    setCurrentComment(e.target.value);
+    //console.log(currentDetailData);
+  };
+
+  // 即時顯示圖片
   const handleFileChange = (e) => {
     console.log("Good");
   };
+
+  // 送出留言
   const handleSubmit = (e) => {
-    console.log("sub");
+    if (!currentUser) {
+      window.alert("請先登入才可以留言歐！！");
+      history.push("/");
+      return;
+    }
+    let _id = e.target.dataset.articleid;
+    let user_id = currentUser.user._id;
+    let now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+
+    ArticleService.postComment(_id, user_id, currentComment, now)
+      .then(() => {
+        //console.log("新增成功");
+        // 成功的話，即時顯示新留言
+        ArticleService.getById(currentDetailData._id)
+          .then((data) => {
+            //console.log(data.data);
+            setCurrentDetailData(data.data);
+          })
+          .catch((err) => {
+            window.alert("發生錯誤，正在處理中！");
+            //console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert(err.response);
+      });
   };
   return (
     <div className="articleDetail">
@@ -79,95 +136,55 @@ const ArticleDetailComponent = (prop) => {
                 <div>共 {currentDetailData.comment.length} 則留言</div>
               </div>
               <div className="articleDetail-comment-box">
-                <div className="articleDetail-comment-con">
-                  <div className="articleDetail-comment-left">
-                    <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
-                  </div>
-                  <div className="articleDetail-comment-mid">
-                    <div className="articleDetail-comment-mid-title">
-                      <div className="email">ian@fake.com</div>
-                      <div className="time-floor">
-                        <span className="floor">B1</span>
-                        <span> · </span>
-                        <span className="time">2021/6/25 下午2:31:56</span>
+                {currentDetailData.comment &&
+                  currentDetailData.comment.length >= 1 &&
+                  currentDetailData.comment.map((comment, index) => (
+                    <div className="articleDetail-comment-con">
+                      <div className="articleDetail-comment-left">
+                        <div className="genderIcon">
+                          {GenderIcons.GirlIcon()}
+                        </div>
+                      </div>
+                      <div className="articleDetail-comment-mid">
+                        <div className="articleDetail-comment-mid-title">
+                          <div className="email">{comment.user_id}</div>
+                          <div className="time-floor">
+                            <span className="floor">B{index + 1}</span>
+                            <span> · </span>
+                            <span className="time">{comment.date}</span>
+                          </div>
+                        </div>
+                        <div className="articleDetail-comment-mid-text">
+                          {comment.text}
+                        </div>
+                        {comment.image.length >= 1 &&
+                          comment.image.map((img) => (
+                            <div className="articleDetail-comment-mid-img">
+                              <img src={img} />
+                            </div>
+                          ))}
+                      </div>
+                      <div className="articleDetail-comment-right">
+                        <div className="articleDetail-comment-right-likes">
+                          <button className="icon-con">
+                            {CommentIcons.CommentLikeIcon()}
+                          </button>
+                          <div className="likeCount">
+                            {comment.likes.length}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="articleDetail-comment-mid-text">
-                      西堤牛排」首推菲力牛排美式餐盒，標榜大份量口感紮實鮮美牛肉，搭配清炒季節鮮蔬，主餐更有蒜香貝果，
-                    </div>
-                  </div>
-                  <div className="articleDetail-comment-right">
-                    <div className="articleDetail-comment-right-likes">
-                      <button className="icon-con">
-                        {CommentIcons.CommentLikeIcon()}
-                      </button>
-                      <div className="likeCount">1</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="articleDetail-comment-con">
-                  <div className="articleDetail-comment-left">
-                    <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
-                  </div>
-                  <div className="articleDetail-comment-mid">
-                    <div className="articleDetail-comment-mid-title">
-                      <div className="email">ian@fake.com</div>
-                      <div className="time-floor">
-                        <span className="floor">B1</span>
-                        <span> · </span>
-                        <span className="time">2021/6/25 下午2:31:56</span>
-                      </div>
-                    </div>
-                    <div className="articleDetail-comment-mid-text">
-                      西堤牛排」首推菲力牛排美式餐盒，標榜大份量口感紮實鮮美牛肉，搭配清炒季節鮮蔬，主餐更有蒜香貝果，
-                    </div>
-                  </div>
-                  <div className="articleDetail-comment-right">
-                    <div className="articleDetail-comment-right-likes">
-                      <button className="icon-con">
-                        {CommentIcons.CommentLikeIcon()}
-                      </button>
-                      <div className="likeCount">1</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="articleDetail-comment-con">
-                  <div className="articleDetail-comment-left">
-                    <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
-                  </div>
-                  <div className="articleDetail-comment-mid">
-                    <div className="articleDetail-comment-mid-title">
-                      <div className="email">ian@fake.com</div>
-                      <div className="time-floor">
-                        <span className="floor">B1</span>
-                        <span> · </span>
-                        <span className="time">2021/6/25 下午2:31:56</span>
-                      </div>
-                    </div>
-                    <div className="articleDetail-comment-mid-text">
-                      西堤牛排」首推菲力牛排美式餐盒，標榜大份量口感紮實鮮美牛肉，搭配清炒季節鮮蔬，主餐更有蒜香貝果，
-                    </div>
-                    <div className="articleDetail-comment-mid-img">
-                      <img src={require("./images/mouse.jpg").default} />
-                    </div>
-                  </div>
-                  <div className="articleDetail-comment-right">
-                    <div className="articleDetail-comment-right-likes">
-                      <button className="icon-con">
-                        {CommentIcons.CommentLikeIcon()}
-                      </button>
-                      <div className="likeCount">1</div>
-                    </div>
-                  </div>
-                </div>
+                  ))}
               </div>
             </div>
           </div>
 
           <div className="articleDetail-comment-input">
-            <textarea placeholder="回應前請詳閱全站站規和本板板規。"></textarea>
+            <textarea
+              onChange={handleCommentText}
+              placeholder="回應前請詳閱全站站規和本板板規。"
+            ></textarea>
           </div>
           <div className="articleDetail-footer">
             <div>
@@ -185,7 +202,9 @@ const ArticleDetailComponent = (prop) => {
               id="submit-btn"
               onClick={handleSubmit}
               type="button"
-              className="disabled"
+              className={buttonStatus}
+              disabled={buttonStatus}
+              data-articleid={currentDetailData._id}
             >
               送出留言
             </button>

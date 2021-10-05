@@ -99,7 +99,11 @@ div.main-con {
               div.article_title {
                 font-size: 1.15rem;
                 font-weight: bolder;
+                width: 55%;
                 padding: 0.3rem 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               }
               div.article_content {
                 color: $colorMidGray;

@@ -17,13 +17,17 @@ const HeaderComponent = (props) => {
     history.push("/login");
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="header-con">
       <header className="header">
         <div className="header-left">
           <div className="ham_menu">{NavigationIcons.HamMenuIcon()}</div>
           <div className="logo">
-            <Link to="/">
+            <Link to="/" onClick={handleRefresh}>
               <img src={ocardLogo} alt="Ocard Logo"></img>
             </Link>
           </div>

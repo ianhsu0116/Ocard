@@ -1,5 +1,6 @@
 import axios from "axios";
 const API_URL = "http://localhost:7777/api/article";
+const OPEN_API_URL = "http://localhost:7777/api/open-article";
 
 class ArticleService {
   post(board, title, content, author, image) {
@@ -51,7 +52,7 @@ class ArticleService {
       token = "";
     }
 
-    return axios.get(API_URL + "/", {
+    return axios.get(OPEN_API_URL + "/", {
       headers: {
         Authorization: token,
       },
@@ -66,11 +67,52 @@ class ArticleService {
       token = "";
     }
 
-    return axios.get(API_URL + "/" + _id, {
+    return axios.get(OPEN_API_URL + "/" + _id, {
       headers: {
         Authorization: token,
       },
     });
+  }
+
+  postComment(_id, user_id, text, date, image) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    // 判斷有無圖片
+    if (image) {
+      return axios.post(
+        API_URL + "/comment/" + _id,
+        {
+          user_id,
+          text,
+          image,
+          date,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    } else {
+      return axios.post(
+        API_URL + "/comment/" + _id,
+        {
+          user_id,
+          text,
+          date,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    }
   }
 }
 
