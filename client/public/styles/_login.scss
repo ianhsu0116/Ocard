@@ -1,0 +1,188 @@
+div.LoginComponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  div.d-flex {
+    margin-top: 10rem;
+    max-width: 100%;
+    align-items: center;
+    div.login-left {
+      max-width: 400px;
+      max-height: 400px;
+      //background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin: 0 2rem;
+
+      div.img-con {
+        width: 270px;
+        height: 270px;
+        position: relative;
+        img {
+          width: 100%;
+        }
+      }
+
+      h1 {
+        font-size: 2rem;
+        padding: 1rem 0;
+        padding-bottom: 0;
+        font-weight: bolder;
+      }
+      p {
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      a {
+        border: none;
+        background-color: transparent;
+        color: $OcardLightBlue;
+      }
+    }
+    div.login-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin: 0 2rem;
+      padding: 5rem;
+      min-width: 250px;
+      background-color: white;
+      border-radius: 15px;
+
+      div.passport-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        button {
+          width: 380px;
+          display: flex;
+          justify-content: space-between;
+          border: none;
+          border-radius: 10px;
+          padding: 1rem;
+          margin: 0.5rem 0;
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+
+        .facebook-btn {
+          background: rgb(66, 95, 156);
+          color: white;
+        }
+      }
+
+      div.mid-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $colorLighGray;
+        margin: 1rem 0;
+
+        div.line {
+          border: 1px solid $colorLighGray;
+          width: 150px;
+        }
+        div.or {
+          margin: 0 2rem;
+        }
+      }
+
+      div.form-con {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: -1rem;
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          width: 380px;
+          position: relative;
+          label {
+            color: black;
+            margin: 0.5rem 0;
+          }
+          input {
+            padding: 0.5rem 0.5rem;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid $colorLighGray;
+
+            &:focus {
+              border: none;
+            }
+          }
+        }
+        div.button-con {
+          max-width: 380px;
+          // border: none;
+          border-radius: 10px;
+          overflow: hidden;
+          // padding: 0.5rem;
+          margin: 1rem 0;
+          // text-align: center;
+          // background: $OcardLightBlue;
+          // color: white;
+          display: flex;
+          flex-direction: row;
+          position: relative;
+
+          button {
+            width: 50%;
+            border: none;
+            padding: 0.5rem;
+            text-align: center;
+            background: $OcardLightBlue;
+            color: white;
+          }
+          .login-submit-btn {
+            margin-right: 0.1;
+          }
+          .register-submit-btn {
+            margin-left: 0.1rem;
+            background: $OcardBlue;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  div.login-left {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 520px) {
+  div.login-right {
+    button {
+      //width: 280px !important;
+      width: calc(100% + 40px) !important;
+    }
+
+    div.form-con {
+      div {
+        //width: 280px !important;
+        width: calc(100% + 40px) !important;
+      }
+    }
+
+    .line {
+      width: 80px !important;
+    }
+  }
+}

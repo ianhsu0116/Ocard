@@ -1,0 +1,45 @@
+.boardSelector {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .boardSelector-con {
+    width: 500px;
+    max-width: 1200px;
+    height: 600px;
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    margin: 0.5rem;
+
+    .boardSelector-con-title {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.5rem;
+      font-weight: bolder;
+    }
+
+    .boards {
+      margin: 1rem 2rem;
+      max-height: 400px;
+      overflow: scroll;
+
+      .board {
+        color: $colorMidGray;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}

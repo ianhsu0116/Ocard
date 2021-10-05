@@ -1,0 +1,157 @@
+.postArticle {
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+  background: white;
+  margin: 0 auto;
+  height: 100vh;
+
+  form.form-con {
+    margin-top: 3.5rem;
+    width: 70%;
+    max-width: 1440px;
+    max-height: 90vh;
+    padding: 1rem 2rem;
+    color: $colorLighGray;
+    overflow: scroll;
+
+    .form-con-title {
+      font-size: 1.25rem;
+      padding: 1rem;
+      border-bottom: 1px solid $colorLighGray;
+    }
+
+    .select-board {
+      padding: 1rem 0;
+
+      button.board-selector {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 0.35rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+
+    .author-con {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-bottom: 1rem;
+
+      .author-avatar {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .author-con-right {
+        margin-left: 0.5rem;
+        .author {
+          color: black;
+        }
+        .currentTime {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .content-con {
+      margin-bottom: 1rem;
+      .post-title {
+        position: relative;
+        input {
+          font-size: 1.6rem;
+          width: 100%;
+          border: none;
+          padding: 0.25rem;
+          margin-bottom: 1rem;
+          outline: none;
+          letter-spacing: 1px;
+        }
+      }
+
+      .post-text {
+        position: relative;
+        textarea {
+          width: 100%;
+          height: 40vh;
+          border: none;
+          padding: 0.25rem;
+          outline: none;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .temp-img-con {
+      max-height: 70vh;
+      position: relative;
+      overflow: scroll;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    .footer-con {
+      width: 100vw;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      padding: 1rem 2rem;
+      .form-footer {
+        bottom: 0;
+        justify-content: space-between;
+        width: 550px;
+        width: 1440px;
+        max-width: 70%;
+        div {
+          .img-icon {
+            fill: $colorMidGray;
+            cursor: pointer;
+          }
+          input {
+            display: none;
+          }
+        }
+        button {
+          border: none;
+          color: white;
+          background: $OcardLightButtonBlue;
+          padding: 0.5rem;
+          border-radius: 8px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .form-con {
+    padding: 1rem 0.25rem !important;
+    width: 100% !important;
+  }
+
+  .footer-con {
+    padding: 0.75rem 0.25rem !important;
+    .form-footer {
+      max-width: 100% !important;
+    }
+  }
+}
