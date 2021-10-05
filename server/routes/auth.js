@@ -26,8 +26,7 @@ router.post("/register", async (req, res) => {
 
   // check igf the user exist
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist)
-    return res.status(400).send("Email has already been register.");
+  if (emailExist) return res.status(400).send("此email已經被註冊過了！");
 
   // register the user
   const newUser = new User({
@@ -57,7 +56,7 @@ router.post("/login", (req, res) => {
     if (err) return res.status(400).send(err);
 
     if (!user) {
-      res.status(401).send("User not found");
+      res.status(401).send("此帳號未曾註冊！");
     } else {
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (err) return res.status(400).send(err);
@@ -72,7 +71,7 @@ router.post("/login", (req, res) => {
             user,
           });
         } else {
-          res.status(401).send("Wrong email or password");
+          res.status(401).send("信箱或是密碼有誤！");
         }
       });
     }

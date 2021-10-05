@@ -3,26 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import ham_menu from "./images/ham-menu.svg";
 import mouse from "./images/mouse.jpg";
 
-const SidebarComponent = () => {
+const SidebarComponent = (props) => {
+  let { boards } = props;
   const API_URL = "http://localhost:7777/api/article";
-  console.log(require("./images/NBA.jpeg"));
-  let boards = [
-    "NBA",
-    "健身",
-    "外送",
-    "居家",
-    "心情",
-    "感情",
-    "星座",
-    "時事",
-    "有趣",
-    "梗圖",
-    "烹飪",
-    "理財",
-    "穿搭",
-    "網購",
-    "西斯",
-  ];
 
   return (
     <div className="sidebar">

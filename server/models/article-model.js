@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+let date = new Date();
 const articleSchema = new mongoose.Schema({
   board: {
     type: String,
@@ -67,8 +67,10 @@ const articleSchema = new mongoose.Schema({
     default: [],
   },
   date: {
-    type: Date,
-    default: Date.now,
+    // type: Date,
+    // default: Date.now,
+    type: String,
+    default: date.toLocaleDateString() + " " + date.toLocaleTimeString(),
   },
 });
 

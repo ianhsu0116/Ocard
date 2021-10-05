@@ -45,6 +45,7 @@ const articleValidation = (data) => {
     title: Joi.string().min(6).max(50).required(),
     content: Joi.string().min(10).max(1000).required(),
     author: Joi.string().required(),
+    image: Joi.string(),
   });
   return schema.validate(data);
 };

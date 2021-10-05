@@ -1,3 +1,10 @@
+$OcardLightBlue: rgb(51, 151, 207);
+$OcardBlue: rgb(0, 106, 166);
+$OcardButtonBlue: rgb(0, 88, 138);
+$OcardLightButtonBlue: #3397cf;
+$colorLighGray: rgba(0, 0, 0, 0.35);
+$colorMidGray: rgba(0, 0, 0, 0.6);
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +20,14 @@ a {
   text-decoration: none;
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
 @import "./header";
 @import "./sidebar";
 @import "./main";
+@import "./login";
+@import "./postArticle";
+@import "./boardSelector";
+@import "./articleDetail";

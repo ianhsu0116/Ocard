@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
 div.header-con {
   position: fixed;
   display: -webkit-box;
@@ -41,7 +45,7 @@ div.header-con .header {
       -ms-flex-align: center;
           align-items: center;
   background-color: #006aa6;
-  padding: 0.75rem;
+  padding: 0.25rem 0.75rem;
 }
 
 div.header-con .header .logo {
@@ -61,6 +65,7 @@ div.header-con .header .header-left {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 65%;
 }
 
 div.header-con .header .header-left .ham_menu {
@@ -86,21 +91,24 @@ div.header-con .header .header-left .search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 80%;
 }
 
 div.header-con .header .header-left .search input,
 div.header-con .header .header-left .search button {
   display: inline-block;
-  font-size: 16px;
-  padding: 5px;
+  font-size: 12px;
+  padding: 0 5px;
   color: white;
 }
 
 div.header-con .header .header-left .search input {
-  width: 650px;
+  width: 100%;
   background-color: #00588a;
   border: 1px solid #00588a;
   border-radius: 5px 0 0 5px;
+  outline: none;
+  letter-spacing: 1px;
 }
 
 div.header-con .header .header-left .search button {
@@ -126,26 +134,54 @@ div.header-con .header .header-left .search button svg {
   position: relative;
   height: 22px;
   width: 22px;
+  fill: white;
 }
 
-div.header-con .header .header-right a {
+div.header-con .header .header-right a,
+div.header-con .header .header-right button {
   color: white;
   font-weight: 100;
   font-size: 20px;
 }
 
-@media screen and (max-width: 950px) {
-  .search input {
-    width: 500px !important;
-  }
+div.header-con .header .header-right button {
+  width: 27px;
+  height: 27px;
+  border: none;
+  background: none;
+  margin-right: 1rem;
+  margin: 0 1rem;
+  cursor: not-allowed;
+}
+
+div.header-con .header .header-right button svg {
+  fill: rgba(0, 0, 0, 0.35);
+  width: 100%;
+  height: 100%;
+}
+
+div.header-con .header .header-right .post-btn,
+div.header-con .header .header-right .logout-btn {
+  cursor: pointer;
+}
+
+div.header-con .header .header-right .post-btn svg,
+div.header-con .header .header-right .logout-btn svg {
+  fill: white;
 }
 
 @media screen and (max-width: 800px) {
+  .header-left {
+    width: 40% !important;
+  }
   .header-left .ham_menu {
     display: block !important;
   }
   .header-left .search {
     display: none !important;
+  }
+  .header-right button {
+    margin: 0 0.25rem !important;
   }
 }
 
@@ -164,8 +200,8 @@ div.header-con .header .header-right a {
       -ms-flex-align: start;
           align-items: flex-start;
   min-width: 200px;
-  margin: 2rem 0;
-  margin-left: 2rem;
+  margin: 2rem 7rem;
+  margin-right: 0;
   max-height: 85vh;
   overflow: scroll;
 }
@@ -248,6 +284,12 @@ div.header-con .header .header-right a {
   color: white;
 }
 
+@media screen and (max-width: 1080px) {
+  .sidebar {
+    margin-left: 2rem;
+  }
+}
+
 @media screen and (max-width: 950px) {
   .sidebar {
     min-width: 170px;
@@ -278,7 +320,7 @@ div.main-con div.d-flex {
 }
 
 div.main-con div.d-flex div.main {
-  margin: 2rem;
+  margin: 2rem 7rem;
   margin-left: 0;
   min-width: 300px;
 }
@@ -320,7 +362,7 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.right span {
-  color: rgba(0, 0, 0, 0.35);
+  color: colorLighGray;
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
@@ -350,7 +392,8 @@ div.main-con div.d-flex div.main div.article_con {
           justify-content: center;
   background: white;
   position: relative;
-  padding: 1rem 0;
+  padding-top: 1rem;
+  cursor: pointer;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle {
@@ -361,6 +404,7 @@ div.main-con div.d-flex div.main div.article_con div.middle {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.left {
@@ -374,6 +418,9 @@ div.main-con div.d-flex div.main div.article_con div.middle div.left {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-flex: 8;
+      -ms-flex: 8 1 300px;
+          flex: 8 1 300px;
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -387,12 +434,13 @@ div.main-con div.d-flex div.main div.article_con div.middle div.left div.top {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 0.9rem;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.left div.top div.genderIcon {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   margin-right: 10px;
 }
 
@@ -409,16 +457,117 @@ div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid {
 div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_title {
   font-size: 1.15rem;
   font-weight: bolder;
-  padding: 1rem 0;
+  padding: 0.3rem 0;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_content {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9rem;
   max-height: 25px;
   width: 95%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding-top: 0;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left div.icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left div.icons button {
+  border: 1px solid white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left div.icons button:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left div.icons button img {
+  position: relative;
+  top: -5px;
+  width: 90%;
+  height: 90%;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-left div.likeCount {
+  margin-left: 5px;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 5px;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-right button {
+  border: 1px solid white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-right button:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-right button svg {
+  fill: #3397cf;
+  position: relative;
+  top: -5px;
+  width: 100%;
+  height: 100%;
+}
+
+div.main-con div.d-flex div.main div.article_con div.middle div.left div.bottom div.bottom-right div.commentCount {
+  margin-left: 5px;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.right {
@@ -431,13 +580,17 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
@@ -445,13 +598,848 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
   height: 100%;
 }
 
+@media screen and (max-width: 1080px) {
+  div.main {
+    margin-right: 2rem !important;
+  }
+}
+
 @media screen and (max-width: 800px) {
+  div.d-flex {
+    margin-top: 1.75rem !important;
+  }
   div.main {
     max-width: 100%;
     margin: 0 !important;
   }
   div.main div.main_nav {
     border-radius: 0 !important;
+  }
+}
+
+div.LoginComponent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+div.LoginComponent div.d-flex {
+  margin-top: 10rem;
+  max-width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.LoginComponent div.d-flex div.login-left {
+  max-width: 400px;
+  max-height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  margin: 0 2rem;
+}
+
+div.LoginComponent div.d-flex div.login-left div.img-con {
+  width: 270px;
+  height: 270px;
+  position: relative;
+}
+
+div.LoginComponent div.d-flex div.login-left div.img-con img {
+  width: 100%;
+}
+
+div.LoginComponent div.d-flex div.login-left h1 {
+  font-size: 2rem;
+  padding: 1rem 0;
+  padding-bottom: 0;
+  font-weight: bolder;
+}
+
+div.LoginComponent div.d-flex div.login-left p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+div.LoginComponent div.d-flex div.login-left a {
+  border: none;
+  background-color: transparent;
+  color: #3397cf;
+}
+
+div.LoginComponent div.d-flex div.login-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  margin: 0 2rem;
+  padding: 5rem;
+  min-width: 250px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+div.LoginComponent div.d-flex div.login-right div.passport-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.LoginComponent div.d-flex div.login-right div.passport-button button {
+  width: 380px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+}
+
+div.LoginComponent div.d-flex div.login-right div.passport-button button img {
+  width: 25px;
+  height: 25px;
+}
+
+div.LoginComponent div.d-flex div.login-right div.passport-button .facebook-btn {
+  background: #425f9c;
+  color: white;
+}
+
+div.LoginComponent div.d-flex div.login-right div.mid-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+  margin: 1rem 0;
+}
+
+div.LoginComponent div.d-flex div.login-right div.mid-line div.line {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  width: 150px;
+}
+
+div.LoginComponent div.d-flex div.login-right div.mid-line div.or {
+  margin: 0 2rem;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: -1rem;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 380px;
+  position: relative;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div label {
+  color: black;
+  margin: 0.5rem 0;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div input {
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div input:focus {
+  border: none;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div.button-con {
+  max-width: 380px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div.button-con button {
+  width: 50%;
+  border: none;
+  padding: 0.5rem;
+  text-align: center;
+  background: #3397cf;
+  color: white;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div.button-con .login-submit-btn {
+  margin-right: 0.1;
+}
+
+div.LoginComponent div.d-flex div.login-right div.form-con div.button-con .register-submit-btn {
+  margin-left: 0.1rem;
+  background: #006aa6;
+}
+
+@media screen and (max-width: 1030px) {
+  div.login-left {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  div.login-right button {
+    width: calc(100% + 40px) !important;
+  }
+  div.login-right div.form-con div {
+    width: calc(100% + 40px) !important;
+  }
+  div.login-right .line {
+    width: 80px !important;
+  }
+}
+
+.postArticle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: white;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.postArticle form.form-con {
+  margin-top: 3.5rem;
+  width: 70%;
+  max-width: 1440px;
+  max-height: 90vh;
+  padding: 1rem 2rem;
+  color: rgba(0, 0, 0, 0.35);
+  overflow: scroll;
+}
+
+.postArticle form.form-con .form-con-title {
+  font-size: 1.25rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.postArticle form.form-con .select-board {
+  padding: 1rem 0;
+}
+
+.postArticle form.form-con .select-board button.board-selector {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.35rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.postArticle form.form-con .select-board button.board-selector img {
+  width: 15px;
+  height: 15px;
+}
+
+.postArticle form.form-con .author-con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 1rem;
+}
+
+.postArticle form.form-con .author-con .author-avatar {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.postArticle form.form-con .author-con .author-avatar svg {
+  width: 100%;
+  height: 100%;
+}
+
+.postArticle form.form-con .author-con .author-con-right {
+  margin-left: 0.5rem;
+}
+
+.postArticle form.form-con .author-con .author-con-right .author {
+  color: black;
+}
+
+.postArticle form.form-con .author-con .author-con-right .currentTime {
+  font-size: 0.7rem;
+}
+
+.postArticle form.form-con .content-con {
+  margin-bottom: 1rem;
+}
+
+.postArticle form.form-con .content-con .post-title {
+  position: relative;
+}
+
+.postArticle form.form-con .content-con .post-title input {
+  font-size: 1.6rem;
+  width: 100%;
+  border: none;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  outline: none;
+  letter-spacing: 1px;
+}
+
+.postArticle form.form-con .content-con .post-text {
+  position: relative;
+}
+
+.postArticle form.form-con .content-con .post-text textarea {
+  width: 100%;
+  height: 40vh;
+  border: none;
+  padding: 0.25rem;
+  outline: none;
+  letter-spacing: 1px;
+}
+
+.postArticle form.form-con .temp-img-con {
+  max-height: 70vh;
+  position: relative;
+  overflow: scroll;
+}
+
+.postArticle form.form-con .temp-img-con img {
+  max-width: 100%;
+}
+
+.postArticle form.form-con .footer-con {
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1rem 2rem;
+}
+
+.postArticle form.form-con .footer-con .form-footer {
+  bottom: 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 550px;
+  width: 1440px;
+  max-width: 70%;
+}
+
+.postArticle form.form-con .footer-con .form-footer div .img-icon {
+  fill: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.postArticle form.form-con .footer-con .form-footer div input {
+  display: none;
+}
+
+.postArticle form.form-con .footer-con .form-footer button {
+  border: none;
+  color: white;
+  background: #3397cf;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 700px) {
+  .form-con {
+    padding: 1rem 0.25rem !important;
+    width: 100% !important;
+  }
+  .footer-con {
+    padding: 0.75rem 0.25rem !important;
+  }
+  .footer-con .form-footer {
+    max-width: 100% !important;
+  }
+}
+
+.boardSelector {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.boardSelector .boardSelector-con {
+  width: 500px;
+  max-width: 1200px;
+  height: 600px;
+  border-radius: 20px;
+  background: white;
+  -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.boardSelector .boardSelector-con .boardSelector-con-title {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.boardSelector .boardSelector-con .boards {
+  margin: 1rem 2rem;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.boardSelector .boardSelector-con .boards .board {
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+}
+
+.boardSelector .boardSelector-con .boards .board:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.articleDetail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.articleDetail .articleDetail-con {
+  width: 80vw;
+  max-width: 800px;
+  min-height: 100%;
+  background: white;
+  -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+  padding: 3rem;
+  padding-bottom: 0;
+  position: relative;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.7rem 0;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header .authorDetail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header .authorDetail .genderIcon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-right: 0.7rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header .authorDetail .genderIcon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header .close-btb {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: none;
+  background: transparent;
+}
+
+.articleDetail .articleDetail-con .articleDetail-header .close-btb svg {
+  width: 100%;
+  fill: rgba(0, 0, 0, 0.35);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content {
+  height: 65vh;
+  overflow: scroll;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-title {
+  padding-bottom: 0.7rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-middle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.35);
+  padding-bottom: 0.7rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-middle .articleDetail-board {
+  color: #3397cf;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-text {
+  min-height: 50vh;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-text .articleDetail-img-con {
+  position: relative;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-text .articleDetail-img-con img {
+  width: 100%;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons button {
+  border: 1px solid white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons button:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons button img {
+  position: relative;
+  width: 90%;
+  height: 90%;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons button svg {
+  fill: #3397cf;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons div.likeCount,
+.articleDetail .articleDetail-con .articleDetail-content .likesIcon-con div.icons div.commentCount {
+  margin: 6px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment {
+  padding: 1rem 0;
+  background: whitesmoke;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-header div {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-left {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50px;
+          flex: 1 1 50px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-left .genderIcon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-left .genderIcon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid {
+  -webkit-box-flex: 10;
+      -ms-flex: 10 1 200px;
+          flex: 10 1 200px;
+  position: relative;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-title {
+  padding-bottom: 0.5rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-title .email {
+  font-weight: bolder;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-title .time-floor {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 0.9rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-title .time-floor .floor {
+  color: #3397cf;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-text {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-img {
+  max-width: 100%;
+  max-height: 40vh;
+  overflow: hidden;
+  text-align: center center;
+  padding-top: 0.5rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-img img {
+  width: 100%;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50px;
+          flex: 1 1 50px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-right .articleDetail-comment-right-likes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-right .articleDetail-comment-right-likes .icon-con {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-right .articleDetail-comment-right-likes .icon-con svg {
+  fill: rgba(0, 0, 0, 0.35);
+  width: 25px;
+  height: 25px;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input {
+  padding: 1rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input textarea {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1.25rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.articleDetail .articleDetail-con .articleDetail-footer div .img-icon {
+  fill: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.articleDetail .articleDetail-con .articleDetail-footer div input {
+  display: none;
+}
+
+.articleDetail .articleDetail-con .articleDetail-footer button {
+  border: none;
+  color: white;
+  background: #3397cf;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 800px) {
+  .articleDetail-con {
+    width: 100vw !important;
+    padding: 0.5rem !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

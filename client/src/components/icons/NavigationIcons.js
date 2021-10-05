@@ -41,7 +41,7 @@ const FriendIcon = () => {
   );
 };
 
-const EMailBoxIcon = () => {
+const EmailBoxIcon = () => {
   return (
     <svg viewBox="0 0 24 24" focusable="false" role="img" aria-hidden="true">
       <path d="M20 4H4a2 2 0 00-2 2v1l10 5 10-5V6a2 2 0 00-2-2z"></path>
@@ -83,7 +83,7 @@ export default {
   SearchIcon,
   PostIcon,
   FriendIcon,
-  EMailBoxIcon,
+  EmailBoxIcon,
   ProfileIcon,
   LogOutIcon,
 };

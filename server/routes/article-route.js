@@ -72,13 +72,24 @@ router.post("/", async (req, res) => {
   const { error } = articleValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let { board, title, content, author } = req.body;
-  let newArticle = new Article({
-    board,
-    title,
-    content,
-    author,
-  });
+  let { board, title, content, author, image } = req.body;
+  let newArticle;
+  if (req.body.hasOwnProperty("image")) {
+    newArticle = new Article({
+      board,
+      title,
+      content,
+      author,
+      image,
+    });
+  } else {
+    newArticle = new Article({
+      board,
+      title,
+      content,
+      author,
+    });
+  }
 
   try {
     await newArticle.save();
