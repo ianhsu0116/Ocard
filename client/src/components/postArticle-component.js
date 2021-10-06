@@ -4,6 +4,7 @@ import ArticleService from "../services/article.service";
 import BoardSelectorComponent from "./boardSelector-component";
 import GenderIcons from "./icons/GenderIcons";
 import UploadImgIcon from "./icons/UploadImgIcon";
+import CloseButtonIcon from "./icons/CloseButtonIcon";
 
 const PostArticleComponent = (props) => {
   let { boards, currentUser, setCurrentUser } = props;
@@ -58,6 +59,7 @@ const PostArticleComponent = (props) => {
       e.preventDefault();
     }
   };
+
   // 即時抓取title
   const handleChangeTitle = (e) => {
     setCurrentTitle(e.target.value);
@@ -66,7 +68,6 @@ const PostArticleComponent = (props) => {
   const handleChangeContent = (e) => {
     setCurrentContent(e.target.value);
   };
-
   // 即時抓取上傳的圖片  error
   const handleFileChange = (e) => {
     let readFile = new FileReader(); //constructor 建構子(函數); 功能: 給初值
@@ -86,6 +87,12 @@ const PostArticleComponent = (props) => {
     }
   };
 
+  // 刪除暫存圖片
+  const handleCloseImage = () => {
+    console.log("delete");
+    setCurrentImage(null);
+  };
+
   // 送出文章
   const handleSubmit = (e) => {
     let author = currentUser.user._id;
@@ -103,7 +110,7 @@ const PostArticleComponent = (props) => {
         })
         .catch((err) => {
           console.log(err);
-          console.log("error1");
+          console.log("postArticleError1");
           window.alert(err.response.data);
         });
     }
@@ -115,8 +122,8 @@ const PostArticleComponent = (props) => {
           history.push("/");
         })
         .catch((err) => {
-          console.log(err.response);
-          console.log("error2");
+          console.log(err);
+          console.log("postArticleError2");
           window.alert(err.response.data);
         });
     }
@@ -170,8 +177,13 @@ const PostArticleComponent = (props) => {
             </div>
           </div>
           {currentImage && (
-            <div className="temp-img-con">
-              <img src={currentImage} />
+            <div className="temp-img-box">
+              <div className="temp-img-con">
+                <img src={currentImage} />
+                <button onClick={handleCloseImage} className="close-btn">
+                  {CloseButtonIcon()}
+                </button>
+              </div>
             </div>
           )}
 

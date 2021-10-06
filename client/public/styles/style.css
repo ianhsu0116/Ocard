@@ -1017,14 +1017,41 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   letter-spacing: 1px;
 }
 
-.postArticle form.form-con .temp-img-con {
+.postArticle form.form-con .temp-img-box {
   max-height: 70vh;
   position: relative;
   overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.postArticle form.form-con .temp-img-con img {
-  max-width: 100%;
+.postArticle form.form-con .temp-img-box .temp-img-con {
+  position: relative;
+  max-width: 80%;
+  max-height: 100%;
+}
+
+.postArticle form.form-con .temp-img-box .temp-img-con img {
+  height: 100%;
+}
+
+.postArticle form.form-con .temp-img-box .temp-img-con button.close-btn {
+  width: 25px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: white;
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.postArticle form.form-con .temp-img-box .temp-img-con button.close-btn svg {
+  width: 100%;
+  height: 100%;
 }
 
 .postArticle form.form-con .footer-con {
@@ -1202,7 +1229,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   height: 30px;
 }
 
-.articleDetail .articleDetail-con .articleDetail-header .close-btb {
+.articleDetail .articleDetail-con .articleDetail-header .close-btn {
   width: 30px;
   height: 30px;
   position: relative;
@@ -1210,7 +1237,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   background: transparent;
 }
 
-.articleDetail .articleDetail-con .articleDetail-header .close-btb svg {
+.articleDetail .articleDetail-con .articleDetail-header .close-btn svg {
   width: 100%;
   fill: rgba(0, 0, 0, 0.35);
 }
@@ -1240,6 +1267,8 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-text {
   min-height: 45vh;
   color: rgba(0, 0, 0, 0.75);
+  white-space: break-spaces;
+  word-break: break-word;
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-text .articleDetail-img-con {
@@ -1249,7 +1278,8 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-text .articleDetail-img-con img {
-  width: 100%;
+  height: 100%;
+  max-width: 100%;
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .likesIcon-con {
@@ -1367,6 +1397,8 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-text {
+  white-space: break-spaces;
+  word-break: break-word;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -1444,7 +1476,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   width: 100%;
 }
 
-.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btb {
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btn {
   width: 25px;
   position: absolute;
   top: 5px;
@@ -1454,7 +1486,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   border: 1px solid black;
 }
 
-.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btb svg {
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btn svg {
   width: 100%;
   height: 100%;
 }

@@ -42,7 +42,7 @@
         }
       }
 
-      .close-btb {
+      .close-btn {
         width: 30px;
         height: 30px;
         position: relative;
@@ -75,12 +75,15 @@
       .articleDetail-text {
         min-height: 45vh;
         color: rgba(0, 0, 0, 0.75);
+        white-space: break-spaces; //這行是使div內可抓到\n(自動斷行)
+        word-break: break-word;
         .articleDetail-img-con {
           position: relative;
           overflow: hidden;
           margin: 1rem 0;
           img {
-            width: 100%;
+            height: 100%;
+            max-width: 100%;
           }
         }
       }
@@ -174,6 +177,8 @@
                 }
               }
               .articleDetail-comment-mid-text {
+                white-space: break-spaces; //這行是使div內可抓到\n(自動斷行)
+                word-break: break-word;
                 color: rgba(0, 0, 0, 0.7);
               }
 
@@ -235,7 +240,7 @@
         img {
           width: 100%;
         }
-        .close-btb {
+        .close-btn {
           width: 25px;
           position: absolute;
           top: 5px;

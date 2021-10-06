@@ -1,4 +1,3 @@
-const { required } = require("joi");
 const Joi = require("joi");
 
 // Register Validation  註冊相關格式
@@ -55,7 +54,7 @@ const commentValidation = (data) => {
     user_id: Joi.string().required(),
     text: Joi.string().min(1).max(200).required(),
     image: Joi.string(),
-    date: Joi.string(),
+    date: Joi.string().required(),
   });
   return schema.validate(data);
 };

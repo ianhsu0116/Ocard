@@ -34,6 +34,7 @@ const HomeComponent = (props) => {
         })
         .catch((err) => {
           console.log(err.response);
+          console.log(1);
         });
     } else {
       ArticleService.get()
@@ -43,17 +44,24 @@ const HomeComponent = (props) => {
         })
         .catch((err) => {
           console.log(err.response);
+          console.log(2);
         });
     }
   }, [currentSidebarBoard]);
 
-  // 顯示文章內容
+  // 顯示文章詳細內容
   function handleShowDetail(e) {
     setArticleDetailOpen(true);
     let article_id = e.currentTarget.dataset.articleid;
 
     ArticleService.getById(article_id)
       .then((data) => {
+        //console.log(data.data);
+
+        //測試加上 /n 變成 <br />
+        // let c = data.data.content.replace("\n", "<br/>");
+        // console.log(c);
+        //data.data.content = c;
         //console.log(data.data);
         setCurrentDetailData(data.data);
       })

@@ -55,7 +55,7 @@ const articleSchema = new mongoose.Schema({
       text: {
         type: String,
         minLength: 1,
-        maxLength: 100,
+        maxLength: 200,
         required: true,
       },
       likes: {

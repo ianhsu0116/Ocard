@@ -26,7 +26,7 @@ const ArticleDetailComponent = (prop) => {
 
   // 判斷資料是否有填寫
   useEffect(() => {
-    if (currentComment.length >= 1) {
+    if (currentComment.length >= 1 && currentComment.length < 200) {
       setButtonStatus(false);
     } else {
       setButtonStatus("disabled");
@@ -94,7 +94,7 @@ const ArticleDetailComponent = (prop) => {
       })
       .catch((err) => {
         console.log(err.response);
-        window.alert(err.response);
+        window.alert(err.response.data);
       });
   };
   return (
@@ -106,7 +106,7 @@ const ArticleDetailComponent = (prop) => {
               <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
               <div className="email">{currentDetailData.author.email}</div>
             </div>
-            <button onClick={handleClose} className="close-btb">
+            <button onClick={handleClose} className="close-btn">
               {CloseButtonIcon()}
             </button>
           </div>
@@ -120,14 +120,15 @@ const ArticleDetailComponent = (prop) => {
               </div>
               <div className="articleDetail-time">{currentDetailData.date}</div>
             </div>
-            <pre className="articleDetail-text">
+            <div className="articleDetail-text">
               {currentDetailData.content}
+
               {currentDetailData.image.length > 0 && (
                 <div className="articleDetail-img-con">
                   <img src={currentDetailData.image[0]} />
                 </div>
               )}
-            </pre>
+            </div>
             <div className="likesIcon-con">
               <div className="icons">
                 <button>
@@ -206,13 +207,13 @@ const ArticleDetailComponent = (prop) => {
           <div className="articleDetail-comment-input">
             <textarea
               onChange={handleCommentText}
-              placeholder="回應前請詳閱全站站規和本板板規。"
+              placeholder="回應前請詳閱全站站規和本板板規。(長度限制：0~200字元)"
               value={currentComment}
             ></textarea>
             {currentImage && (
               <div className="articleDetail-comment-input-img">
                 <img src={currentImage} />
-                <button onClick={handleCloseImage} className="close-btb">
+                <button onClick={handleCloseImage} className="close-btn">
                   {CloseButtonIcon()}
                 </button>
               </div>
