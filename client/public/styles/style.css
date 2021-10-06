@@ -46,7 +46,7 @@ div.header-con .header {
       -ms-flex-align: center;
           align-items: center;
   background-color: #006aa6;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0;
 }
 
 div.header-con .header .logo {
@@ -60,13 +60,14 @@ div.header-con .header .logo img {
 }
 
 div.header-con .header .header-left {
+  margin-left: 7rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 65%;
+  width: 60%;
 }
 
 div.header-con .header .header-left .ham_menu {
@@ -92,7 +93,7 @@ div.header-con .header .header-left .search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 80%;
+  width: 90%;
 }
 
 div.header-con .header .header-left .search input,
@@ -138,6 +139,10 @@ div.header-con .header .header-left .search button svg {
   fill: white;
 }
 
+div.header-con .header .header-right {
+  margin-right: 7rem;
+}
+
 div.header-con .header .header-right a,
 div.header-con .header .header-right button {
   color: white;
@@ -150,8 +155,7 @@ div.header-con .header .header-right button {
   height: 27px;
   border: none;
   background: none;
-  margin-right: 1rem;
-  margin: 0 1rem;
+  margin-left: 2rem;
   cursor: not-allowed;
 }
 
@@ -171,8 +175,27 @@ div.header-con .header .header-right .logout-btn svg {
   fill: white;
 }
 
+@media screen and (max-width: 1200px) {
+  .header-right button {
+    margin-left: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .header-left {
+    margin-left: 2rem !important;
+  }
+  .header-right {
+    margin-right: 2rem !important;
+  }
+  .header-right button {
+    margin-left: 0.8rem !important;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .header-left {
+    margin-left: 1rem !important;
     width: 40% !important;
   }
   .header-left .ham_menu {
@@ -181,8 +204,11 @@ div.header-con .header .header-right .logout-btn svg {
   .header-left .search {
     display: none !important;
   }
+  .header-right {
+    margin-right: 1rem !important;
+  }
   .header-right button {
-    margin: 0 0.25rem !important;
+    margin-left: 0.4rem !important;
   }
 }
 

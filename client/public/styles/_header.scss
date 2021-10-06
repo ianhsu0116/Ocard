@@ -13,7 +13,7 @@ div.header-con {
     justify-content: space-between;
     align-items: center;
     background-color: $OcardBlue;
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0;
 
     .logo {
       width: 85px;
@@ -25,9 +25,10 @@ div.header-con {
     }
 
     .header-left {
+      margin-left: 7rem;
       display: flex;
       align-items: center;
-      width: 65%;
+      width: 60%;
       .ham_menu {
         display: none;
         width: 35px;
@@ -47,7 +48,7 @@ div.header-con {
 
       .search {
         display: flex;
-        width: 80%;
+        width: 90%;
         input,
         button {
           display: inline-block;
@@ -85,6 +86,7 @@ div.header-con {
       }
     }
     .header-right {
+      margin-right: 7rem;
       a,
       button {
         color: white;
@@ -97,8 +99,7 @@ div.header-con {
         height: 27px;
         border: none;
         background: none;
-        margin-right: 1rem;
-        margin: 0 1rem;
+        margin-left: 2rem;
         cursor: not-allowed;
         svg {
           fill: $colorLighGray;
@@ -117,8 +118,29 @@ div.header-con {
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .header-right {
+    button {
+      margin-left: 1rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .header-left {
+    margin-left: 2rem !important;
+  }
+  .header-right {
+    margin-right: 2rem !important;
+    button {
+      margin-left: 0.8rem !important;
+    }
+  }
+}
+
 @media screen and (max-width: 800px) {
   .header-left {
+    margin-left: 1rem !important;
     width: 40% !important;
     .ham_menu {
       display: block !important;
@@ -128,8 +150,9 @@ div.header-con {
     }
   }
   .header-right {
+    margin-right: 1rem !important;
     button {
-      margin: 0 0.25rem !important;
+      margin-left: 0.4rem !important;
     }
   }
 }
