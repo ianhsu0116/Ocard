@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import ArticleService from "../services/article.service";
 import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
@@ -36,6 +37,8 @@ const ArticleDetailComponent = (prop) => {
   // 即時追蹤comment內容
   const handleCommentText = (e) => {
     setCurrentComment(e.target.value);
+    console.log(currentUser);
+    console.log(currentDetailData);
   };
 
   // 即時顯示圖片
@@ -69,11 +72,19 @@ const ArticleDetailComponent = (prop) => {
       history.push("/login");
       return;
     }
+    let comment_id = uuidv4();
     let _id = e.target.dataset.articleid;
     let user_id = currentUser.user._id;
     let now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
 
-    ArticleService.postComment(_id, user_id, currentComment, now, currentImage)
+    ArticleService.postComment(
+      comment_id,
+      _id,
+      user_id,
+      currentComment,
+      now,
+      currentImage
+    )
       .then(() => {
         window.alert("新增成功！");
 
@@ -95,6 +106,23 @@ const ArticleDetailComponent = (prop) => {
       .catch((err) => {
         console.log(err.response);
         window.alert(err.response.data);
+      });
+  };
+
+  // 按讚、收回按讚
+  const handleLikeClick = (e) => {
+    let _id = e.currentTarget.dataset.articleid;
+    let comment_id = e.currentTarget.dataset.commentid;
+    let user_id = currentUser.user._id;
+
+    ArticleService.postLikes(_id, comment_id, user_id)
+      .then(() => {
+        console.log("按讚編輯成功");
+        e.target.parentElement.parentElement.classList.toggle("likesActive");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        console.log("err");
       });
   };
   return (
@@ -178,9 +206,14 @@ const ArticleDetailComponent = (prop) => {
                             <span className="time">{comment.date}</span>
                           </div>
                         </div>
-                        <div className="articleDetail-comment-mid-text">
-                          {comment.text}
-                        </div>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              comment.text &&
+                              comment.text.replaceAll("\n", "<br/>"),
+                          }}
+                          className="articleDetail-comment-mid-text"
+                        />
                         {comment.image.length >= 1 &&
                           comment.image.map((img) => (
                             <div className="articleDetail-comment-mid-img">
@@ -190,9 +223,44 @@ const ArticleDetailComponent = (prop) => {
                       </div>
                       <div className="articleDetail-comment-right">
                         <div className="articleDetail-comment-right-likes">
-                          <button className="icon-con">
-                            {CommentIcons.CommentLikeIcon()}
-                          </button>
+                          {currentUser &&
+                            comment.likes.length > 0 &&
+                            comment.likes.some(
+                              (likeid) => likeid == currentUser.user._id
+                            ) && (
+                              <button
+                                className="icon-con likesActive"
+                                data-articleid={currentDetailData._id}
+                                data-commentid={comment.comment_id}
+                                onClick={handleLikeClick}
+                              >
+                                {CommentIcons.CommentLikeIcon()}
+                              </button>
+                            )}
+                          {currentUser &&
+                            comment.likes.every(
+                              (likeid) => likeid != currentUser.user._id
+                            ) && (
+                              <button
+                                className="icon-con"
+                                data-articleid={currentDetailData._id}
+                                data-commentid={comment.comment_id}
+                                onClick={handleLikeClick}
+                              >
+                                {CommentIcons.CommentLikeIcon()}
+                              </button>
+                            )}
+                          {!currentUser && (
+                            <button
+                              className="icon-con"
+                              data-articleid={currentDetailData._id}
+                              data-commentid={comment.comment_id}
+                              onClick={handleLikeClick}
+                            >
+                              {CommentIcons.CommentLikeIcon()}
+                            </button>
+                          )}
+
                           <div className="likeCount">
                             {comment.likes.length}
                           </div>

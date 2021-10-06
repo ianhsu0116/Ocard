@@ -47,6 +47,10 @@ const articleSchema = new mongoose.Schema({
   },
   comment: [
     {
+      comment_id: {
+        type: String,
+        required: true,
+      },
       user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

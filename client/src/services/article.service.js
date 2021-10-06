@@ -83,7 +83,7 @@ class ArticleService {
   }
 
   // 新增留言
-  postComment(_id, user_id, text, date, image) {
+  postComment(comment_id, _id, user_id, text, date, image) {
     let token;
     if (localStorage.getItem("user")) {
       token = JSON.parse(localStorage.getItem("user")).token;
@@ -96,6 +96,7 @@ class ArticleService {
       return axios.post(
         API_URL + "/comment/" + _id,
         {
+          comment_id,
           user_id,
           text,
           image,
@@ -111,6 +112,7 @@ class ArticleService {
       return axios.post(
         API_URL + "/comment/" + _id,
         {
+          comment_id,
           user_id,
           text,
           date,
@@ -122,6 +124,29 @@ class ArticleService {
         }
       );
     }
+  }
+
+  // 按讚或是取消按讚
+  postLikes(_id, comment_id, user_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    return axios.post(
+      API_URL + "/comment/likes/" + _id,
+      {
+        comment_id,
+        user_id,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
   }
 }
 

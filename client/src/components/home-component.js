@@ -57,12 +57,6 @@ const HomeComponent = (props) => {
     ArticleService.getById(article_id)
       .then((data) => {
         //console.log(data.data);
-
-        //測試加上 /n 變成 <br />
-        // let c = data.data.content.replace("\n", "<br/>");
-        // console.log(c);
-        //data.data.content = c;
-        //console.log(data.data);
         setCurrentDetailData(data.data);
       })
       .catch((err) => {
@@ -92,7 +86,7 @@ const HomeComponent = (props) => {
           <div className="main_nav">
             <div className="middle">
               <div className="right">
-                <span>依文章排序</span>
+                <span>文章排序依</span>
                 <button>熱門</button>
               </div>
             </div>

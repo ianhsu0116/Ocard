@@ -107,10 +107,11 @@ router.post("/comment/:_id", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let { _id } = req.params;
-  let { user_id, text, date, image } = req.body;
+  let { comment_id, user_id, text, date, image } = req.body;
   let newComment;
   if (req.body.hasOwnProperty("image")) {
     newComment = {
+      comment_id,
       user_id,
       text,
       image,
@@ -118,6 +119,7 @@ router.post("/comment/:_id", async (req, res) => {
     };
   } else {
     newComment = {
+      comment_id,
       user_id,
       text,
       date,
@@ -134,7 +136,34 @@ router.post("/comment/:_id", async (req, res) => {
   }
 });
 
-// 新增按讚
-// 取消按讚
+// 按讚或是收回讚
+router.post("/comment/likes/:_id", async (req, res) => {
+  let { _id } = req.params;
+  let { comment_id, user_id } = req.body;
+  try {
+    let article = await Article.findById({ _id });
+    // 找到要新增或是取消讚的comment
+    article.comment.forEach((com) => {
+      if (com.comment_id === comment_id) {
+        //找到後尋找當前傳入的user_id是否存在於Likes內
+        let isContain = com.likes.find((like) => like == user_id);
+        // 存在的話就刪除，否則新增
+        if (isContain) {
+          com.likes.forEach((userid, index) => {
+            if (userid == user_id) {
+              com.likes.splice(index, 1);
+            }
+          });
+        } else {
+          com.likes.push(user_id);
+        }
+      }
+    });
+    article.save();
+    res.status(200).send("Like has been edit");
+  } catch (err) {
+    res.status(400).send("cannot delete like");
+  }
+});
 
 module.exports = router;

@@ -4,6 +4,7 @@ $OcardButtonBlue: rgb(0, 88, 138);
 $OcardLightButtonBlue: #3397cf;
 $colorLighGray: rgba(0, 0, 0, 0.35);
 $colorMidGray: rgba(0, 0, 0, 0.6);
+$likesActiveRed: rgb(234, 92, 92);
 
 * {
   margin: 0;
@@ -23,6 +24,12 @@ a {
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.likesActive {
+  svg {
+    fill: $likesActiveRed !important;
+  }
 }
 
 @import "./header";
