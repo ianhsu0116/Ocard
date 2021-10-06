@@ -9,6 +9,23 @@
   max-height: 85vh;
   overflow: scroll;
 
+  .active {
+    background: rgba(255, 255, 255, 0.8);
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      div {
+        span {
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
+    div {
+      span {
+        color: rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
+
   .boardSecond {
     display: flex;
     justify-content: flex-start;
@@ -61,7 +78,7 @@
       }
 
       span {
-        font-size: 18px;
+        font-size: 16px;
         color: rgb(255, 255, 255);
       }
     }

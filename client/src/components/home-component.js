@@ -7,9 +7,10 @@ import CommentIcons from "./icons/CommentIcons";
 
 const HomeComponent = (props) => {
   let { currentUser, setCurrentUser, boards } = props;
-  let [currentData, setCurrentData] = useState([]); // 當前fatch到的資料
+  let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
+  let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
 
   // 進入網頁立即顯示文章
   useEffect(() => {
@@ -22,6 +23,29 @@ const HomeComponent = (props) => {
         console.log(err.response);
       });
   }, []);
+
+  // 切換板板時重新render頁面
+  useEffect(() => {
+    if (currentSidebarBoard) {
+      ArticleService.getByBoard(currentSidebarBoard)
+        .then((data) => {
+          //console.log(data.data);
+          setCurrentData(data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else {
+      ArticleService.get()
+        .then((data) => {
+          //console.log(data.data);
+          setCurrentData(data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
+  }, [currentSidebarBoard]);
 
   // 顯示文章內容
   function handleShowDetail(e) {
@@ -49,7 +73,13 @@ const HomeComponent = (props) => {
             setCurrentDetailData={setCurrentDetailData}
           />
         )}
-        <SidebarComponent boards={boards} />
+        <SidebarComponent
+          boards={boards}
+          currentSidebarBoard={currentSidebarBoard}
+          setCurrentSidebarBoard={setCurrentSidebarBoard}
+          currentData={currentData}
+          setCurrentData={setCurrentData}
+        />
         <div className="main">
           <div className="main_nav">
             <div className="middle">

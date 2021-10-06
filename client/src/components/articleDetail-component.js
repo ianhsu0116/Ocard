@@ -14,8 +14,8 @@ const ArticleDetailComponent = (prop) => {
     setCurrentDetailData,
   } = prop;
   let [currentComment, setCurrentComment] = useState("");
-  let [newComment, setNewComment] = useState([]);
   let [buttonStatus, setButtonStatus] = useState("disabled");
+  let [currentImage, setCurrentImage] = useState(null);
   let history = useHistory();
   let date = new Date();
   // 按下關閉鈕時
@@ -36,28 +36,51 @@ const ArticleDetailComponent = (prop) => {
   // 即時追蹤comment內容
   const handleCommentText = (e) => {
     setCurrentComment(e.target.value);
-    //console.log(currentDetailData);
   };
 
   // 即時顯示圖片
   const handleFileChange = (e) => {
-    console.log("Good");
+    let readFile = new FileReader(); //constructor 建構子(函數); 功能: 給初值
+    let file = e.target.files[0];
+    let imageType = /image.*/;
+
+    // 格式符合就顯示，否則提醒
+    if (file) {
+      if (file.type.match(imageType) && file.size < 80000) {
+        readFile.readAsDataURL(file);
+        readFile.addEventListener("load", function () {
+          setCurrentImage(readFile.result);
+        });
+      } else {
+        window.alert("只能上傳圖片歐！(檔案大小須小於80kb)");
+      }
+    }
+  };
+
+  // 手動刪除圖片
+  const handleCloseImage = () => {
+    setCurrentImage(null);
   };
 
   // 送出留言
   const handleSubmit = (e) => {
     if (!currentUser) {
       window.alert("請先登入才可以留言歐！！");
-      history.push("/");
+      history.push("/login");
       return;
     }
     let _id = e.target.dataset.articleid;
     let user_id = currentUser.user._id;
     let now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
 
-    ArticleService.postComment(_id, user_id, currentComment, now)
+    ArticleService.postComment(_id, user_id, currentComment, now, currentImage)
       .then(() => {
-        //console.log("新增成功");
+        window.alert("新增成功！");
+
+        // 清空textarea + 圖片
+        setCurrentComment("");
+        setCurrentImage(null);
+
         // 成功的話，即時顯示新留言
         ArticleService.getById(currentDetailData._id)
           .then((data) => {
@@ -147,7 +170,7 @@ const ArticleDetailComponent = (prop) => {
                       </div>
                       <div className="articleDetail-comment-mid">
                         <div className="articleDetail-comment-mid-title">
-                          <div className="email">{comment.user_id}</div>
+                          <div className="email">{comment.user_id.email}</div>
                           <div className="time-floor">
                             <span className="floor">B{index + 1}</span>
                             <span> · </span>
@@ -184,7 +207,16 @@ const ArticleDetailComponent = (prop) => {
             <textarea
               onChange={handleCommentText}
               placeholder="回應前請詳閱全站站規和本板板規。"
+              value={currentComment}
             ></textarea>
+            {currentImage && (
+              <div className="articleDetail-comment-input-img">
+                <img src={currentImage} />
+                <button onClick={handleCloseImage} className="close-btb">
+                  {CloseButtonIcon()}
+                </button>
+              </div>
+            )}
           </div>
           <div className="articleDetail-footer">
             <div>

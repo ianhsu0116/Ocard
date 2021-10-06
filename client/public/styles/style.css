@@ -207,6 +207,22 @@ div.header-con .header .header-right .logout-btn svg {
   overflow: scroll;
 }
 
+.sidebar .active {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar .active:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar .active:hover div span {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.sidebar .active div span {
+  color: rgba(0, 0, 0, 0.8);
+}
+
 .sidebar .boardSecond {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -281,7 +297,7 @@ div.header-con .header .header-right .logout-btn svg {
 }
 
 .sidebar a div span {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
 }
 
@@ -1405,15 +1421,42 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 
 .articleDetail .articleDetail-con .articleDetail-comment-input {
   padding: 1rem;
+  max-height: 15vh;
+  overflow: scroll;
 }
 
 .articleDetail .articleDetail-con .articleDetail-comment-input textarea {
   width: 100%;
-  max-height: 10vh;
+  max-height: 15vh;
   padding: 1rem;
   border: none;
   outline: none;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img {
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img img {
+  width: 100%;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btb {
+  width: 25px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: white;
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.articleDetail .articleDetail-con .articleDetail-comment-input .articleDetail-comment-input-img .close-btb svg {
+  width: 100%;
+  height: 100%;
 }
 
 .articleDetail .articleDetail-con .articleDetail-footer {

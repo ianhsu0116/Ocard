@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import ham_menu from "./images/ham-menu.svg";
-import mouse from "./images/mouse.jpg";
+import ArticleService from "../services/article.service";
 
 const SidebarComponent = (props) => {
-  let { boards } = props;
-  const API_URL = "http://localhost:7777/api/article";
+  let { boards, currentSidebarBoard, setCurrentSidebarBoard, setCurrentData } =
+    props;
+
+  const handleBoardChange = (e) => {
+    //console.log(e.currentTarget.dataset.board);
+    setCurrentSidebarBoard(e.currentTarget.dataset.board);
+  };
+
+  // 回到所有看板
+  const handleBackToAllBoard = () => {
+    setCurrentSidebarBoard("");
+    ArticleService.get()
+      .then((data) => {
+        //console.log(data.data);
+        setCurrentData(data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
 
   return (
     <div className="sidebar">
-      <a>
+      <Link to="/" onClick={handleBackToAllBoard}>
         <div>
           <div className="board-icon-con">
-            <img src={ham_menu} alt="ham_menu " />
+            <img
+              src={require("./images/ham-menu.svg").default}
+              alt="ham_menu "
+            />
           </div>
           <span>所有看板</span>
         </div>
-      </a>
+      </Link>
       <div className="boardSecond">
         <div>
           <span>Ocard 精選看板</span>
@@ -24,7 +44,11 @@ const SidebarComponent = (props) => {
       </div>
 
       {boards.map((board) => (
-        <a>
+        <a
+          onClick={handleBoardChange}
+          data-board={board}
+          className={currentSidebarBoard == board && "active"}
+        >
           <div>
             <div className="board-icon-con2">
               <img

@@ -18,6 +18,7 @@ const HeaderComponent = (props) => {
   };
 
   const handleRefresh = () => {
+    history.push("/");
     window.location.reload();
   };
 
@@ -27,9 +28,9 @@ const HeaderComponent = (props) => {
         <div className="header-left">
           <div className="ham_menu">{NavigationIcons.HamMenuIcon()}</div>
           <div className="logo">
-            <Link to="/" onClick={handleRefresh}>
+            <div onClick={handleRefresh}>
               <img src={ocardLogo} alt="Ocard Logo"></img>
-            </Link>
+            </div>
           </div>
           <div className="search">
             <input placeholder="搜尋"></input>
