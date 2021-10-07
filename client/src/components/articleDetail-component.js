@@ -19,11 +19,6 @@ const ArticleDetailComponent = (prop) => {
   let [currentImage, setCurrentImage] = useState(null);
   let history = useHistory();
   let date = new Date();
-  // 按下關閉鈕時
-  const handleClose = () => {
-    setArticleDetailOpen(false);
-    setCurrentDetailData(null);
-  };
 
   // 判斷資料是否有填寫
   useEffect(() => {
@@ -37,8 +32,6 @@ const ArticleDetailComponent = (prop) => {
   // 即時追蹤comment內容
   const handleCommentText = (e) => {
     setCurrentComment(e.target.value);
-    console.log(currentUser);
-    console.log(currentDetailData);
   };
 
   // 即時顯示圖片
@@ -109,22 +102,78 @@ const ArticleDetailComponent = (prop) => {
       });
   };
 
-  // 按讚、收回按讚
+  let [likeWhichComment, setLikeWhichComment] = useState([]);
+  // 按讚、收回按讚(留言)
   const handleLikeClick = (e) => {
-    let _id = e.currentTarget.dataset.articleid;
-    let comment_id = e.currentTarget.dataset.commentid;
-    let user_id = currentUser.user._id;
+    if (currentUser) {
+      let comment_id = e.currentTarget.dataset.commentid;
 
-    ArticleService.postLikes(_id, comment_id, user_id)
-      .then(() => {
-        console.log("按讚編輯成功");
-        e.target.parentElement.parentElement.classList.toggle("likesActive");
-      })
-      .catch((err) => {
-        console.log(err.response);
-        console.log("err");
-      });
+      let likeCount = e.currentTarget.parentElement.children[1];
+      let likeCountNumber = Number(
+        e.currentTarget.parentElement.children[1].innerText
+      );
+      if (likeWhichComment.includes(comment_id)) {
+        // 移除原有的comment_id
+        likeWhichComment.forEach((commentid, index) => {
+          if (commentid == comment_id) {
+            likeWhichComment.splice(index, 1);
+          }
+        });
+
+        // 按讚數增減
+        if (e.currentTarget.classList.contains("likesActive")) {
+          likeCountNumber--;
+          likeCount.innerText = likeCountNumber;
+        } else {
+          likeCountNumber++;
+          likeCount.innerText = likeCountNumber;
+        }
+        e.currentTarget.classList.toggle("likesActive");
+      } else {
+        // 新增comment_id
+        likeWhichComment.push(comment_id);
+
+        // 按讚數增減
+        if (e.currentTarget.classList.contains("likesActive")) {
+          likeCountNumber--;
+          likeCount.innerText = likeCountNumber;
+        } else {
+          likeCountNumber++;
+          likeCount.innerText = likeCountNumber;
+        }
+        e.currentTarget.classList.toggle("likesActive");
+      }
+      setLikeWhichComment(likeWhichComment);
+    } else {
+      window.alert("登入後才可以按讚留言啦！");
+    }
   };
+  // 按下關閉鈕時
+  const handleClose = () => {
+    // 控制ArticleDetail的這個element的開啟關閉
+    setArticleDetailOpen(false);
+    setCurrentDetailData(null);
+
+    if (currentUser) {
+      // 送出留言的按讚
+      let _id = currentDetailData._id;
+      let user_id = currentUser.user._id;
+
+      likeWhichComment.forEach((comment_id) => {
+        ArticleService.postLikes(_id, comment_id, user_id)
+          .then(() => {
+            console.log("按讚編輯成功");
+          })
+          .catch((err) => {
+            console.log(err.response);
+            console.log("err");
+          });
+      });
+      // 重置當前按讚的所有留言
+      setLikeWhichComment([]);
+    }
+  };
+
   return (
     <div className="articleDetail">
       {currentDetailData && (
