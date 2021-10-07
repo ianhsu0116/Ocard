@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import NavigationIcons from "./icons/NavigationIcons";
 import ocardLogo from "./images/Ocard.svg";
 
 const HeaderComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, currentSearch, setCurrentSearch } = props;
+  let [searchInput, setSearchInput] = useState("");
   const history = useHistory();
   const handlePost = () => {
     history.push("/postArticle");
@@ -22,6 +23,16 @@ const HeaderComponent = (props) => {
     window.location.reload();
   };
 
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    //console.log(searchInput);
+    setCurrentSearch(searchInput);
+    setSearchInput("");
+  };
+
   return (
     <div className="header-con">
       <header className="header">
@@ -33,8 +44,14 @@ const HeaderComponent = (props) => {
             </div>
           </div>
           <div className="search">
-            <input placeholder="搜尋"></input>
-            <button>{NavigationIcons.SearchIcon()}</button>
+            <input
+              placeholder="搜尋"
+              onChange={handleSearchChange}
+              value={searchInput}
+            />
+            <button onClick={handleSearchSubmit}>
+              {NavigationIcons.SearchIcon()}
+            </button>
           </div>
         </div>
         <div className="header-right">

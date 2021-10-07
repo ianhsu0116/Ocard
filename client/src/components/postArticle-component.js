@@ -76,13 +76,13 @@ const PostArticleComponent = (props) => {
 
     // 格式符合就顯示，否則提醒
     if (file) {
-      if (file.type.match(imageType) && file.size < 80000) {
+      if (file.type.match(imageType) && file.size < 75000) {
         readFile.readAsDataURL(file);
         readFile.addEventListener("load", function () {
           setCurrentImage(readFile.result);
         });
       } else {
-        window.alert("只能上傳圖片歐！(檔案大小須小於80kb)");
+        window.alert("只能上傳圖片歐！(目前情況檔案須小於75kb)");
       }
     }
   };

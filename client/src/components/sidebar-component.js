@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import ArticleService from "../services/article.service";
 
@@ -10,6 +10,9 @@ const SidebarComponent = (props) => {
     //console.log(e.currentTarget.dataset.board);
     setCurrentSidebarBoard(e.currentTarget.dataset.board);
   };
+  // useEffect(() => {
+  //   console.log(currentSidebarBoard);
+  // }, [currentSidebarBoard]);
 
   // 回到所有看板
   const handleBackToAllBoard = () => {

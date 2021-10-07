@@ -48,38 +48,29 @@ class ArticleService {
 
   // 拿所有文章
   get() {
-    let token;
-    if (localStorage.getItem("user")) {
-      token = JSON.parse(localStorage.getItem("user")).token;
-    } else {
-      token = "";
-    }
-
     return axios.get(OPEN_API_URL + "/");
   }
 
-  // 拿到特定文章
+  // 根據_id拿到特定文章
   getById(_id) {
-    let token;
-    if (localStorage.getItem("user")) {
-      token = JSON.parse(localStorage.getItem("user")).token;
-    } else {
-      token = "";
-    }
-
     return axios.get(OPEN_API_URL + "/" + _id);
   }
 
   // 依照看板拿文章
   getByBoard(board) {
-    let token;
-    if (localStorage.getItem("user")) {
-      token = JSON.parse(localStorage.getItem("user")).token;
-    } else {
-      token = "";
-    }
-
     return axios.get(OPEN_API_URL + "/board/" + board);
+  }
+
+  // 依照搜尋條件拿文章
+  getBySearch(input, currentSidebarBoard) {
+    //判斷這次是否需要依照看板下去搜尋
+    if (currentSidebarBoard) {
+      return axios.post(OPEN_API_URL + "/search/" + input, {
+        board: currentSidebarBoard,
+      });
+    } else {
+      return axios.post(OPEN_API_URL + "/search/" + input);
+    }
   }
 
   // 新增留言
@@ -126,8 +117,30 @@ class ArticleService {
     }
   }
 
-  // 按讚或是取消按讚
-  postLikes(_id, comment_id, user_id) {
+  // 按讚或是取消按讚(article)
+  postArticleLikes(_id, user_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    return axios.post(
+      API_URL + "/likes/" + _id,
+      {
+        user_id,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+  }
+
+  // 按讚或是取消按讚(comment)
+  postCommentLikes(_id, comment_id, user_id) {
     let token;
     if (localStorage.getItem("user")) {
       token = JSON.parse(localStorage.getItem("user")).token;

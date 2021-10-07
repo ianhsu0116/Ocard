@@ -6,7 +6,8 @@ import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
 
 const HomeComponent = (props) => {
-  let { currentUser, setCurrentUser, boards } = props;
+  let { currentUser, setCurrentUser, boards, currentSearch, setCurrentSearch } =
+    props;
   let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
@@ -23,6 +24,44 @@ const HomeComponent = (props) => {
         console.log(err.response);
       });
   }, []);
+
+  // useEffect(() => {
+  //   console.log(currentSidebarBoard);
+  // }, [currentSidebarBoard]);
+
+  useEffect(() => {
+    //  判斷當前是否有搜尋條件
+    if (currentSearch) {
+      // 判斷現在是否有在看板分類中
+      if (!currentSidebarBoard) {
+        ArticleService.getBySearch(currentSearch)
+          .then((data) => {
+            //console.log(data.data);
+            setCurrentData(data.data);
+            setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
+            if (data.data.length === 0) {
+              window.alert("沒有相符的文章喔！！");
+            }
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
+      } else {
+        ArticleService.getBySearch(currentSearch, currentSidebarBoard)
+          .then((data) => {
+            //console.log(data.data);
+            setCurrentData(data.data);
+            setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
+            if (data.data.length === 0) {
+              window.alert("此看板沒有相符的文章喔！！");
+            }
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
+      }
+    }
+  }, [currentSearch]);
 
   // 切換板板時重新render頁面
   useEffect(() => {

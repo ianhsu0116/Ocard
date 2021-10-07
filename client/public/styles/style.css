@@ -1434,14 +1434,15 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-img {
   max-width: 100%;
-  max-height: 40vh;
+  max-height: 350px;
   overflow: hidden;
-  text-align: center center;
+  position: relative;
   padding-top: 0.5rem;
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-mid .articleDetail-comment-mid-img img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 350px;
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-comment .articleDetail-comment-box .articleDetail-comment-con .articleDetail-comment-right {

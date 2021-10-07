@@ -136,7 +136,34 @@ router.post("/comment/:_id", async (req, res) => {
   }
 });
 
-// 按讚或是收回讚
+// 按讚或是收回讚(article)
+router.post("/likes/:_id", async (req, res) => {
+  let { _id } = req.params;
+  let { user_id } = req.body;
+  try {
+    // 找到要新增或是取消讚的article
+    let article = await Article.findById({ _id });
+    let isExist = article.likes.includes(user_id);
+
+    // 存在就刪除，不存在則新增
+    if (isExist) {
+      article.likes.forEach((userid, index) => {
+        if (userid == user_id) {
+          article.likes.splice(index, 1);
+        }
+      });
+    } else {
+      article.likes.push(user_id);
+    }
+
+    article.save();
+    res.status(200).send("Article like has been edit ");
+  } catch (err) {
+    res.status(400).send("cannot edit likes from article");
+  }
+});
+
+// 按讚或是收回讚(comment)
 router.post("/comment/likes/:_id", async (req, res) => {
   let { _id } = req.params;
   let { comment_id, user_id } = req.body;
@@ -160,9 +187,9 @@ router.post("/comment/likes/:_id", async (req, res) => {
       }
     });
     article.save();
-    res.status(200).send("Like has been edit");
+    res.status(200).send("Comment like has been edit");
   } catch (err) {
-    res.status(400).send("cannot delete like");
+    res.status(400).send("cannot edit likes from comment");
   }
 });
 

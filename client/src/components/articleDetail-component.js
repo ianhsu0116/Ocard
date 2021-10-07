@@ -17,10 +17,21 @@ const ArticleDetailComponent = (prop) => {
   let [currentComment, setCurrentComment] = useState("");
   let [buttonStatus, setButtonStatus] = useState("disabled");
   let [currentImage, setCurrentImage] = useState(null);
+  let [likeWhichComment, setLikeWhichComment] = useState([]);
+  let [isArticleLike, setIsArticleLike] = useState(false);
   let history = useHistory();
   let date = new Date();
 
-  // 判斷資料是否有填寫
+  // 判斷當前使用者是否已經對當前文章按過讚
+  useEffect(() => {
+    if (currentDetailData) {
+      if (currentDetailData.likes.includes(currentUser.user_id)) {
+        setIsArticleLike(true);
+      }
+    }
+  }, [currentDetailData]);
+
+  // 判斷留言內是否有填寫文字
   useEffect(() => {
     if (currentComment.length >= 1 && currentComment.length < 200) {
       setButtonStatus(false);
@@ -59,7 +70,7 @@ const ArticleDetailComponent = (prop) => {
   };
 
   // 送出留言
-  const handleSubmit = (e) => {
+  const handleCommentSubmit = (e) => {
     if (!currentUser) {
       window.alert("請先登入才可以留言歐！！");
       history.push("/login");
@@ -102,7 +113,27 @@ const ArticleDetailComponent = (prop) => {
       });
   };
 
-  let [likeWhichComment, setLikeWhichComment] = useState([]);
+  // 按讚、收回按讚(文章)
+  let currentArticleLikesCount = Number(
+    document.querySelector(".likeCount").innerText
+  );
+  const handleArticleLike = (e) => {
+    if (currentUser) {
+      // 判斷當前使用者是否有對當前文章按讚
+      if (isArticleLike) {
+        setIsArticleLike(false);
+        document.querySelector(".likeCount").innerText =
+          currentArticleLikesCount - 1;
+      } else {
+        setIsArticleLike(true);
+        document.querySelector(".likeCount").innerText =
+          currentArticleLikesCount + 1;
+      }
+    } else {
+      window.alert("登入後才可以按讚留言啦！");
+    }
+  };
+
   // 按讚、收回按讚(留言)
   const handleLikeClick = (e) => {
     if (currentUser) {
@@ -148,21 +179,23 @@ const ArticleDetailComponent = (prop) => {
       window.alert("登入後才可以按讚留言啦！");
     }
   };
+
   // 按下關閉鈕時
   const handleClose = () => {
     // 控制ArticleDetail的這個element的開啟關閉
     setArticleDetailOpen(false);
     setCurrentDetailData(null);
 
+    // 目前有人登入的話，確認有無要送出的按讚(文章及留言的)
     if (currentUser) {
       // 送出留言的按讚
       let _id = currentDetailData._id;
       let user_id = currentUser.user._id;
 
       likeWhichComment.forEach((comment_id) => {
-        ArticleService.postLikes(_id, comment_id, user_id)
+        ArticleService.postCommentLikes(_id, comment_id, user_id)
           .then(() => {
-            console.log("按讚編輯成功");
+            console.log("留言按讚編輯成功");
           })
           .catch((err) => {
             console.log(err.response);
@@ -171,6 +204,18 @@ const ArticleDetailComponent = (prop) => {
       });
       // 重置當前按讚的所有留言
       setLikeWhichComment([]);
+
+      // 判斷是否送出文章的按讚編輯
+      if (isArticleLike) {
+        ArticleService.postArticleLikes(_id, user_id)
+          .then(() => {
+            console.log("文章按讚編輯成功");
+          })
+          .catch((err) => {
+            console.log(err.response);
+            console.log("err");
+          });
+      }
     }
   };
 
@@ -208,16 +253,16 @@ const ArticleDetailComponent = (prop) => {
             </div>
             <div className="likesIcon-con">
               <div className="icons">
-                <button>
+                <button onClick={handleArticleLike}>
                   <img src={require("./images/like.png").default} alt="like" />
                 </button>
-                <button>
+                <button onClick={handleArticleLike}>
                   <img
                     src={require("./images/happy.png").default}
                     alt="happy"
                   />
                 </button>
-                <button>
+                <button onClick={handleArticleLike}>
                   <img
                     src={require("./images/angry.png").default}
                     alt="angry"
@@ -279,7 +324,6 @@ const ArticleDetailComponent = (prop) => {
                             ) && (
                               <button
                                 className="icon-con likesActive"
-                                data-articleid={currentDetailData._id}
                                 data-commentid={comment.comment_id}
                                 onClick={handleLikeClick}
                               >
@@ -292,7 +336,6 @@ const ArticleDetailComponent = (prop) => {
                             ) && (
                               <button
                                 className="icon-con"
-                                data-articleid={currentDetailData._id}
                                 data-commentid={comment.comment_id}
                                 onClick={handleLikeClick}
                               >
@@ -302,7 +345,7 @@ const ArticleDetailComponent = (prop) => {
                           {!currentUser && (
                             <button
                               className="icon-con"
-                              data-articleid={currentDetailData._id}
+                              // data-articleid={currentDetailData._id}
                               data-commentid={comment.comment_id}
                               onClick={handleLikeClick}
                             >
@@ -350,7 +393,7 @@ const ArticleDetailComponent = (prop) => {
             </div>
             <button
               id="submit-btn"
-              onClick={handleSubmit}
+              onClick={handleCommentSubmit}
               type="button"
               className={buttonStatus}
               disabled={buttonStatus}

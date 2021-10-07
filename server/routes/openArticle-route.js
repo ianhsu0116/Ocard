@@ -40,6 +40,33 @@ router.get("/:_id", (req, res) => {
     });
 });
 
+// 依照搜尋條件(title) hasOwnProperty
+router.post("/search/:text", (req, res) => {
+  let { text } = req.params;
+  let { board } = req.body;
+  if (board) {
+    Article.find({ $and: [{ title: { $regex: `${text}` } }, { board }] })
+      .populate("author", ["email"])
+      .populate("comment.user_id", ["email"])
+      .then((article) => {
+        res.status(200).send(article);
+      })
+      .catch((err) => {
+        res.status(500).send("can not find any article");
+      });
+  } else {
+    Article.find({ title: { $regex: `${text}` } })
+      .populate("author", ["email"])
+      .populate("comment.user_id", ["email"])
+      .then((article) => {
+        res.status(200).send(article);
+      })
+      .catch((err) => {
+        res.status(500).send("can not find any article");
+      });
+  }
+});
+
 // 依照board拿到文章
 router.get("/board/:board_name", (req, res) => {
   let { board_name } = req.params;

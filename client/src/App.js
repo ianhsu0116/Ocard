@@ -7,6 +7,7 @@ import LoginComponent from "./components/login-component";
 import PostArticleComponent from "./components/postArticle-component";
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
   let [boards, setBoards] = useState([
     "NBA",
     "健身",
@@ -37,6 +38,8 @@ function App() {
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         boards={boards}
+        currentSearch={currentSearch}
+        setCurrentSearch={setCurrentSearch}
       />
       <Switch>
         <Route path="/" exact>
@@ -44,6 +47,8 @@ function App() {
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
             boards={boards}
+            currentSearch={currentSearch}
+            setCurrentSearch={setCurrentSearch}
           />
         </Route>
         <Route path="/login" exact>
