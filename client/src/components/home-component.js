@@ -6,8 +6,15 @@ import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
 
 const HomeComponent = (props) => {
-  let { currentUser, setCurrentUser, boards, currentSearch, setCurrentSearch } =
-    props;
+  let {
+    currentUser,
+    setCurrentUser,
+    boards,
+    currentSearch,
+    setCurrentSearch,
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
+  } = props;
   let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
@@ -99,8 +106,9 @@ const HomeComponent = (props) => {
         setCurrentDetailData(data.data);
       })
       .catch((err) => {
-        window.alert("發生錯誤，正在處理中！");
+        window.alert("發生錯誤，正在處理中！(get articleDetail)");
         //console.log(err);
+        //console.log(err.response);
       });
   }
   return (
@@ -120,6 +128,8 @@ const HomeComponent = (props) => {
           setCurrentSidebarBoard={setCurrentSidebarBoard}
           currentData={currentData}
           setCurrentData={setCurrentData}
+          mobileSidebarOpen={mobileSidebarOpen}
+          setMobileSidebarOpen={setMobileSidebarOpen}
         />
         <div className="main">
           <div className="main_nav">

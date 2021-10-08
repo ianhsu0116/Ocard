@@ -140,7 +140,7 @@ class ArticleService {
   }
 
   // 按讚或是取消按讚(comment)
-  postCommentLikes(_id, comment_id, user_id) {
+  postCommentLikes(_id, comment_id_arr, user_id) {
     let token;
     if (localStorage.getItem("user")) {
       token = JSON.parse(localStorage.getItem("user")).token;
@@ -151,7 +151,7 @@ class ArticleService {
     return axios.post(
       API_URL + "/comment/likes/" + _id,
       {
-        comment_id,
+        comment_id_arr,
         user_id,
       },
       {

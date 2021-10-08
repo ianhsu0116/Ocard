@@ -237,6 +237,10 @@ div.header-con .header .header-right .logout-btn svg {
   overflow: scroll;
 }
 
+.sidebar .sidbar-header {
+  display: none;
+}
+
 .sidebar .active {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -301,15 +305,17 @@ div.header-con .header .header-right .logout-btn svg {
 }
 
 .sidebar a div .board-icon-con {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-right: 10px;
 }
 
-.sidebar a div .board-icon-con img {
-  background: white;
+.sidebar a div .board-icon-con svg {
   width: 100%;
-  border-radius: 5px;
+  height: 100%;
+  position: relative;
+  top: 1px;
+  color: white;
 }
 
 .sidebar a div .board-icon-con2 {
@@ -345,7 +351,101 @@ div.header-con .header .header-right .logout-btn svg {
 
 @media screen and (max-width: 800px) {
   .sidebar {
-    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: white;
+    z-index: 20;
+  }
+  .sidebar .sidbar-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100vw;
+    min-height: 40px;
+    background: #006aa6;
+    color: white;
+    font-size: 16px;
+    font-weight: bolder;
+    position: relative;
+  }
+  .sidebar .sidbar-header .sidebar-close-btn-con {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+  .sidebar .sidbar-header .sidebar-close-btn-con svg {
+    position: absolute;
+    fill: white;
+    width: 100%;
+    height: 100%;
+  }
+  .sidebar .boardSecond {
+    color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    padding: 0.75rem 1.25rem;
+  }
+  .sidebar a {
+    padding: 0.5rem 1.25rem;
+  }
+  .sidebar a:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+  .sidebar a.active {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+  .sidebar a.active:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .sidebar a div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .sidebar a div .board-icon-con {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+  .sidebar a div .board-icon-con svg {
+    width: 100%;
+    color: rgba(0, 0, 0, 0.35);
+  }
+  .sidebar a div .board-icon-con2 {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .sidebar a div .board-icon-con2 img {
+    background: white;
+    width: 100%;
+    height: 100%;
+  }
+  .sidebar a div span {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.8);
   }
 }
 

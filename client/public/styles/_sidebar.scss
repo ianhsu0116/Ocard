@@ -9,6 +9,10 @@
   max-height: 85vh;
   overflow: scroll;
 
+  .sidbar-header {
+    display: none;
+  }
+
   .active {
     background: rgba(255, 255, 255, 0.8);
     &:hover {
@@ -52,14 +56,16 @@
       justify-content: flex-start;
       align-items: center;
       .board-icon-con {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         margin-right: 10px;
 
-        img {
-          background: white;
+        svg {
           width: 100%;
-          border-radius: 5px;
+          height: 100%;
+          position: relative;
+          top: 1px;
+          color: white;
         }
       }
 
@@ -96,7 +102,104 @@
   }
 }
 @media screen and (max-width: 800px) {
+  // .sidebar {
+  //   display: none;
+  // }
+
   .sidebar {
-    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: rgb(255, 255, 255);
+    z-index: 20;
+
+    .sidbar-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      min-height: 40px;
+      background: $OcardBlue;
+      color: white;
+      font-size: 16px;
+      font-weight: bolder;
+      position: relative;
+
+      .sidebar-close-btn-con {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0.5rem;
+        cursor: pointer;
+
+        svg {
+          position: absolute;
+          fill: white;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .boardSecond {
+      color: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      padding: 0.75rem 1.25rem;
+    }
+
+    a {
+      padding: 0.5rem 1.25rem;
+      &:hover {
+        background: rgba(0, 0, 0, 0.1) !important;
+      }
+
+      &.active {
+        background: rgba(0, 0, 0, 0.1) !important;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .board-icon-con {
+          width: 25px;
+          height: 25px;
+          margin-right: 10px;
+
+          svg {
+            width: 100%;
+            color: $colorLighGray;
+          }
+        }
+
+        .board-icon-con2 {
+          width: 35px;
+          height: 35px;
+          margin-right: 10px;
+          border-radius: 50%;
+          overflow: hidden;
+
+          img {
+            background: white;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        span {
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
   }
 }

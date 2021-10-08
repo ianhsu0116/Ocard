@@ -8,6 +8,7 @@ import PostArticleComponent from "./components/postArticle-component";
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
+  let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   let [boards, setBoards] = useState([
     "NBA",
     "健身",
@@ -40,6 +41,7 @@ function App() {
         boards={boards}
         currentSearch={currentSearch}
         setCurrentSearch={setCurrentSearch}
+        setMobileSidebarOpen={setMobileSidebarOpen}
       />
       <Switch>
         <Route path="/" exact>
@@ -49,6 +51,8 @@ function App() {
             boards={boards}
             currentSearch={currentSearch}
             setCurrentSearch={setCurrentSearch}
+            mobileSidebarOpen={mobileSidebarOpen}
+            setMobileSidebarOpen={setMobileSidebarOpen}
           />
         </Route>
         <Route path="/login" exact>

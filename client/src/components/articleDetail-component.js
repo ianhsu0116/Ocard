@@ -19,14 +19,17 @@ const ArticleDetailComponent = (prop) => {
   let [currentImage, setCurrentImage] = useState(null);
   let [likeWhichComment, setLikeWhichComment] = useState([]);
   let [isArticleLike, setIsArticleLike] = useState(false);
+  let [isNeedEditArticleLike, setIsNeedEditArticleLike] = useState(false);
   let history = useHistory();
   let date = new Date();
 
   // 判斷當前使用者是否已經對當前文章按過讚
   useEffect(() => {
-    if (currentDetailData) {
-      if (currentDetailData.likes.includes(currentUser.user_id)) {
-        setIsArticleLike(true);
+    if (currentUser) {
+      if (currentDetailData) {
+        if (currentDetailData.likes.includes(currentUser.user._id)) {
+          setIsArticleLike(true);
+        }
       }
     }
   }, [currentDetailData]);
@@ -39,6 +42,25 @@ const ArticleDetailComponent = (prop) => {
       setButtonStatus("disabled");
     }
   }, [currentComment]);
+
+  // 判斷是否要送出文章按讚
+  useEffect(() => {
+    if (currentUser) {
+      if (isNeedEditArticleLike) {
+        let _id = currentDetailData._id;
+        let user_id = currentUser.user._id;
+        // 送出文章的按讚編輯
+        ArticleService.postArticleLikes(_id, user_id)
+          .then(() => {
+            console.log("文章按讚編輯成功");
+          })
+          .catch((err) => {
+            console.log(err.response);
+            console.log("err");
+          });
+      }
+    }
+  }, [isNeedEditArticleLike]);
 
   // 即時追蹤comment內容
   const handleCommentText = (e) => {
@@ -53,13 +75,13 @@ const ArticleDetailComponent = (prop) => {
 
     // 格式符合就顯示，否則提醒
     if (file) {
-      if (file.type.match(imageType) && file.size < 80000) {
+      if (file.type.match(imageType) && file.size < 75000) {
         readFile.readAsDataURL(file);
         readFile.addEventListener("load", function () {
           setCurrentImage(readFile.result);
         });
       } else {
-        window.alert("只能上傳圖片歐！(檔案大小須小於80kb)");
+        window.alert("只能上傳圖片歐！(目前情況檔案大小須小於75kb)");
       }
     }
   };
@@ -103,7 +125,7 @@ const ArticleDetailComponent = (prop) => {
             setCurrentDetailData(data.data);
           })
           .catch((err) => {
-            window.alert("發生錯誤，正在處理中！");
+            window.alert("發生錯誤，正在處理中！(post article comment)");
             //console.log(err);
           });
       })
@@ -114,11 +136,16 @@ const ArticleDetailComponent = (prop) => {
   };
 
   // 按讚、收回按讚(文章)
-  let currentArticleLikesCount = Number(
-    document.querySelector(".likeCount").innerText
-  );
   const handleArticleLike = (e) => {
     if (currentUser) {
+      // 一按下文章的讚，就代表這次有需要進資料庫更改
+      setIsNeedEditArticleLike(true);
+
+      // 先抓到當前留言 原有的按讚數量
+      let currentArticleLikesCount = Number(
+        document.querySelector(".likeCount").innerText
+      );
+
       // 判斷當前使用者是否有對當前文章按讚
       if (isArticleLike) {
         setIsArticleLike(false);
@@ -138,7 +165,6 @@ const ArticleDetailComponent = (prop) => {
   const handleLikeClick = (e) => {
     if (currentUser) {
       let comment_id = e.currentTarget.dataset.commentid;
-
       let likeCount = e.currentTarget.parentElement.children[1];
       let likeCountNumber = Number(
         e.currentTarget.parentElement.children[1].innerText
@@ -192,8 +218,10 @@ const ArticleDetailComponent = (prop) => {
       let _id = currentDetailData._id;
       let user_id = currentUser.user._id;
 
-      likeWhichComment.forEach((comment_id) => {
-        ArticleService.postCommentLikes(_id, comment_id, user_id)
+      //console.log(likeWhichComment);
+
+      if (likeWhichComment.length > 0) {
+        ArticleService.postCommentLikes(_id, likeWhichComment, user_id)
           .then(() => {
             console.log("留言按讚編輯成功");
           })
@@ -201,21 +229,22 @@ const ArticleDetailComponent = (prop) => {
             console.log(err.response);
             console.log("err");
           });
-      });
-      // 重置當前按讚的所有留言
-      setLikeWhichComment([]);
-
-      // 判斷是否送出文章的按讚編輯
-      if (isArticleLike) {
-        ArticleService.postArticleLikes(_id, user_id)
-          .then(() => {
-            console.log("文章按讚編輯成功");
-          })
-          .catch((err) => {
-            console.log(err.response);
-            console.log("err");
-          });
+        // 重置當前按讚的所有留言
+        setLikeWhichComment([]);
       }
+
+      // 先判斷這次使用者是否有點擊過文章按讚鈕
+      // if (isNeedEditArticleLike) {
+      //   // 送出文章的按讚編輯
+      //   ArticleService.postArticleLikes(_id, user_id)
+      //     .then(() => {
+      //       console.log("文章按讚編輯成功");
+      //     })
+      //     .catch((err) => {
+      //       console.log(err.response);
+      //       console.log("err");
+      //     });
+      // }
     }
   };
 

@@ -5,7 +5,13 @@ import NavigationIcons from "./icons/NavigationIcons";
 import ocardLogo from "./images/Ocard.svg";
 
 const HeaderComponent = (props) => {
-  let { currentUser, setCurrentUser, currentSearch, setCurrentSearch } = props;
+  let {
+    currentUser,
+    setCurrentUser,
+    currentSearch,
+    setCurrentSearch,
+    setMobileSidebarOpen,
+  } = props;
   let [searchInput, setSearchInput] = useState("");
   const history = useHistory();
   const handlePost = () => {
@@ -33,11 +39,17 @@ const HeaderComponent = (props) => {
     setSearchInput("");
   };
 
+  const handleSidebarOpen = () => {
+    setMobileSidebarOpen(true);
+  };
+
   return (
     <div className="header-con">
       <header className="header">
         <div className="header-left">
-          <div className="ham_menu">{NavigationIcons.HamMenuIcon()}</div>
+          <div className="ham_menu" onClick={handleSidebarOpen}>
+            {NavigationIcons.HamMenuIcon()}
+          </div>
           <div className="logo">
             <div onClick={handleRefresh}>
               <img src={ocardLogo} alt="Ocard Logo"></img>

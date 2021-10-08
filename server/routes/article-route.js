@@ -166,26 +166,27 @@ router.post("/likes/:_id", async (req, res) => {
 // 按讚或是收回讚(comment)
 router.post("/comment/likes/:_id", async (req, res) => {
   let { _id } = req.params;
-  let { comment_id, user_id } = req.body;
+  let { comment_id_arr, user_id } = req.body;
+
   try {
     let article = await Article.findById({ _id });
     // 找到要新增或是取消讚的comment
-    article.comment.forEach((com) => {
-      if (com.comment_id === comment_id) {
-        //找到後尋找當前傳入的user_id是否存在於Likes內
-        let isContain = com.likes.find((like) => like == user_id);
-        // 存在的話就刪除，否則新增
-        if (isContain) {
-          com.likes.forEach((userid, index) => {
-            if (userid == user_id) {
-              com.likes.splice(index, 1);
-            }
-          });
-        } else {
-          com.likes.push(user_id);
+    await comment_id_arr.forEach((currentComId) => {
+      article.comment.forEach((com) => {
+        if (com.comment_id == currentComId) {
+          // 尋找當前傳入的user_id是否存在於Likes內
+          let index = com.likes.indexOf(user_id);
+
+          //存在的話就刪除，否則新增
+          if (index >= 0) {
+            com.likes.splice(index, 1);
+          } else {
+            com.likes.push(user_id);
+          }
         }
-      }
+      });
     });
+
     article.save();
     res.status(200).send("Comment like has been edit");
   } catch (err) {
