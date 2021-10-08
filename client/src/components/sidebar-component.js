@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ArticleService from "../services/article.service";
 import NavigationIcons from "./icons/NavigationIcons";
@@ -16,15 +16,25 @@ const SidebarComponent = (props) => {
 
   const handleBoardChange = (e) => {
     //console.log(e.currentTarget.dataset.board);
+    // 更新當前看板
     setCurrentSidebarBoard(e.currentTarget.dataset.board);
+
+    // 如果是手機版的話選好看板後 關閉sidebar
+    if (windowWidth <= 800) {
+      setMobileSidebarOpen(false);
+    }
   };
-  // useEffect(() => {
-  //   console.log(currentSidebarBoard);
-  // }, [currentSidebarBoard]);
 
   // 回到所有看板
   const handleBackToAllBoard = () => {
+    // 清空當前已選看板
     setCurrentSidebarBoard("");
+
+    // 選好看板後 如果是手機版的話 => 關閉sidebar
+    if (windowWidth <= 800) {
+      setMobileSidebarOpen(false);
+    }
+
     ArticleService.get()
       .then((data) => {
         //console.log(data.data);
@@ -35,13 +45,16 @@ const SidebarComponent = (props) => {
       });
   };
 
-  const handleSidebarOpen = () => {
+  // 按下看板關閉按鈕
+  const handleSidebarClose = () => {
     setMobileSidebarOpen(false);
   };
 
+  // 控制手機版的sidebar開關
   useEffect(() => {
     let sidebar = document.querySelector(".sidebar");
-    console.log(sidebar);
+    //console.log(sidebar);
+
     if (mobileSidebarOpen) {
       sidebar.style.display = "flex";
     } else {
@@ -49,18 +62,24 @@ const SidebarComponent = (props) => {
     }
   }, [mobileSidebarOpen]);
 
-  ///// ====================== 以下尚未完成，正在實現即時獲取window width, 來做到sidebar開合控制
-  let windowWidth = 1080;
-  window.addEventListener("resize", (e) => {
-    windowWidth = window.window.innerWidth;
+  // 即時獲取window width, 來做到sidebar開合控制
+  let [windowWidth, setWindowWidth] = useState(window.window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWindowWidth(window.window.innerWidth);
   });
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (windowWidth > 800) {
+      setMobileSidebarOpen(true);
+    } else {
+      setMobileSidebarOpen(false);
+    }
+  }, [windowWidth]);
 
   return (
     <div className="sidebar">
       <div className="sidbar-header">
         精選看板
-        <div onClick={handleSidebarOpen} className="sidebar-close-btn-con">
+        <div onClick={handleSidebarClose} className="sidebar-close-btn-con">
           {CloseButtonIcon()}
         </div>
       </div>

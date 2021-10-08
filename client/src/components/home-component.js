@@ -26,15 +26,14 @@ const HomeComponent = (props) => {
       .then((data) => {
         //console.log(data.data);
         setCurrentData(data.data);
+        if (data.data.length === 0) {
+          window.alert("Ocard內還沒有任何文章歐，幫我新增一篇吧！");
+        }
       })
       .catch((err) => {
         console.log(err.response);
       });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(currentSidebarBoard);
-  // }, [currentSidebarBoard]);
 
   useEffect(() => {
     //  判斷當前是否有搜尋條件
@@ -77,6 +76,9 @@ const HomeComponent = (props) => {
         .then((data) => {
           //console.log(data.data);
           setCurrentData(data.data);
+          if (data.data.length === 0) {
+            window.alert("當前看板還沒有文章歐！");
+          }
         })
         .catch((err) => {
           console.log(err.response);

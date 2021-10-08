@@ -1157,6 +1157,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-bottom: 5rem;
 }
 
 .postArticle form.form-con .temp-img-box .temp-img-con {
@@ -1166,7 +1167,8 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 }
 
 .postArticle form.form-con .temp-img-box .temp-img-con img {
-  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .postArticle form.form-con .temp-img-box .temp-img-con button.close-btn {
@@ -1229,11 +1231,11 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 
 @media screen and (max-width: 700px) {
   .form-con {
-    padding: 1rem 0.25rem !important;
+    padding: 0rem 1rem !important;
     width: 100% !important;
   }
   .footer-con {
-    padding: 0.75rem 0.25rem !important;
+    padding: 0.75rem 1rem !important;
   }
   .footer-con .form-footer {
     max-width: 100% !important;
