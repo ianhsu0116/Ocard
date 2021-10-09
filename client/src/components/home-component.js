@@ -4,11 +4,11 @@ import SidebarComponent from "./sidebar-component";
 import ArticleDetailComponent from "./articleDetail-component";
 import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
+import mergeSortFormula from "./sortFormula/mergeSort-Formula";
 
 const HomeComponent = (props) => {
   let {
     currentUser,
-    setCurrentUser,
     boards,
     currentSearch,
     setCurrentSearch,
@@ -113,6 +113,13 @@ const HomeComponent = (props) => {
         //console.log(err.response);
       });
   }
+
+  // =========目前停在這，無法順利控制container的開合=================
+  // 控制排序法容器開關
+  let [isSortConOpen, setIsSortConOpen] = useState("none");
+  const handleSortConOpen = () => {
+    setIsSortConOpen("flex");
+  };
   return (
     <div className="main-con">
       <div className="d-flex">
@@ -136,9 +143,13 @@ const HomeComponent = (props) => {
         <div className="main">
           <div className="main_nav">
             <div className="middle">
-              <div className="right">
+              <div className="main_nav-middle-right">
                 <span>文章排序依</span>
-                <button>熱門</button>
+                <button onClick={handleSortConOpen}>熱門</button>
+                <div className="sortSelector-con" display={isSortConOpen}>
+                  <button className="hotSort">熱門</button>
+                  <button className="timeSort">最新</button>
+                </div>
               </div>
             </div>
           </div>

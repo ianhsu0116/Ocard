@@ -501,20 +501,53 @@ div.main-con div.d-flex div.main div.main_nav div.middle {
   font-size: 16px;
 }
 
-div.main-con div.d-flex div.main div.main_nav div.middle div.right span,
-div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right {
+  position: relative;
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right span,
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right button {
   display: inline-block;
   margin: 1rem 0rem;
   padding: 0.3rem 0.5rem;
 }
 
-div.main-con div.d-flex div.main div.main_nav div.middle div.right span {
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right span {
   color: colorLighGray;
 }
 
-div.main-con div.d-flex div.main div.main_nav div.middle div.right button {
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right button {
   border: none;
   border-radius: 5px;
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  z-index: 12;
+  right: 0;
+  top: 50px;
+  min-width: 10vw;
+  padding: 0.25rem 0.25rem;
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+  background: white;
+  border-radius: 10px;
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button {
+  padding: 0.25rem 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  background: white;
+  margin: 0.1rem 0;
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 div.main-con div.d-flex div.main div.main_banner {
