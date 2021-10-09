@@ -522,7 +522,9 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
