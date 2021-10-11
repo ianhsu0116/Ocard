@@ -4,10 +4,10 @@ const mergeByHot = (arr1, arr2) => {
   let j = 0;
 
   while (arr1.length > i && arr2.length > j) {
-    if (arr1[i].likes.length > arr2[j].likes.length) {
+    if (arr1[i].likes.length < arr2[j].likes.length) {
       result.push(arr2[j]);
       j++;
-    } else if (arr1[i].likes.length < arr2[j].likes.length) {
+    } else if (arr1[i].likes.length > arr2[j].likes.length) {
       result.push(arr1[i]);
       i++;
     } else {
@@ -27,16 +27,17 @@ const mergeByHot = (arr1, arr2) => {
 
   return result;
 };
+
 const mergeByTime = (arr1, arr2) => {
   let result = [];
   let i = 0;
   let j = 0;
 
   while (arr1.length > i && arr2.length > j) {
-    if (arr1[i].date > arr2[j].date) {
+    if (new Date(arr1[i].date) < new Date(arr2[j].date)) {
       result.push(arr2[j]);
       j++;
-    } else if (arr1[i].date < arr2[j].date) {
+    } else if (new Date(arr1[i].date) > new Date(arr2[j].date)) {
       result.push(arr1[i]);
       i++;
     } else {
@@ -115,10 +116,10 @@ export default { timeMergeSort, hotMergeSort };
 //   return result;
 // };
 
-//let testArr = [
+// let testArr = [
 //   {
 //     _id: "61611644320ffa9c5e620c88",
-//     board: "健身1",
+//     board: "11111",
 //     title: "健身 1 + 1",
 //     content:
 //       "測試用ㄉ文章\n測試用ㄉ文章測試用ㄉ文章\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章",
@@ -128,13 +129,13 @@ export default { timeMergeSort, hotMergeSort };
 //     },
 //     likes: ["a", "v", "c"],
 //     image: [],
-//     date: "2021/10/5 上午11:45:26",
+//     date: "2",
 //     comment: [],
 //     __v: 0,
 //   },
 //   {
 //     _id: "61611644320ffa9c5e620c88",
-//     board: "健身2",
+//     board: "2222",
 //     title: "健身 1 + 1",
 //     content:
 //       "測試用ㄉ文章\n測試用ㄉ文章測試用ㄉ文章\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章",
@@ -144,24 +145,28 @@ export default { timeMergeSort, hotMergeSort };
 //     },
 //     likes: ["a", "v", "c", "g", "f"],
 //     image: [],
-//     date: "2021/10/5 上午11:45:27",
+//     date: "10",
 //     comment: [],
 //     __v: 0,
 //   },
 //   {
 //     _id: "61611644320ffa9c5e620c88",
-//     board: "健身3",
-//     title: "健身 1 + 1",
+//     board: "3333",
+//     title: "健身434",
 //     content:
 //       "測試用ㄉ文章\n測試用ㄉ文章測試用ㄉ文章\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章\n\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章\n\n測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章測試用ㄉ文章",
 //     author: {
 //       _id: "6155d76a14d2139ebe0c921b",
 //       email: "ian@fake.com",
 //     },
-//     likes: ["a"],
+//     likes: ["a", "v", "c", "g", "f", "v", "c", "g", "f"],
 //     image: [],
-//     date: "2021/10/5 上午11:45:2",
+//     date: "1",
 //     comment: [],
 //     __v: 0,
 //   },
 // ];
+
+// console.log(hotMergeSort(testArr));
+
+// ===== 目前timeSort有問題 (日期會變成string compare)

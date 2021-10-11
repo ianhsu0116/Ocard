@@ -21,15 +21,22 @@ a {
   text-decoration: none;
 }
 
+// 按鍵
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+// 留言愛心
 .likesActive {
   svg {
     fill: $likesActiveRed !important;
   }
+}
+
+// 給sort button用的button active 目前還未用到
+.sortSelector-con-btn-active {
+  color: $OcardLightButtonBlue;
 }
 
 @import "./header";

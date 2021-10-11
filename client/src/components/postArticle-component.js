@@ -19,6 +19,8 @@ const PostArticleComponent = (props) => {
     date.toLocaleDateString() + " " + date.toLocaleTimeString()
   );
 
+  //console.log(date.toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }));
+
   // 確認當前是否登入
   let history = useHistory();
   useEffect(() => {

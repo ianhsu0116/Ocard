@@ -269,7 +269,11 @@ const ArticleDetailComponent = (prop) => {
               <div className="articleDetail-board">
                 {currentDetailData.board} ·
               </div>
-              <div className="articleDetail-time">{currentDetailData.date}</div>
+              <div className="articleDetail-time">
+                {new Date(currentDetailData.date).toLocaleDateString()}
+
+                {new Date(currentDetailData.date).toLocaleTimeString()}
+              </div>
             </div>
             <div className="articleDetail-text">
               {currentDetailData.content}

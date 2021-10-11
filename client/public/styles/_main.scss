@@ -44,11 +44,11 @@ div.main-con {
               display: flex;
               flex-direction: column;
               position: absolute;
-              z-index: 12;
+              z-index: 9;
               right: 0;
               top: 50px;
               min-width: 10vw;
-              padding: 0.25rem 0.25rem;
+              padding: 0.25rem;
               box-shadow: 3px 3px 5px $colorMidGray;
               background: white;
               border-radius: 10px;
@@ -249,6 +249,33 @@ div.main-con {
 
     div.main_nav {
       border-radius: 0 !important;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  div.main_nav {
+    height: 70px !important;
+    div.middle {
+      div.main_nav-middle-right {
+        span,
+        button {
+          margin: 0.25rem 0 !important;
+        }
+
+        div.sortSelector-con {
+          top: 38px !important;
+          min-width: 10vw;
+          padding: 0.2rem;
+          border-radius: 8px;
+          & button {
+            padding: 0.2rem 0.65rem;
+            font-size: 0.75rem;
+            &:hover {
+              background: rgba(0, 0, 0, 0.1);
+            }
+          }
+        }
+      }
     }
   }
 }

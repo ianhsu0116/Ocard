@@ -74,10 +74,8 @@ const articleSchema = new mongoose.Schema({
     },
   ],
   date: {
-    // type: Date,
-    // default: Date.now,
-    type: String,
-    default: date.toLocaleDateString() + " " + date.toLocaleTimeString(),
+    type: Date,
+    default: Date.now,
   },
 });
 

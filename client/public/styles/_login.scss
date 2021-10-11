@@ -169,21 +169,26 @@ div.LoginComponent {
   }
 }
 @media screen and (max-width: 520px) {
-  div.login-right {
-    button {
-      //width: 280px !important;
-      width: calc(100% + 40px) !important;
-    }
+  div.login-con {
+    margin-top: 5rem !important;
 
-    div.form-con {
-      div {
+    div.login-right {
+      padding: 2.2rem !important;
+      button {
         //width: 280px !important;
         width: calc(100% + 40px) !important;
       }
-    }
 
-    .line {
-      width: 80px !important;
+      div.form-con {
+        div {
+          //width: 280px !important;
+          width: calc(100% + 40px) !important;
+        }
+      }
+
+      .line {
+        width: 80px !important;
+      }
     }
   }
 }

@@ -25,7 +25,11 @@ const HomeComponent = (props) => {
     ArticleService.get()
       .then((data) => {
         //console.log(data.data);
-        setCurrentData(data.data);
+
+        // 先將順序排列成熱門優先，再放入currentData
+        let sortedData = mergeSortFormula.hotMergeSort(data.data);
+        setCurrentData(sortedData);
+
         if (data.data.length === 0) {
           window.alert("Ocard內還沒有任何文章歐，幫我新增一篇吧！");
         }
@@ -43,7 +47,11 @@ const HomeComponent = (props) => {
         ArticleService.getBySearch(currentSearch)
           .then((data) => {
             //console.log(data.data);
-            setCurrentData(data.data);
+
+            // 先將順序排列成熱門優先，再放入currentData
+            let sortedData = mergeSortFormula.hotMergeSort(data.data);
+            setCurrentData(sortedData);
+
             setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
             if (data.data.length === 0) {
               window.alert("沒有相符的文章喔！！");
@@ -56,7 +64,11 @@ const HomeComponent = (props) => {
         ArticleService.getBySearch(currentSearch, currentSidebarBoard)
           .then((data) => {
             //console.log(data.data);
-            setCurrentData(data.data);
+
+            // 先將順序排列成熱門優先，再放入currentData
+            let sortedData = mergeSortFormula.hotMergeSort(data.data);
+            setCurrentData(sortedData);
+
             setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
             if (data.data.length === 0) {
               window.alert("此看板沒有相符的文章喔！！");
@@ -75,7 +87,11 @@ const HomeComponent = (props) => {
       ArticleService.getByBoard(currentSidebarBoard)
         .then((data) => {
           //console.log(data.data);
-          setCurrentData(data.data);
+
+          // 先將順序排列成熱門優先，再放入currentData
+          let sortedData = mergeSortFormula.hotMergeSort(data.data);
+          setCurrentData(sortedData);
+
           if (data.data.length === 0) {
             window.alert("當前看板還沒有文章歐！");
           }
@@ -88,7 +104,10 @@ const HomeComponent = (props) => {
       ArticleService.get()
         .then((data) => {
           //console.log(data.data);
-          setCurrentData(data.data);
+
+          // 先將順序排列成熱門優先，再放入currentData
+          let sortedData = mergeSortFormula.hotMergeSort(data.data);
+          setCurrentData(sortedData);
         })
         .catch((err) => {
           console.log(err.response);
@@ -114,10 +133,11 @@ const HomeComponent = (props) => {
       });
   }
 
-  // =========目前停在這，可以順利控制container的開合=================
   // 控制排序法容器開關
-  let [isSortConOpen, setIsSortConOpen] = useState(false);
-  const handleSortConOpen = () => {
+  let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關
+  let [sortMethod, setSortMethod] = useState("熱門"); // 切換當前sort method
+  const handleSortConOpen = (e) => {
+    e.stopPropagation();
     if (isSortConOpen) {
       setIsSortConOpen(false);
     } else {
@@ -125,7 +145,31 @@ const HomeComponent = (props) => {
     }
   };
 
-  const handledSortMethod = (e) => {};
+  // 點任一處即可關閉sortContainer
+  window.addEventListener("click", () => {
+    setIsSortConOpen(false);
+  });
+
+  // 即時更新演算法box內的文字
+  const handledSortMethod = (e) => {
+    setSortMethod(e.target.innerText);
+
+    // 關閉sortContainer
+    setIsSortConOpen(false);
+  };
+
+  // 當算法被更動後，即刻重新跑一次
+  useEffect(() => {
+    if (sortMethod === "熱門") {
+      //console.log(currentData);
+      let sortedData = mergeSortFormula.hotMergeSort(currentData);
+      setCurrentData(sortedData);
+    } else if (sortMethod === "最新") {
+      //console.log(currentData);
+      let sortedData = mergeSortFormula.timeMergeSort(currentData);
+      setCurrentData(sortedData);
+    }
+  }, [sortMethod]);
 
   return (
     <div className="main-con">
@@ -152,7 +196,7 @@ const HomeComponent = (props) => {
             <div className="middle">
               <div className="main_nav-middle-right">
                 <span>文章排序依</span>
-                <button onClick={handleSortConOpen}>熱門</button>
+                <button onClick={handleSortConOpen}>{sortMethod}</button>
                 {isSortConOpen && (
                   <div className="sortSelector-con">
                     <button className="hotSort" onClick={handledSortMethod}>
