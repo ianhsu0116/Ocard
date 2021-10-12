@@ -34,15 +34,6 @@ const SidebarComponent = (props) => {
     if (windowWidth <= 800) {
       setMobileSidebarOpen(false);
     }
-
-    ArticleService.get()
-      .then((data) => {
-        //console.log(data.data);
-        setCurrentData(data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
   };
 
   // 按下看板關閉按鈕

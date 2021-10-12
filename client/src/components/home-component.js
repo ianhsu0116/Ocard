@@ -16,6 +16,7 @@ const HomeComponent = (props) => {
     setMobileSidebarOpen,
   } = props;
   let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
+  let [currentData2, setCurrentData2] = useState();
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
   let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
@@ -30,6 +31,9 @@ const HomeComponent = (props) => {
         let sortedData = mergeSortFormula.hotMergeSort(data.data);
         setCurrentData(sortedData);
 
+        // 備用data存放區, 用途：在點擊所有文章時 不用重新render資料 直接從備用的拿
+        setCurrentData2(sortedData);
+
         if (data.data.length === 0) {
           window.alert("Ocard內還沒有任何文章歐，幫我新增一篇吧！");
         }
@@ -39,6 +43,7 @@ const HomeComponent = (props) => {
       });
   }, []);
 
+  // 搜尋功能
   useEffect(() => {
     //  判斷當前是否有搜尋條件
     if (currentSearch) {
@@ -88,9 +93,14 @@ const HomeComponent = (props) => {
         .then((data) => {
           //console.log(data.data);
 
-          // 先將順序排列成熱門優先，再放入currentData
-          let sortedData = mergeSortFormula.hotMergeSort(data.data);
-          setCurrentData(sortedData);
+          // 確認當前是哪個排列方式，排好再放入currentData
+          if (sortMethod === "熱門") {
+            let sortedData = mergeSortFormula.hotMergeSort(data.data);
+            setCurrentData(sortedData);
+          } else if (sortMethod === "最新") {
+            let sortedData = mergeSortFormula.timeMergeSort(data.data);
+            setCurrentData(sortedData);
+          }
 
           if (data.data.length === 0) {
             window.alert("當前看板還沒有文章歐！");
@@ -101,18 +111,14 @@ const HomeComponent = (props) => {
           console.log(1);
         });
     } else {
-      ArticleService.get()
-        .then((data) => {
-          //console.log(data.data);
-
-          // 先將順序排列成熱門優先，再放入currentData
-          let sortedData = mergeSortFormula.hotMergeSort(data.data);
-          setCurrentData(sortedData);
-        })
-        .catch((err) => {
-          console.log(err.response);
-          console.log(2);
-        });
+      // 直接將備用的data render出來，直接減去拿資料的時間
+      // 一樣要確認當前是哪個排列方式，排好再放入currentData
+      if (sortMethod === "熱門") {
+        setCurrentData(currentData2);
+      } else if (sortMethod === "最新") {
+        let sortedData = mergeSortFormula.timeMergeSort(currentData2);
+        setCurrentData(sortedData);
+      }
     }
   }, [currentSidebarBoard]);
 

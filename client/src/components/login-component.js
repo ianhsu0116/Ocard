@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import AuthService from "../services/auth.service";
 
 const LoginComponent = (props) => {
@@ -18,12 +19,15 @@ const LoginComponent = (props) => {
     }
   }, []);
 
+  // 即時抓取input value
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  // 登入
   const handleLogin = () => {
     AuthService.login(email, password)
       .then((response) => {
@@ -40,6 +44,8 @@ const LoginComponent = (props) => {
         setMessage(error.response.data);
       });
   };
+
+  // 註冊
   const handleRegister = () => {
     AuthService.register(email, password)
       .then(() => {
@@ -53,8 +59,8 @@ const LoginComponent = (props) => {
       });
   };
 
-  // google login
-  const Google_CLIENT_ID =
+  // google登入、註冊
+  const GOOGLE_CLIENT_ID =
     "1023583206236-q7i25f2b5j2fdu2eadgrfme1fce0g9se.apps.googleusercontent.com";
   const responseGoogle = (response) => {
     let { googleId } = response;
@@ -73,6 +79,15 @@ const LoginComponent = (props) => {
         console.log(err);
         window.alert("登入失敗！ 問題正在努力修復中。");
       });
+  };
+
+  // Facebook登入、註冊
+  const FACEBOOK_CLIENT_ID = "387092299774650";
+  const componentClicked = (data) => {
+    console.log(data);
+  };
+  const responseFacebook = (response) => {
+    console.log(response);
   };
 
   return (
@@ -98,17 +113,35 @@ const LoginComponent = (props) => {
                 <div></div>
               </button> */}
               <GoogleLogin
-                clientId={Google_CLIENT_ID}
+                clientId={GOOGLE_CLIENT_ID}
                 buttonText="Google 註冊 / 登入"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <img src={require("./images/googleLogin.svg").default} />
+                    <div>Google 註冊 / 登入</div>
+                    <div></div>
+                  </button>
+                )}
               />
-              <button className="facebook-btn">
+              {/* <button className="facebook-btn">
                 <img src={require("./images/facebookLogin.svg").default} />
                 <div>Facebook 註冊 / 登入</div>
                 <div></div>
-              </button>
+              </button> */}
+              {/* <FacebookLogin
+                appId={FACEBOOK_CLIENT_ID}
+                autoLoad={true}
+                fields="name,email,picture"
+                onClick={componentClicked}
+                callback={responseFacebook}
+                cssClass="facebook-btn"
+              /> */}
             </div>
             <div className="mid-line">
               <div className="line"></div>
