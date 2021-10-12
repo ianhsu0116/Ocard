@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
 import AuthService from "../services/auth.service";
 
 const LoginComponent = (props) => {
@@ -52,6 +53,28 @@ const LoginComponent = (props) => {
       });
   };
 
+  // google login
+  const Google_CLIENT_ID =
+    "1023583206236-q7i25f2b5j2fdu2eadgrfme1fce0g9se.apps.googleusercontent.com";
+  const responseGoogle = (response) => {
+    let { googleId } = response;
+    let email = response.it.Tt;
+
+    AuthService.googleLogin(email, googleId)
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+
+        setCurrentUser(AuthService.getCurrentUser());
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("登入失敗！ 問題正在努力修復中。");
+      });
+  };
+
   return (
     <div className="LoginComponent">
       {!currentUser && (
@@ -69,11 +92,18 @@ const LoginComponent = (props) => {
           </div>
           <div className="login-right">
             <div className="passport-button">
-              <button className="google-btn">
+              {/* <button className="google-btn">
                 <img src={require("./images/googleLogin.svg").default} />
                 <div>Google 註冊 / 登入</div>
                 <div></div>
-              </button>
+              </button> */}
+              <GoogleLogin
+                clientId={Google_CLIENT_ID}
+                buttonText="Google 註冊 / 登入"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
               <button className="facebook-btn">
                 <img src={require("./images/facebookLogin.svg").default} />
                 <div>Facebook 註冊 / 登入</div>

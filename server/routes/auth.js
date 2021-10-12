@@ -78,4 +78,54 @@ router.post("/login", (req, res) => {
   });
 });
 
+// google登入 註冊
+router.post("/google", (req, res) => {
+  let { email, googleId } = req.body;
+  if (!email || !googleId) {
+    return res.status(400).send("email 或是 googleId未正確送達！");
+  }
+
+  User.findOne({ email }, async function (err, user) {
+    if (err) return res.status(400).send(err);
+
+    // 如果是新用戶 就註冊
+    if (!user) {
+      let newUser = new User({
+        email,
+        password: "00000000",
+        googleId,
+      });
+
+      newUser
+        .save()
+        .then((msg) => {
+          let { _id, email } = msg;
+          const tokenObject = { _id, email };
+          const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+
+          res.status(200).send({
+            seccess: true,
+            token: "JWT " + token,
+            user: msg,
+          });
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
+    }
+
+    // 如果已註冊過，就登入
+    else {
+      const tokenObject = { _id: user._id, email: user.email };
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+
+      res.status(200).send({
+        seccess: true,
+        token: "JWT " + token,
+        user,
+      });
+    }
+  });
+});
+
 module.exports = router;

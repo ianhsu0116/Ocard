@@ -23,6 +23,13 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem("user"));
   }
+
+  googleLogin(email, googleId) {
+    return axios.post(API_URL + "/google", {
+      email,
+      googleId,
+    });
+  }
 }
 
 export default new AuthService();
