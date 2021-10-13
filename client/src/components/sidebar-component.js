@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import ArticleService from "../services/article.service";
 import NavigationIcons from "./icons/NavigationIcons";
 import CloseButtonIcon from "./icons/CloseButtonIcon";
 
@@ -9,7 +8,6 @@ const SidebarComponent = (props) => {
     boards,
     currentSidebarBoard,
     setCurrentSidebarBoard,
-    setCurrentData,
     mobileSidebarOpen,
     setMobileSidebarOpen,
   } = props;

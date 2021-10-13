@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const BoardSelectorComponent = (props) => {
-  let { boards, setBoardOpen, currentBoard, setCurrentBoard } = props;
+  let { boards, setBoardOpen, setCurrentBoard } = props;
 
   const handleChangeBoard = (e) => {
     e.stopPropagation();

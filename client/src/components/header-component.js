@@ -5,13 +5,8 @@ import NavigationIcons from "./icons/NavigationIcons";
 import ocardLogo from "./images/Ocard.svg";
 
 const HeaderComponent = (props) => {
-  let {
-    currentUser,
-    setCurrentUser,
-    currentSearch,
-    setCurrentSearch,
-    setMobileSidebarOpen,
-  } = props;
+  let { currentUser, setCurrentUser, setCurrentSearch, setMobileSidebarOpen } =
+    props;
   let [searchInput, setSearchInput] = useState("");
   const history = useHistory();
   const handlePost = () => {

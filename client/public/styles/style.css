@@ -785,6 +785,8 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
 div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
   width: 100%;
   height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 1080px) {
@@ -958,6 +960,11 @@ div.LoginComponent div.login-con div.login-right div.passport-button button {
 div.LoginComponent div.login-con div.login-right div.passport-button button img {
   width: 25px;
   height: 25px;
+}
+
+div.LoginComponent div.login-con div.login-right div.passport-button .google-btn {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 div.LoginComponent div.login-con div.login-right div.passport-button .facebook-btn {

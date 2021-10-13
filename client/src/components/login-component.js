@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import AuthService from "../services/auth.service";
 
 const LoginComponent = (props) => {
@@ -117,11 +117,6 @@ const LoginComponent = (props) => {
           </div>
           <div className="login-right">
             <div className="passport-button">
-              {/* <button className="google-btn">
-                <img src={require("./images/googleLogin.svg").default} />
-                <div>Google 註冊 / 登入</div>
-                <div></div>
-              </button> */}
               <GoogleLogin
                 clientId={GOOGLE_CLIENT_ID}
                 buttonText="Google 註冊 / 登入"
@@ -132,6 +127,7 @@ const LoginComponent = (props) => {
                   <button
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}
+                    className="google-btn"
                   >
                     <img src={require("./images/googleLogin.svg").default} />
                     <div>Google 註冊 / 登入</div>
@@ -139,16 +135,20 @@ const LoginComponent = (props) => {
                   </button>
                 )}
               />
-              {/* <button className="facebook-btn">
-                <img src={require("./images/facebookLogin.svg").default} />
-                <div>Facebook 註冊 / 登入</div>
-                <div></div>
-              </button> */}
               <FacebookLogin
                 appId={FACEBOOK_CLIENT_ID}
                 fields="name,email,picture"
                 callback={responseFacebook}
-                cssClass="facebook-btn"
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    className="facebook-btn"
+                  >
+                    <img src={require("./images/facebookLogin.svg").default} />
+                    <div>Facebook 註冊 / 登入</div>
+                    <div></div>
+                  </button>
+                )}
               />
             </div>
             <div className="mid-line">
