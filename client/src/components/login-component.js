@@ -60,44 +60,45 @@ const LoginComponent = (props) => {
   };
 
   // google登入、註冊
-  const GOOGLE_CLIENT_ID =
-    "1023583206236-q7i25f2b5j2fdu2eadgrfme1fce0g9se.apps.googleusercontent.com";
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const responseGoogle = (response) => {
-    let { googleId } = response;
-    let email = response.it.Tt;
+    console.log(response);
+    // let { googleId } = response;
+    // let email = response.it.Tt;
 
-    AuthService.googleLogin(email, googleId)
-      .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
+    // AuthService.googleLogin(email, googleId)
+    //   .then((response) => {
+    //     if (response.data.token) {
+    //       localStorage.setItem("user", JSON.stringify(response.data));
+    //     }
 
-        setCurrentUser(AuthService.getCurrentUser());
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert("登入失敗(google)！ 問題正在努力修復中。");
-      });
+    //     setCurrentUser(AuthService.getCurrentUser());
+    //     history.push("/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     window.alert("登入失敗(google)！ 問題正在努力修復中。");
+    //   });
   };
 
   // Facebook登入、註冊
-  const FACEBOOK_CLIENT_ID = "554951315605149";
+  const FACEBOOK_CLIENT_ID = process.env.REACT_APP_FACEBOOK_CLIENT_ID;
   const responseFacebook = (response) => {
-    let { email, userID } = response;
-    AuthService.facebookLogin(email, userID)
-      .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
+    console.log(response);
+    // let { email, userID } = response;
+    // AuthService.facebookLogin(email, userID)
+    //   .then((response) => {
+    //     if (response.data.token) {
+    //       localStorage.setItem("user", JSON.stringify(response.data));
+    //     }
 
-        setCurrentUser(AuthService.getCurrentUser());
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
-      });
+    //     setCurrentUser(AuthService.getCurrentUser());
+    //     history.push("/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
+    //   });
   };
 
   return (
