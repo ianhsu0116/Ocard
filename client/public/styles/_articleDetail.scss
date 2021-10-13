@@ -12,7 +12,7 @@
 
   .articleDetail-con {
     width: 80vw;
-    max-width: 800px;
+    max-width: 700px;
     min-height: 100%;
     background: white;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
@@ -291,6 +291,6 @@
 @media screen and (max-width: 800px) {
   .articleDetail-con {
     width: 100vw !important;
-    padding: 0.5rem !important;
+    padding: 0.75rem !important;
   }
 }

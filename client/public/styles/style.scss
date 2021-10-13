@@ -39,6 +39,12 @@ a {
   color: $OcardLightButtonBlue;
 }
 
+// 手機版sort button用
+.mobile-sortBtn-active {
+  color: rgba(0, 0, 0, 0.8) !important;
+  border-bottom: 3px solid $OcardLightBlue !important;
+}
+
 @import "./header";
 @import "./sidebar";
 @import "./main";

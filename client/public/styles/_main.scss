@@ -64,6 +64,19 @@ div.main-con {
             }
           }
         }
+
+        .main_nav-middle-mobile {
+          display: none;
+          width: 100%;
+          height: 100%;
+          button {
+            flex: 1 1 100px;
+            border: 3px solid transparent;
+            background: white;
+            color: $colorLighGray;
+            font-weight: bolder;
+          }
+        }
       }
 
       div.main_banner {
@@ -224,10 +237,10 @@ div.main-con {
               display: flex;
               justify-content: center;
               align-items: center;
+              border: 1px solid rgba(0, 0, 0, 0.1);
               img {
                 width: 100px;
                 height: 100px;
-                border: 1px solid rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
               }
             }
@@ -238,7 +251,7 @@ div.main-con {
   }
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1100px) {
   div.main {
     margin-right: 2rem !important;
   }
@@ -250,37 +263,56 @@ div.main-con {
   }
   div.main {
     max-width: 100%;
-    margin: 0 !important;
+    margin: 1rem 0 0 0 !important;
 
     div.main_nav {
       border-radius: 0 !important;
+      height: 6vh !important;
+
+      .middle {
+        display: none !important;
+      }
+
+      .main_nav-middle-mobile {
+        display: flex !important;
+      }
     }
   }
 }
-@media screen and (max-width: 500px) {
-  div.main_nav {
-    height: 70px !important;
-    div.middle {
-      div.main_nav-middle-right {
-        span,
+@media screen and (max-width: 400px) {
+  div.main {
+    div.main_nav {
+      .main_nav-middle-mobile {
         button {
-          margin: 0.25rem 0 !important;
-        }
-
-        div.sortSelector-con {
-          top: 38px !important;
-          min-width: 10vw;
-          padding: 0.2rem;
-          border-radius: 8px;
-          & button {
-            padding: 0.2rem 0.65rem;
-            font-size: 0.75rem;
-            &:hover {
-              background: rgba(0, 0, 0, 0.1);
-            }
-          }
+          font-size: 0.85rem;
         }
       }
     }
   }
 }
+// @media screen and (max-width: 500px) {
+//   div.main_nav {
+//     div.middle {
+//       div.main_nav-middle-right {
+//         span,
+//         button {
+//           margin: 0.25rem 0 !important;
+//         }
+
+//         div.sortSelector-con {
+//           top: 38px !important;
+//           min-width: 10vw;
+//           padding: 0.2rem;
+//           border-radius: 8px;
+//           & button {
+//             padding: 0.2rem 0.65rem;
+//             font-size: 0.75rem;
+//             &:hover {
+//               background: rgba(0, 0, 0, 0.1);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

@@ -27,6 +27,11 @@ a {
   color: #3397cf;
 }
 
+.mobile-sortBtn-active {
+  color: rgba(0, 0, 0, 0.8) !important;
+  border-bottom: 3px solid #3397cf !important;
+}
+
 div.header-con {
   position: fixed;
   display: -webkit-box;
@@ -188,7 +193,7 @@ div.header-con .header .header-right .logout-btn svg {
   }
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1100px) {
   .header-left {
     margin-left: 2rem !important;
   }
@@ -216,6 +221,21 @@ div.header-con .header .header-right .logout-btn svg {
   }
   .header-right button {
     margin-left: 0.4rem !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header-left .ham_menu {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .header-left .logo {
+    width: 65px !important;
+    margin: 0.25rem 0.5rem !important;
+  }
+  .header-right button {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
 
@@ -340,7 +360,7 @@ div.header-con .header .header-right .logout-btn svg {
   color: white;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1100px) {
   .sidebar {
     margin-left: 2rem;
   }
@@ -553,6 +573,22 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+div.main-con div.d-flex div.main div.main_nav .main_nav-middle-mobile {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+div.main-con div.d-flex div.main div.main_nav .main_nav-middle-mobile button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
+  border: 3px solid transparent;
+  background: white;
+  color: rgba(0, 0, 0, 0.35);
+  font-weight: bolder;
 }
 
 div.main-con div.d-flex div.main div.main_banner {
@@ -789,16 +825,16 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
   width: 100px;
   height: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1100px) {
   div.main {
     margin-right: 2rem !important;
   }
@@ -810,33 +846,25 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
   }
   div.main {
     max-width: 100%;
-    margin: 0 !important;
+    margin: 1rem 0 0 0 !important;
   }
   div.main div.main_nav {
     border-radius: 0 !important;
+    height: 6vh !important;
+  }
+  div.main div.main_nav .middle {
+    display: none !important;
+  }
+  div.main div.main_nav .main_nav-middle-mobile {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
   }
 }
 
-@media screen and (max-width: 500px) {
-  div.main_nav {
-    height: 70px !important;
-  }
-  div.main_nav div.middle div.main_nav-middle-right span,
-  div.main_nav div.middle div.main_nav-middle-right button {
-    margin: 0.25rem 0 !important;
-  }
-  div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con {
-    top: 38px !important;
-    min-width: 10vw;
-    padding: 0.2rem;
-    border-radius: 8px;
-  }
-  div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button {
-    padding: 0.2rem 0.65rem;
-    font-size: 0.75rem;
-  }
-  div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:hover {
-    background: rgba(0, 0, 0, 0.1);
+@media screen and (max-width: 400px) {
+  div.main div.main_nav .main_nav-middle-mobile button {
+    font-size: 0.85rem;
   }
 }
 
@@ -1400,7 +1428,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 
 .articleDetail .articleDetail-con {
   width: 80vw;
-  max-width: 800px;
+  max-width: 700px;
   min-height: 100%;
   background: white;
   -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
@@ -1745,7 +1773,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 @media screen and (max-width: 800px) {
   .articleDetail-con {
     width: 100vw !important;
-    padding: 0.5rem !important;
+    padding: 0.75rem !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

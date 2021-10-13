@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavigationIcons from "./icons/NavigationIcons";
 import CloseButtonIcon from "./icons/CloseButtonIcon";
@@ -10,6 +10,7 @@ const SidebarComponent = (props) => {
     setCurrentSidebarBoard,
     mobileSidebarOpen,
     setMobileSidebarOpen,
+    windowWidth,
   } = props;
 
   const handleBoardChange = (e) => {
@@ -51,11 +52,6 @@ const SidebarComponent = (props) => {
     }
   }, [mobileSidebarOpen]);
 
-  // 即時獲取window width, 來做到sidebar開合控制
-  let [windowWidth, setWindowWidth] = useState(window.window.innerWidth);
-  window.addEventListener("resize", () => {
-    setWindowWidth(window.window.innerWidth);
-  });
   useEffect(() => {
     if (windowWidth > 800) {
       setMobileSidebarOpen(true);

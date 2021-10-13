@@ -74,6 +74,7 @@ const HeaderComponent = (props) => {
           )}
           {currentUser && <button>{NavigationIcons.FriendIcon()}</button>}
           {currentUser && <button>{NavigationIcons.EmailBoxIcon()}</button>}
+          {currentUser && <button>{NavigationIcons.ProfileIcon()}</button>}
           {currentUser && (
             <button className="logout-btn" onClick={handleLogout}>
               {NavigationIcons.LogOutIcon()}

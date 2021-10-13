@@ -21,7 +21,11 @@ const HomeComponent = (props) => {
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
   let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
-
+  // 即時獲取window width, 來做到sidebar開合控制
+  let [windowWidth, setWindowWidth] = useState(window.window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWindowWidth(window.window.innerWidth);
+  });
   // 進入網頁立即顯示文章
   useEffect(() => {
     ArticleService.get()
@@ -50,6 +54,7 @@ const HomeComponent = (props) => {
     if (currentSearch) {
       // 判斷現在是否有在看板分類中
       if (!currentSidebarBoard) {
+        // 下方comment out 的是原fetch Data的方式（太慢）
         // ArticleService.getBySearch(currentSearch)
         //   .then((data) => {
         //     //console.log(data.data);
@@ -70,7 +75,7 @@ const HomeComponent = (props) => {
         // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
         if (currentData2) {
           let searchData = otherFormula.searchSort(currentSearch, currentData2);
-          console.log(searchData);
+          //console.log(searchData);
           setCurrentData(searchData);
 
           if (searchData.length === 0) {
@@ -78,6 +83,7 @@ const HomeComponent = (props) => {
           }
         }
       } else {
+        // 下方comment out 的是原fetch Data的方式（太慢）
         // ArticleService.getBySearch(currentSearch, currentSidebarBoard)
         //   .then((data) => {
         //     //console.log(data.data);
@@ -102,7 +108,7 @@ const HomeComponent = (props) => {
             currentSidebarBoard,
             currentData2
           );
-          console.log(searchData);
+          //console.log(searchData);
           setCurrentData(searchData);
 
           if (searchData.length === 0) {
@@ -116,6 +122,7 @@ const HomeComponent = (props) => {
   // 切換板板時重新render頁面
   useEffect(() => {
     if (currentSidebarBoard) {
+      // 下方comment out 的是原fetch Data的方式（太慢）
       // ArticleService.getByBoard(currentSidebarBoard)
       //   .then((data) => {
       //     //console.log(data.data);
@@ -190,7 +197,7 @@ const HomeComponent = (props) => {
       });
   }
 
-  // 控制排序法容器開關
+  // 控制排序法容器開關（電腦版）
   let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關
   let [sortMethod, setSortMethod] = useState("熱門"); // 切換當前sort method
   const handleSortConOpen = (e) => {
@@ -202,12 +209,12 @@ const HomeComponent = (props) => {
     }
   };
 
-  // 點任一處即可關閉sortContainer
+  // 點任一處即可關閉sortContainer（電腦版）
   window.addEventListener("click", () => {
     setIsSortConOpen(false);
   });
 
-  // 即時更新演算法box內的文字
+  // 即時更新演算法box內的文字（電腦版）
   const handledSortMethod = (e) => {
     setSortMethod(e.target.innerText);
 
@@ -228,12 +235,23 @@ const HomeComponent = (props) => {
     }
   }, [sortMethod]);
 
-  window.addEventListener("scroll", (e) => {
-    if (articleDetailOpen) {
-      e.preventDefault();
-      console.log("scrolllll");
+  // 控制sort button 樣式（手機版）
+  let mobileHotSortBtn = document.querySelector(".hotSort-mobile");
+  let mobileTimeSortBtn = document.querySelector(".timeSort-mobile");
+  useEffect(() => {
+    // 確認currentData2內已有資料後再繼續
+    if (currentData2) {
+      if (windowWidth <= 800) {
+        if (sortMethod === "熱門") {
+          mobileHotSortBtn.classList.add("mobile-sortBtn-active");
+          mobileTimeSortBtn.classList.remove("mobile-sortBtn-active");
+        } else if (sortMethod === "最新") {
+          mobileTimeSortBtn.classList.add("mobile-sortBtn-active");
+          mobileHotSortBtn.classList.remove("mobile-sortBtn-active");
+        }
+      }
     }
-  });
+  }, [sortMethod, currentData2, windowWidth]); // 排序法改變、首次fatch到資料後、或是螢幕寬度改變時
 
   return (
     <div className="main-con">
@@ -254,9 +272,11 @@ const HomeComponent = (props) => {
           setCurrentData={setCurrentData}
           mobileSidebarOpen={mobileSidebarOpen}
           setMobileSidebarOpen={setMobileSidebarOpen}
+          windowWidth={windowWidth}
         />
         <div className="main">
           <div className="main_nav">
+            {/* 電腦版sort button */}
             <div className="middle">
               <div className="main_nav-middle-right">
                 <span>文章排序依</span>
@@ -272,6 +292,16 @@ const HomeComponent = (props) => {
                   </div>
                 )}
               </div>
+            </div>
+            {/* 手機版sort button */}
+            <div className="main_nav-middle-mobile">
+              <button className="hotSort-mobile" onClick={handledSortMethod}>
+                熱門
+              </button>
+              <button className="timeSort-mobile" onClick={handledSortMethod}>
+                最新
+              </button>
+              <button className="followSort-mobile">追蹤</button>
             </div>
           </div>
           <div className="main_banner">
