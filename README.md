@@ -1,36 +1,36 @@
 # Ocard
 
-一個仿造 Dcard 的論壇
+一個致敬 Dcard(台灣最大的大學生網路論壇)所寫出來的個人練習用作品
 
-### Front-End Fundamental
+## Front-End Fundamental
 
-HTML
-CSS
+HTML  
+CSS  
 JavaScript (ES2015)
 
-### Front-End Frameworks & Libraries
+## Front-End Frameworks & Libraries
 
-React
-React Hooks
+React  
+React Hooks  
 React Router
 
-### Authentication
+## Authentication
 
-Google Auth
-Facebook Auth
+Google Auth  
+Facebook Auth  
 Passport-jwt
 
-### Tool for Development
+## Tool for Development
 
-Node Package Manager (NPM)
-ESLint
+Node Package Manager (NPM)  
+ESLint  
 Prettier
 
-### Back-End Fundamental
+## Back-End Fundamental
 
-Node
+Node  
 Express
 
-### Database
+## Database
 
 MongoDB(mongodb atlas)
