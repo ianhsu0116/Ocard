@@ -80,8 +80,8 @@ div.header-con .header .header-left {
 
 div.header-con .header .header-left .ham_menu {
   display: none;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   position: relative;
   cursor: pointer;
 }
@@ -780,11 +780,20 @@ div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgCon
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.right div.imgContainer img {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }

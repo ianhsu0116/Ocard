@@ -54,10 +54,10 @@ const PostArticleComponent = (props) => {
     setBoardOpen(false);
   };
 
-  // 防止按下enter直接送出
+  // 防止input按下enter直接送出
   const preventTitleSubmit = (e) => {
     let code = e.keyCode ? e.keyCode : e.which;
-    if (code == 13) {
+    if (code === 13) {
       e.preventDefault();
     }
   };
@@ -97,6 +97,8 @@ const PostArticleComponent = (props) => {
 
   // 送出文章
   const handleSubmit = (e) => {
+    // 送出當下就將按鍵disabled，防止重複送出
+    setButtonStatus("disabled");
     let author = currentUser.user._id;
     let board = currentBoard;
     let title = currentTitle;
@@ -111,8 +113,8 @@ const PostArticleComponent = (props) => {
           history.push("/");
         })
         .catch((err) => {
-          console.log(err);
-          console.log("postArticleError1");
+          //console.log(err);
+          //console.log("postArticleError1");
           window.alert(err.response.data);
         });
     }
@@ -124,8 +126,8 @@ const PostArticleComponent = (props) => {
           history.push("/");
         })
         .catch((err) => {
-          console.log(err);
-          console.log("postArticleError2");
+          //console.log(err);
+          //console.log("postArticleError2");
           window.alert(err.response.data);
         });
     }

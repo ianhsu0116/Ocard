@@ -114,8 +114,8 @@ router.post("/google", (req, res) => {
         });
     }
 
-    // 如果已註冊過，就登入
-    else {
+    // 如果已註冊過且有googleId，就登入
+    else if (user && user.googleId === googleId) {
       const tokenObject = { _id: user._id, email: user.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
@@ -123,6 +123,14 @@ router.post("/google", (req, res) => {
         seccess: true,
         token: "JWT " + token,
         user,
+      });
+    }
+
+    // 如果有此email 卻沒有googleId，但表已被local註冊過
+    else {
+      res.status(400).send({
+        seccess: false,
+        message: "此Google帳號的email已被註冊過囉！",
       });
     }
   });
@@ -164,8 +172,8 @@ router.post("/facebook", (req, res) => {
         });
     }
 
-    // 如果已註冊過，就登入
-    else {
+    // 如果已註冊過且有facebookId，就登入
+    else if (user && user.facebookId === facebookId) {
       const tokenObject = { _id: user._id, email: user.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
@@ -173,6 +181,14 @@ router.post("/facebook", (req, res) => {
         seccess: true,
         token: "JWT " + token,
         user,
+      });
+    }
+
+    // 如果有此email 卻沒有facebookId，但表已被local註冊過
+    else {
+      res.status(400).send({
+        seccess: false,
+        message: "此Facebook帳號綁定email已被註冊過囉！",
       });
     }
   });

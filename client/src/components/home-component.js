@@ -5,6 +5,7 @@ import ArticleDetailComponent from "./articleDetail-component";
 import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
 import mergeSortFormula from "./sortFormula/mergeSort-Formula";
+import otherFormula from "./sortFormula/other-Formula";
 
 const HomeComponent = (props) => {
   let {
@@ -49,39 +50,65 @@ const HomeComponent = (props) => {
     if (currentSearch) {
       // 判斷現在是否有在看板分類中
       if (!currentSidebarBoard) {
-        ArticleService.getBySearch(currentSearch)
-          .then((data) => {
-            //console.log(data.data);
+        // ArticleService.getBySearch(currentSearch)
+        //   .then((data) => {
+        //     //console.log(data.data);
 
-            // 先將順序排列成熱門優先，再放入currentData
-            let sortedData = mergeSortFormula.hotMergeSort(data.data);
-            setCurrentData(sortedData);
+        //     // 先將順序排列成熱門優先，再放入currentData
+        //     let sortedData = mergeSortFormula.hotMergeSort(data.data);
+        //     setCurrentData(sortedData);
 
-            setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
-            if (data.data.length === 0) {
-              window.alert("沒有相符的文章喔！！");
-            }
-          })
-          .catch((err) => {
-            console.log(err.response);
-          });
+        //     setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
+        //     if (data.data.length === 0) {
+        //       window.alert("沒有相符的文章喔！！");
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log(err.response);
+        //   });
+
+        // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
+        if (currentData2) {
+          let searchData = otherFormula.searchSort(currentSearch, currentData2);
+          console.log(searchData);
+          setCurrentData(searchData);
+
+          if (searchData.length === 0) {
+            window.alert("此看板沒有符合搜尋條件的文章喔！！");
+          }
+        }
       } else {
-        ArticleService.getBySearch(currentSearch, currentSidebarBoard)
-          .then((data) => {
-            //console.log(data.data);
+        // ArticleService.getBySearch(currentSearch, currentSidebarBoard)
+        //   .then((data) => {
+        //     //console.log(data.data);
 
-            // 先將順序排列成熱門優先，再放入currentData
-            let sortedData = mergeSortFormula.hotMergeSort(data.data);
-            setCurrentData(sortedData);
+        //     // 先將順序排列成熱門優先，再放入currentData
+        //     let sortedData = mergeSortFormula.hotMergeSort(data.data);
+        //     setCurrentData(sortedData);
 
-            setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
-            if (data.data.length === 0) {
-              window.alert("此看板沒有相符的文章喔！！");
-            }
-          })
-          .catch((err) => {
-            console.log(err.response);
-          });
+        //     setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
+        //     if (data.data.length === 0) {
+        //       window.alert("此看板沒有相符的文章喔！！");
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log(err.response);
+        //   });
+
+        // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
+        if (currentData) {
+          let searchData = otherFormula.searchSortWithBoard(
+            currentSearch,
+            currentSidebarBoard,
+            currentData2
+          );
+          console.log(searchData);
+          setCurrentData(searchData);
+
+          if (searchData.length === 0) {
+            window.alert("此看板沒有符合搜尋條件的文章喔！！");
+          }
+        }
       }
     }
   }, [currentSearch]);
@@ -89,35 +116,59 @@ const HomeComponent = (props) => {
   // 切換板板時重新render頁面
   useEffect(() => {
     if (currentSidebarBoard) {
-      ArticleService.getByBoard(currentSidebarBoard)
-        .then((data) => {
-          //console.log(data.data);
+      // ArticleService.getByBoard(currentSidebarBoard)
+      //   .then((data) => {
+      //     //console.log(data.data);
 
-          // 確認當前是哪個排列方式，排好再放入currentData
-          if (sortMethod === "熱門") {
-            let sortedData = mergeSortFormula.hotMergeSort(data.data);
-            setCurrentData(sortedData);
-          } else if (sortMethod === "最新") {
-            let sortedData = mergeSortFormula.timeMergeSort(data.data);
-            setCurrentData(sortedData);
-          }
+      //     // 確認當前是哪個排列方式，排好再放入currentData
+      //     if (sortMethod === "熱門") {
+      //       let sortedData = mergeSortFormula.hotMergeSort(data.data);
+      //       setCurrentData(sortedData);
+      //     } else if (sortMethod === "最新") {
+      //       let sortedData = mergeSortFormula.timeMergeSort(data.data);
+      //       setCurrentData(sortedData);
+      //     }
 
-          if (data.data.length === 0) {
-            window.alert("當前看板還沒有文章歐！");
-          }
-        })
-        .catch((err) => {
-          console.log(err.response);
-          console.log(1);
-        });
+      //     if (data.data.length === 0) {
+      //       window.alert("當前看板還沒有文章歐！");
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //     console.log(1);
+      //   });
+
+      // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
+      if (currentData2) {
+        // 從currentData2中篩選出來，符合當前board的data
+        let boardData = otherFormula.boardSort(
+          currentSidebarBoard,
+          currentData2
+        );
+
+        // 確認當前是哪個排列方式，排好再放入currentData
+        if (sortMethod === "熱門") {
+          let sortedData = mergeSortFormula.hotMergeSort(boardData);
+          setCurrentData(sortedData);
+        } else if (sortMethod === "最新") {
+          let sortedData = mergeSortFormula.timeMergeSort(boardData);
+          setCurrentData(sortedData);
+        }
+        if (boardData.length === 0) {
+          window.alert("當前看板還沒有文章歐！");
+        }
+      }
     } else {
-      // 直接將備用的data render出來，直接減去拿資料的時間
-      // 一樣要確認當前是哪個排列方式，排好再放入currentData
-      if (sortMethod === "熱門") {
-        setCurrentData(currentData2);
-      } else if (sortMethod === "最新") {
-        let sortedData = mergeSortFormula.timeMergeSort(currentData2);
-        setCurrentData(sortedData);
+      // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
+      if (currentData2) {
+        // 直接將備用的data render出來，直接減去拿資料的時間
+        // 一樣要確認當前是哪個排列方式，排好再放入currentData
+        if (sortMethod === "熱門") {
+          setCurrentData(currentData2);
+        } else if (sortMethod === "最新") {
+          let sortedData = mergeSortFormula.timeMergeSort(currentData2);
+          setCurrentData(sortedData);
+        }
       }
     }
   }, [currentSidebarBoard]);
@@ -176,6 +227,13 @@ const HomeComponent = (props) => {
       setCurrentData(sortedData);
     }
   }, [sortMethod]);
+
+  window.addEventListener("scroll", (e) => {
+    if (articleDetailOpen) {
+      e.preventDefault();
+      console.log("scrolllll");
+    }
+  });
 
   return (
     <div className="main-con">

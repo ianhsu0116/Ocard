@@ -62,43 +62,53 @@ const LoginComponent = (props) => {
   // google登入、註冊
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const responseGoogle = (response) => {
-    console.log(response);
-    // let { googleId } = response;
-    // let email = response.it.Tt;
+    //console.log(response);
+    let { googleId } = response;
+    let email = response.it.Tt;
 
-    // AuthService.googleLogin(email, googleId)
-    //   .then((response) => {
-    //     if (response.data.token) {
-    //       localStorage.setItem("user", JSON.stringify(response.data));
-    //     }
+    AuthService.googleLogin(email, googleId)
+      .then((response) => {
+        if (response.data.token) {
+          // webStorage存入當前user資料
+          localStorage.setItem("user", JSON.stringify(response.data));
 
-    //     setCurrentUser(AuthService.getCurrentUser());
-    //     history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     window.alert("登入失敗(google)！ 問題正在努力修復中。");
-    //   });
+          // 在currentUser存入當前user資料
+          setCurrentUser(AuthService.getCurrentUser());
+
+          // 導回首頁
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        //console.log(err.response);
+        //window.alert("登入失敗(google)！ 問題正在努力修復中。");
+        window.alert(err.response.data.message);
+      });
   };
 
   // Facebook登入、註冊
   const FACEBOOK_CLIENT_ID = process.env.REACT_APP_FACEBOOK_CLIENT_ID;
   const responseFacebook = (response) => {
-    console.log(response);
-    // let { email, userID } = response;
-    // AuthService.facebookLogin(email, userID)
-    //   .then((response) => {
-    //     if (response.data.token) {
-    //       localStorage.setItem("user", JSON.stringify(response.data));
-    //     }
+    //console.log(response);
+    let { email, userID } = response;
+    AuthService.facebookLogin(email, userID)
+      .then((response) => {
+        if (response.data.token) {
+          // webStorage存入當前user資料
+          localStorage.setItem("user", JSON.stringify(response.data));
 
-    //     setCurrentUser(AuthService.getCurrentUser());
-    //     history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
-    //   });
+          // 在currentUser存入當前user資料
+          setCurrentUser(AuthService.getCurrentUser());
+
+          // 導回首頁
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        //console.log(err.response);
+        //window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
+        window.alert(err.response.data.message);
+      });
   };
 
   return (

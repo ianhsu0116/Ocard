@@ -53,6 +53,7 @@ const ArticleDetailComponent = (prop) => {
         ArticleService.postArticleLikes(_id, user_id)
           .then(() => {
             console.log("文章按讚編輯成功");
+            setIsNeedEditArticleLike(false);
           })
           .catch((err) => {
             console.log(err.response);
@@ -212,7 +213,7 @@ const ArticleDetailComponent = (prop) => {
     setArticleDetailOpen(false);
     setCurrentDetailData(null);
 
-    // 目前有人登入的話，確認有無要送出的按讚(文章及留言的)
+    // 目前有人登入的話，確認有無要送出的按讚(留言的)
     if (currentUser) {
       // 送出留言的按讚
       let _id = currentDetailData._id;
@@ -232,19 +233,6 @@ const ArticleDetailComponent = (prop) => {
         // 重置當前按讚的所有留言
         setLikeWhichComment([]);
       }
-
-      // 先判斷這次使用者是否有點擊過文章按讚鈕
-      // if (isNeedEditArticleLike) {
-      //   // 送出文章的按讚編輯
-      //   ArticleService.postArticleLikes(_id, user_id)
-      //     .then(() => {
-      //       console.log("文章按讚編輯成功");
-      //     })
-      //     .catch((err) => {
-      //       console.log(err.response);
-      //       console.log("err");
-      //     });
-      // }
     }
   };
 
@@ -270,8 +258,7 @@ const ArticleDetailComponent = (prop) => {
                 {currentDetailData.board} ·
               </div>
               <div className="articleDetail-time">
-                {new Date(currentDetailData.date).toLocaleDateString()}
-
+                {new Date(currentDetailData.date).toLocaleDateString()} -
                 {new Date(currentDetailData.date).toLocaleTimeString()}
               </div>
             </div>
