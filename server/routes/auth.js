@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  // check igf the user exist
+  // check if the user exist
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send("此email已經被註冊過了！");
 
@@ -94,6 +94,56 @@ router.post("/google", (req, res) => {
         email,
         password: "00000000",
         googleId,
+      });
+
+      newUser
+        .save()
+        .then((msg) => {
+          let { _id, email } = msg;
+          const tokenObject = { _id, email };
+          const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+
+          res.status(200).send({
+            seccess: true,
+            token: "JWT " + token,
+            user: msg,
+          });
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
+    }
+
+    // 如果已註冊過，就登入
+    else {
+      const tokenObject = { _id: user._id, email: user.email };
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+
+      res.status(200).send({
+        seccess: true,
+        token: "JWT " + token,
+        user,
+      });
+    }
+  });
+});
+
+// Facebook登入 註冊
+router.post("/facebook", (req, res) => {
+  let { email, facebookId } = req.body;
+  if (!email || !facebookId) {
+    return res.status(400).send("email 或是 facebookId未正確送達！");
+  }
+
+  User.findOne({ email }, async function (err, user) {
+    if (err) return res.status(400).send(err);
+
+    // 如果是新用戶 就註冊
+    if (!user) {
+      let newUser = new User({
+        email,
+        password: "00000000",
+        facebookId,
       });
 
       newUser

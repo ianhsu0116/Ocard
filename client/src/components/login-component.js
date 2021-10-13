@@ -77,17 +77,27 @@ const LoginComponent = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert("登入失敗！ 問題正在努力修復中。");
+        window.alert("登入失敗(google)！ 問題正在努力修復中。");
       });
   };
 
   // Facebook登入、註冊
-  const FACEBOOK_CLIENT_ID = "387092299774650";
-  const componentClicked = (data) => {
-    console.log(data);
-  };
+  const FACEBOOK_CLIENT_ID = "554951315605149";
   const responseFacebook = (response) => {
-    console.log(response);
+    let { email, userID } = response;
+    AuthService.facebookLogin(email, userID)
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+
+        setCurrentUser(AuthService.getCurrentUser());
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
+      });
   };
 
   return (
@@ -134,14 +144,12 @@ const LoginComponent = (props) => {
                 <div>Facebook 註冊 / 登入</div>
                 <div></div>
               </button> */}
-              {/* <FacebookLogin
+              <FacebookLogin
                 appId={FACEBOOK_CLIENT_ID}
-                autoLoad={true}
                 fields="name,email,picture"
-                onClick={componentClicked}
                 callback={responseFacebook}
                 cssClass="facebook-btn"
-              /> */}
+              />
             </div>
             <div className="mid-line">
               <div className="line"></div>

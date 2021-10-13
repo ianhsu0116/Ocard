@@ -30,6 +30,13 @@ class AuthService {
       googleId,
     });
   }
+
+  facebookLogin(email, facebookId) {
+    return axios.post(API_URL + "/facebook", {
+      email,
+      facebookId,
+    });
+  }
 }
 
 export default new AuthService();
