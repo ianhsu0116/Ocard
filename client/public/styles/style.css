@@ -536,12 +536,19 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right span {
-  color: colorLighGray;
+  color: rgba(0, 0, 0, 0.35);
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right button {
   border: none;
   border-radius: 5px;
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right button img.main_nav-middle-right-downArrow {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  top: -2px;
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con {
@@ -572,6 +579,10 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:focus {
   background: rgba(0, 0, 0, 0.1);
 }
 

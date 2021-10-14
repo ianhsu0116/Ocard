@@ -170,38 +170,30 @@ const ArticleDetailComponent = (prop) => {
       let likeCountNumber = Number(
         e.currentTarget.parentElement.children[1].innerText
       );
+
       if (likeWhichComment.includes(comment_id)) {
         // 移除原有的comment_id
         likeWhichComment.forEach((commentid, index) => {
-          if (commentid == comment_id) {
+          if (commentid === comment_id) {
             likeWhichComment.splice(index, 1);
           }
         });
-
-        // 按讚數增減
-        if (e.currentTarget.classList.contains("likesActive")) {
-          likeCountNumber--;
-          likeCount.innerText = likeCountNumber;
-        } else {
-          likeCountNumber++;
-          likeCount.innerText = likeCountNumber;
-        }
-        e.currentTarget.classList.toggle("likesActive");
       } else {
         // 新增comment_id
         likeWhichComment.push(comment_id);
-
-        // 按讚數增減
-        if (e.currentTarget.classList.contains("likesActive")) {
-          likeCountNumber--;
-          likeCount.innerText = likeCountNumber;
-        } else {
-          likeCountNumber++;
-          likeCount.innerText = likeCountNumber;
-        }
-        e.currentTarget.classList.toggle("likesActive");
       }
+
       setLikeWhichComment(likeWhichComment);
+
+      // 按讚數增減
+      if (e.currentTarget.classList.contains("likesActive")) {
+        likeCountNumber--;
+        likeCount.innerText = likeCountNumber;
+      } else {
+        likeCountNumber++;
+        likeCount.innerText = likeCountNumber;
+      }
+      e.currentTarget.classList.toggle("likesActive");
     } else {
       window.alert("登入後才可以按讚留言啦！");
     }
@@ -267,7 +259,7 @@ const ArticleDetailComponent = (prop) => {
 
               {currentDetailData.image.length > 0 && (
                 <div className="articleDetail-img-con">
-                  <img src={currentDetailData.image[0]} />
+                  <img src={currentDetailData.image[0]} alt="articleImage" />
                 </div>
               )}
             </div>
@@ -305,7 +297,10 @@ const ArticleDetailComponent = (prop) => {
                 {currentDetailData.comment &&
                   currentDetailData.comment.length >= 1 &&
                   currentDetailData.comment.map((comment, index) => (
-                    <div className="articleDetail-comment-con">
+                    <div
+                      key={comment._id}
+                      className="articleDetail-comment-con"
+                    >
                       <div className="articleDetail-comment-left">
                         <div className="genderIcon">
                           {GenderIcons.GirlIcon()}
@@ -331,7 +326,7 @@ const ArticleDetailComponent = (prop) => {
                         {comment.image.length >= 1 &&
                           comment.image.map((img) => (
                             <div className="articleDetail-comment-mid-img">
-                              <img src={img} />
+                              <img src={img} alt="commentImage" />
                             </div>
                           ))}
                       </div>
@@ -340,7 +335,7 @@ const ArticleDetailComponent = (prop) => {
                           {currentUser &&
                             comment.likes.length > 0 &&
                             comment.likes.some(
-                              (likeid) => likeid == currentUser.user._id
+                              (likeid) => likeid === currentUser.user._id
                             ) && (
                               <button
                                 className="icon-con likesActive"
@@ -352,7 +347,7 @@ const ArticleDetailComponent = (prop) => {
                             )}
                           {currentUser &&
                             comment.likes.every(
-                              (likeid) => likeid != currentUser.user._id
+                              (likeid) => likeid !== currentUser.user._id
                             ) && (
                               <button
                                 className="icon-con"
@@ -392,7 +387,7 @@ const ArticleDetailComponent = (prop) => {
             ></textarea>
             {currentImage && (
               <div className="articleDetail-comment-input-img">
-                <img src={currentImage} />
+                <img src={currentImage} alt="即時顯示上傳圖片" />
                 <button onClick={handleCloseImage} className="close-btn">
                   {CloseButtonIcon()}
                 </button>

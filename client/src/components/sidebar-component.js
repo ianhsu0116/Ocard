@@ -80,11 +80,12 @@ const SidebarComponent = (props) => {
         </div>
       </div>
 
-      {boards.map((board) => (
+      {boards.map((board, index) => (
         <a
+          key={index}
           onClick={handleBoardChange}
           data-board={board}
-          className={currentSidebarBoard == board && "active"}
+          className={currentSidebarBoard === board && "active"}
         >
           <div>
             <div className="board-icon-con2">

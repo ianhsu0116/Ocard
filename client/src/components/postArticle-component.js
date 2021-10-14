@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import ArticleService from "../services/article.service";
-import BoardSelectorComponent from "./boardSelector-component";
+import BoardSelectorComponent from "./BoardSelector-component";
 import GenderIcons from "./icons/GenderIcons";
 import UploadImgIcon from "./icons/UploadImgIcon";
 import CloseButtonIcon from "./icons/CloseButtonIcon";
 
 const PostArticleComponent = (props) => {
-  let { boards, currentUser, setCurrentUser } = props;
+  let { boards, currentUser } = props;
   let date = new Date();
   let [boardOpen, setBoardOpen] = useState(false);
   let [currentBoard, setCurrentBoard] = useState("點此選擇發文看板");
@@ -32,7 +32,6 @@ const PostArticleComponent = (props) => {
 
   // 判斷資料是否有填寫
   useEffect(() => {
-    let submitBtn = document.querySelector("#submit-btn");
     if (
       currentBoard !== "點此選擇發文看板" &&
       currentTitle.length >= 6 &&
@@ -154,7 +153,10 @@ const PostArticleComponent = (props) => {
               className="board-selector"
             >
               {currentBoard}
-              <img src={require("./images/down.svg").default}></img>
+              <img
+                src={require("./images/down.svg").default}
+                alt="downArror"
+              ></img>
             </button>
           </div>
           <div className="author-con">
@@ -183,7 +185,7 @@ const PostArticleComponent = (props) => {
           {currentImage && (
             <div className="temp-img-box">
               <div className="temp-img-con">
-                <img src={currentImage} />
+                <img src={currentImage} alt="即時顯示上傳圖片" />
                 <button onClick={handleCloseImage} className="close-btn">
                   {CloseButtonIcon()}
                 </button>
@@ -205,7 +207,6 @@ const PostArticleComponent = (props) => {
                 ></input>
               </div>
               <button
-                id="submit-btn"
                 onClick={handleSubmit}
                 type="button"
                 className={buttonStatus}

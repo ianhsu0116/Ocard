@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ArticleService from "../services/article.service";
-import SidebarComponent from "./sidebar-component";
-import ArticleDetailComponent from "./articleDetail-component";
+import SidebarComponent from "./Sidebar-component";
+import ArticleDetailComponent from "./ArticleDetail-component";
 import GenderIcons from "./icons/GenderIcons";
 import CommentIcons from "./icons/CommentIcons";
 import mergeSortFormula from "./sortFormula/mergeSort-Formula";
@@ -12,7 +12,6 @@ const HomeComponent = (props) => {
     currentUser,
     boards,
     currentSearch,
-    setCurrentSearch,
     mobileSidebarOpen,
     setMobileSidebarOpen,
   } = props;
@@ -280,7 +279,14 @@ const HomeComponent = (props) => {
             <div className="middle">
               <div className="main_nav-middle-right">
                 <span>文章排序依</span>
-                <button onClick={handleSortConOpen}>{sortMethod}</button>
+                <button onClick={handleSortConOpen}>
+                  {sortMethod}
+                  <img
+                    className="main_nav-middle-right-downArrow"
+                    src={require("./images/down.svg").default}
+                    alt="downArror"
+                  ></img>
+                </button>
                 {isSortConOpen && (
                   <div className="sortSelector-con">
                     <button className="hotSort" onClick={handledSortMethod}>
@@ -310,6 +316,7 @@ const HomeComponent = (props) => {
           {currentData &&
             currentData.map((data) => (
               <div
+                key={data._id}
                 className="article_con"
                 onClick={handleShowDetail}
                 data-articleid={data._id}

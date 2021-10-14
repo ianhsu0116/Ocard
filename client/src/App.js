@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import AuthService from "./services/auth.service";
-import HeaderComponent from "./components/header-component";
-import HomeComponent from "./components/home-component";
-import LoginComponent from "./components/login-component";
-import PostArticleComponent from "./components/postArticle-component";
+import HeaderComponent from "./components/Header-component";
+import HomeComponent from "./components/Home-component";
+import LoginComponent from "./components/Login-component";
+import PostArticleComponent from "./components/PostArticle-component";
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
@@ -50,7 +50,6 @@ function App() {
             setCurrentUser={setCurrentUser}
             boards={boards}
             currentSearch={currentSearch}
-            setCurrentSearch={setCurrentSearch}
             mobileSidebarOpen={mobileSidebarOpen}
             setMobileSidebarOpen={setMobileSidebarOpen}
           />
@@ -62,11 +61,7 @@ function App() {
           />
         </Route>
         <Route path="/postArticle" exact>
-          <PostArticleComponent
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-            boards={boards}
-          />
+          <PostArticleComponent currentUser={currentUser} boards={boards} />
         </Route>
       </Switch>
     </div>

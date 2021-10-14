@@ -33,11 +33,17 @@ div.main-con {
               padding: 0.3rem 0.5rem;
             }
             span {
-              color: colorLighGray;
+              color: $colorLighGray;
             }
             button {
               border: none;
               border-radius: 5px;
+              img.main_nav-middle-right-downArrow {
+                width: 18px;
+                height: 18px;
+                position: relative;
+                top: -2px;
+              }
             }
 
             div.sortSelector-con {
@@ -58,6 +64,9 @@ div.main-con {
                 background: white;
                 margin: 0.1rem 0;
                 &:hover {
+                  background: rgba(0, 0, 0, 0.1);
+                }
+                &:focus {
                   background: rgba(0, 0, 0, 0.1);
                 }
               }
@@ -290,29 +299,3 @@ div.main-con {
     }
   }
 }
-// @media screen and (max-width: 500px) {
-//   div.main_nav {
-//     div.middle {
-//       div.main_nav-middle-right {
-//         span,
-//         button {
-//           margin: 0.25rem 0 !important;
-//         }
-
-//         div.sortSelector-con {
-//           top: 38px !important;
-//           min-width: 10vw;
-//           padding: 0.2rem;
-//           border-radius: 8px;
-//           & button {
-//             padding: 0.2rem 0.65rem;
-//             font-size: 0.75rem;
-//             &:hover {
-//               background: rgba(0, 0, 0, 0.1);
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
