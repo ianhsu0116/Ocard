@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
   facebookId: {
     type: String,
   },
+  gender: {
+    type: String,
+    enum: ["male", "female"],
+    default: "female",
+  },
   date: {
     type: Date,
     default: Date.now,

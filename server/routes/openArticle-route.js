@@ -17,7 +17,7 @@ router.get("/testAPI", (req, res) => {
 // 拿到所有文章
 router.get("/", (req, res) => {
   Article.find({})
-    .populate("author", ["email"])
+    .populate("author", ["email", "gender"])
     .then((article) => {
       res.status(200).send(article);
     })
@@ -30,8 +30,8 @@ router.get("/", (req, res) => {
 router.get("/:_id", (req, res) => {
   let { _id } = req.params;
   Article.findOne({ _id })
-    .populate("author", ["email"])
-    .populate("comment.user_id", ["email"])
+    .populate("author", ["email", "gender"])
+    .populate("comment.user_id", ["email", "gender"])
     .then((article) => {
       res.status(200).send(article);
     })
@@ -46,8 +46,8 @@ router.post("/search/:text", (req, res) => {
   let { board } = req.body;
   if (board) {
     Article.find({ $and: [{ title: { $regex: `${text}` } }, { board }] })
-      .populate("author", ["email"])
-      .populate("comment.user_id", ["email"])
+      .populate("author", ["email", "gender"])
+      .populate("comment.user_id", ["email", "gender"])
       .then((article) => {
         res.status(200).send(article);
       })
@@ -56,8 +56,8 @@ router.post("/search/:text", (req, res) => {
       });
   } else {
     Article.find({ title: { $regex: `${text}` } })
-      .populate("author", ["email"])
-      .populate("comment.user_id", ["email"])
+      .populate("author", ["email", "gender"])
+      .populate("comment.user_id", ["email", "gender"])
       .then((article) => {
         res.status(200).send(article);
       })
@@ -71,7 +71,7 @@ router.post("/search/:text", (req, res) => {
 router.get("/board/:board_name", (req, res) => {
   let { board_name } = req.params;
   Article.find({ board: board_name })
-    .populate("author", ["email"])
+    .populate("author", ["email", "gender"])
     .then((article) => {
       res.status(200).send(article);
     })

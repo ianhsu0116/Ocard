@@ -314,7 +314,11 @@ const HomeComponent = (props) => {
                 <div className="middle">
                   <div className="left">
                     <div className="top">
-                      <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
+                      <div className="genderIcon">
+                        {data.author.gender === "female" &&
+                          GenderIcons.GirlIcon()}
+                        {data.author.gender === "male" && GenderIcons.BoyIcon()}
+                      </div>
                       <div>{data.board} · </div>
                       <div>{data.author.email}</div>
                     </div>

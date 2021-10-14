@@ -234,7 +234,12 @@ const ArticleDetailComponent = (prop) => {
         <div className="articleDetail-con">
           <div className="articleDetail-header">
             <div className="authorDetail">
-              <div className="genderIcon">{GenderIcons.GirlIcon()}</div>
+              <div className="genderIcon">
+                {currentDetailData.author.gender === "female" &&
+                  GenderIcons.GirlIcon()}
+                {currentDetailData.author.gender === "male" &&
+                  GenderIcons.BoyIcon()}
+              </div>
               <div className="email">{currentDetailData.author.email}</div>
             </div>
             <button onClick={handleClose} className="close-btn">
@@ -303,7 +308,10 @@ const ArticleDetailComponent = (prop) => {
                     >
                       <div className="articleDetail-comment-left">
                         <div className="genderIcon">
-                          {GenderIcons.GirlIcon()}
+                          {comment.user_id.gender === "female" &&
+                            GenderIcons.GirlIcon()}
+                          {comment.user_id.gender === "male" &&
+                            GenderIcons.BoyIcon()}
                         </div>
                       </div>
                       <div className="articleDetail-comment-mid">

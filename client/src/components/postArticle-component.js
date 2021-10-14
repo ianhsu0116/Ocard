@@ -160,7 +160,10 @@ const PostArticleComponent = (props) => {
             </button>
           </div>
           <div className="author-con">
-            <div className="author-avatar">{GenderIcons.GenderDIcon()}</div>
+            <div className="author-avatar">
+              {currentUser.user.gender === "female" && GenderIcons.GirlIcon()}
+              {currentUser.user.gender === "male" && GenderIcons.BoyIcon()}
+            </div>
             <div className="author-con-right">
               <div className="author">{currentUser.user.email}</div>
               <div className="currentTime">{now}</div>
