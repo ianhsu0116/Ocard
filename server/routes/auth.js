@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const registerValidation = require("../validation").registerValidation;
 const loginValidation = require("../validation").loginValidation;
+const userEditValidation = require("../validation").userEditValidation;
 const User = require("../models").userModel;
 const jwt = require("jsonwebtoken");
 
@@ -16,6 +17,27 @@ router.get("/testAPI", (req, res) => {
   };
   // res.json() 跟 res.send() 雷同，不過json是送出一個json格式的object
   return res.json(msgObj);
+});
+
+// 拿到使用者資料
+router.get("/userProfile/:_id", async (req, res) => {
+  let { _id } = req.params;
+  let userData = await User.findById({ _id });
+  try {
+    let { _id, email } = userData;
+    const tokenObject = { _id, email };
+    const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+    res.status(200).send({
+      seccess: true,
+      token: "JWT " + token,
+      user: userData,
+    });
+  } catch (err) {
+    res.status(400).send({
+      seccess: false,
+      msg: err,
+    });
+  }
 });
 
 // 註冊
@@ -37,7 +59,7 @@ router.post("/register", async (req, res) => {
   try {
     const saveUser = await newUser.save();
     res.status(200).send({
-      msg: "Success",
+      seccess: true,
       savedObject: saveUser,
     });
   } catch (err) {
@@ -192,6 +214,27 @@ router.post("/facebook", (req, res) => {
       });
     }
   });
+});
+
+// user edit route （目前只能更新性別）
+router.put("/edit", (req, res) => {
+  const { error } = userEditValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  let { _id, gender } = req.body;
+  User.updateOne({ _id }, { gender })
+    .then((msg) => {
+      res.status(200).send({
+        seccess: true,
+        msg,
+      });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        seccess: false,
+        err,
+      });
+    });
 });
 
 module.exports = router;

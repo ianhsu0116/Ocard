@@ -2,6 +2,10 @@ import axios from "axios";
 const API_URL = "http://localhost:7777/api/user";
 
 class AuthService {
+  getUserProfile(_id) {
+    return axios.get(API_URL + "/userProfile/" + _id);
+  }
+
   login(email, password) {
     return axios.post(API_URL + "/login", {
       email,

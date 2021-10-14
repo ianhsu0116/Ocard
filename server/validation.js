@@ -19,6 +19,15 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
+// 修改基本資料(性別)
+const userEditValidation = (data) => {
+  const schema = Joi.object({
+    _id: Joi.string().required(),
+    gender: Joi.string().valid("male", "female").required(),
+  });
+  return schema.validate(data);
+};
+
 // article insert Validation
 const articleValidation = (data) => {
   const schema = Joi.object({
@@ -64,3 +73,4 @@ module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
 module.exports.commentValidation = commentValidation;
+module.exports.userEditValidation = userEditValidation;

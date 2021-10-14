@@ -12,16 +12,19 @@ const HomeComponent = (props) => {
     currentUser,
     boards,
     currentSearch,
+    setCurrentSearch,
     mobileSidebarOpen,
     setMobileSidebarOpen,
     currentData,
     setCurrentData,
     currentData2,
     setCurrentData2,
+    currentSidebarBoard,
+    setCurrentSidebarBoard,
   } = props;
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
-  let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
+  // let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
   let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關（電腦版）
   let [sortMethod, setSortMethod] = useState("熱門"); // 切換當前sort method
   let [windowWidth, setWindowWidth] = useState(window.window.innerWidth); // 即時獲取window width, 來做到sidebar開合控制
@@ -181,6 +184,8 @@ const HomeComponent = (props) => {
         }
       }
     }
+    // 清空當前Search，防止切換看板後搜尋內容相同時，因currentSearch內容沒變，無法觸發useEffect
+    setCurrentSearch("");
   }, [currentSidebarBoard]);
 
   // 顯示文章詳細內容

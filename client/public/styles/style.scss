@@ -1,6 +1,7 @@
 $OcardLightBlue: rgb(51, 151, 207);
 $OcardBlue: rgb(0, 106, 166);
 $OcardButtonBlue: rgb(0, 88, 138);
+$OcardButtonRed: rgb(250, 55, 55);
 $OcardLightButtonBlue: #3397cf;
 $facebookBlue: rgb(66, 95, 156);
 $colorLighGray: rgba(0, 0, 0, 0.35);
@@ -53,3 +54,4 @@ a {
 @import "./postArticle";
 @import "./boardSelector";
 @import "./articleDetail";
+@import "./profile";

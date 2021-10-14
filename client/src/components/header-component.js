@@ -14,6 +14,7 @@ const HeaderComponent = (props) => {
     setMobileSidebarOpen,
     setCurrentData,
     setCurrentData2,
+    setCurrentSidebarBoard,
   } = props;
   let [searchInput, setSearchInput] = useState("");
   const history = useHistory();
@@ -51,6 +52,9 @@ const HeaderComponent = (props) => {
       .catch((err) => {
         console.log(err.response);
       });
+
+    // 按下logo等同於回到所有看板，故將當前所在看板位置回歸預設
+    setCurrentSidebarBoard("");
   };
 
   // 即時抓取search input value
@@ -68,6 +72,11 @@ const HeaderComponent = (props) => {
   // 按下漢堡（手機版的 Munu）
   const handleSidebarOpen = () => {
     setMobileSidebarOpen(true);
+  };
+
+  // 按下profile
+  const handleProfile = () => {
+    history.push("/profile");
   };
 
   return (
@@ -106,7 +115,11 @@ const HeaderComponent = (props) => {
           )}
           {currentUser && <button>{NavigationIcons.FriendIcon()}</button>}
           {currentUser && <button>{NavigationIcons.EmailBoxIcon()}</button>}
-          {currentUser && <button>{NavigationIcons.ProfileIcon()}</button>}
+          {currentUser && (
+            <button className="profile-btn" onClick={handleProfile}>
+              {NavigationIcons.ProfileIcon()}
+            </button>
+          )}
           {currentUser && (
             <button className="logout-btn" onClick={handleLogout}>
               {NavigationIcons.LogOutIcon()}

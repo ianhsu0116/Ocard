@@ -332,8 +332,11 @@ const ArticleDetailComponent = (prop) => {
                           className="articleDetail-comment-mid-text"
                         />
                         {comment.image.length >= 1 &&
-                          comment.image.map((img) => (
-                            <div className="articleDetail-comment-mid-img">
+                          comment.image.map((img, index) => (
+                            <div
+                              key={index}
+                              className="articleDetail-comment-mid-img"
+                            >
                               <img src={img} alt="commentImage" />
                             </div>
                           ))}

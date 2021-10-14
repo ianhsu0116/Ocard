@@ -179,12 +179,14 @@ div.header-con .header .header-right button svg {
 }
 
 div.header-con .header .header-right .post-btn,
-div.header-con .header .header-right .logout-btn {
+div.header-con .header .header-right .logout-btn,
+div.header-con .header .header-right .profile-btn {
   cursor: pointer;
 }
 
 div.header-con .header .header-right .post-btn svg,
-div.header-con .header .header-right .logout-btn svg {
+div.header-con .header .header-right .logout-btn svg,
+div.header-con .header .header-right .profile-btn svg {
   fill: white;
 }
 
@@ -1787,5 +1789,110 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
     width: 100vw !important;
     padding: 0.75rem !important;
   }
+}
+
+.ProfileModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ProfileModal .ProfileModal-con {
+  width: 500px;
+  max-width: 1200px;
+  height: 600px;
+  border-radius: 20px;
+  background: white;
+  -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.ProfileModal .ProfileModal-con .ProfileModal-con-title {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con {
+  margin: 1rem 2rem;
+  height: 450px;
+  position: relative;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileAvator-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileAvator-box .ProfileData-avatar {
+  width: 65px;
+  height: 65px;
+  position: relative;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileAvator-box .ProfileData-avatar svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileData-box {
+  margin: 1rem 0;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileData-box input,
+.ProfileModal .ProfileModal-con .ProfileData-con .ProfileData-box select {
+  width: 100%;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .profile-btn-con {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .profile-btn-con button {
+  border: none;
+  border-radius: 5px;
+  margin: 0 0.25rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .profile-btn-con .profile-cancel-btn {
+  background: #fa3737;
+  color: white;
+}
+
+.ProfileModal .ProfileModal-con .ProfileData-con .profile-btn-con .profile-submit-btn {
+  background: #00588a;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */
