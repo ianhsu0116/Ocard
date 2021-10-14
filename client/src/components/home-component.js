@@ -14,17 +14,21 @@ const HomeComponent = (props) => {
     currentSearch,
     mobileSidebarOpen,
     setMobileSidebarOpen,
+    currentData,
+    setCurrentData,
+    currentData2,
+    setCurrentData2,
   } = props;
-  let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
-  let [currentData2, setCurrentData2] = useState();
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
   let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
-  // 即時獲取window width, 來做到sidebar開合控制
-  let [windowWidth, setWindowWidth] = useState(window.window.innerWidth);
+  let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關（電腦版）
+  let [sortMethod, setSortMethod] = useState("熱門"); // 切換當前sort method
+  let [windowWidth, setWindowWidth] = useState(window.window.innerWidth); // 即時獲取window width, 來做到sidebar開合控制
   window.addEventListener("resize", () => {
     setWindowWidth(window.window.innerWidth);
   });
+
   // 進入網頁立即顯示文章
   useEffect(() => {
     ArticleService.get()
@@ -197,8 +201,6 @@ const HomeComponent = (props) => {
   }
 
   // 控制排序法容器開關（電腦版）
-  let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關
-  let [sortMethod, setSortMethod] = useState("熱門"); // 切換當前sort method
   const handleSortConOpen = (e) => {
     e.stopPropagation();
     if (isSortConOpen) {
@@ -233,24 +235,6 @@ const HomeComponent = (props) => {
       setCurrentData(sortedData);
     }
   }, [sortMethod]);
-
-  // 控制sort button 樣式（手機版）
-  let mobileHotSortBtn = document.querySelector(".hotSort-mobile");
-  let mobileTimeSortBtn = document.querySelector(".timeSort-mobile");
-  useEffect(() => {
-    // 確認currentData2內已有資料後再繼續
-    if (currentData2) {
-      if (windowWidth <= 800) {
-        if (sortMethod === "熱門") {
-          mobileHotSortBtn.classList.add("mobile-sortBtn-active");
-          mobileTimeSortBtn.classList.remove("mobile-sortBtn-active");
-        } else if (sortMethod === "最新") {
-          mobileTimeSortBtn.classList.add("mobile-sortBtn-active");
-          mobileHotSortBtn.classList.remove("mobile-sortBtn-active");
-        }
-      }
-    }
-  }, [sortMethod, currentData2, windowWidth]); // 排序法改變、首次fatch到資料後、或是螢幕寬度改變時
 
   return (
     <div className="main-con">
@@ -301,10 +285,16 @@ const HomeComponent = (props) => {
             </div>
             {/* 手機版sort button */}
             <div className="main_nav-middle-mobile">
-              <button className="hotSort-mobile" onClick={handledSortMethod}>
+              <button
+                className={sortMethod === "熱門" && "mobile-sortBtn-active"}
+                onClick={handledSortMethod}
+              >
                 熱門
               </button>
-              <button className="timeSort-mobile" onClick={handledSortMethod}>
+              <button
+                className={sortMethod === "最新" && "mobile-sortBtn-active"}
+                onClick={handledSortMethod}
+              >
                 最新
               </button>
               <button className="followSort-mobile">追蹤</button>

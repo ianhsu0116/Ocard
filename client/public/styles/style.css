@@ -66,6 +66,7 @@ div.header-con .header .logo {
   width: 85px;
   margin: 0.2rem 1rem;
   position: relative;
+  cursor: pointer;
 }
 
 div.header-con .header .logo img {

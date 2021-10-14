@@ -7,6 +7,8 @@ import LoginComponent from "./components/Login-component";
 import PostArticleComponent from "./components/PostArticle-component";
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
+  let [currentData2, setCurrentData2] = useState(); // 備用的allData(搜尋或是切換看板用的)
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
   let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   let [boards, setBoards] = useState([
@@ -42,6 +44,8 @@ function App() {
         currentSearch={currentSearch}
         setCurrentSearch={setCurrentSearch}
         setMobileSidebarOpen={setMobileSidebarOpen}
+        setCurrentData={setCurrentData}
+        setCurrentData2={setCurrentData2}
       />
       <Switch>
         <Route path="/" exact>
@@ -52,6 +56,10 @@ function App() {
             currentSearch={currentSearch}
             mobileSidebarOpen={mobileSidebarOpen}
             setMobileSidebarOpen={setMobileSidebarOpen}
+            currentData={currentData}
+            setCurrentData={setCurrentData}
+            currentData2={currentData2}
+            setCurrentData2={setCurrentData2}
           />
         </Route>
         <Route path="/login" exact>

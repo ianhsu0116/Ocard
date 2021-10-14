@@ -14,8 +14,8 @@ const BoardSelectorComponent = (props) => {
       <div className="boardSelector-con">
         <div className="boardSelector-con-title">選擇發文看版</div>
         <div className="boards">
-          {boards.map((board) => (
-            <div onClick={handleChangeBoard} className="board">
+          {boards.map((board, index) => (
+            <div key={index} onClick={handleChangeBoard} className="board">
               {board}
             </div>
           ))}
