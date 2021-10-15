@@ -28,17 +28,15 @@ class AuthService {
     return JSON.parse(localStorage.getItem("user"));
   }
 
-  googleLogin(email, googleId) {
-    return axios.post(API_URL + "/google", {
-      email,
-      googleId,
+  googleLogin(access_token) {
+    return axios.post(API_URL + "/google/token", {
+      access_token,
     });
   }
 
-  facebookLogin(email, facebookId) {
-    return axios.post(API_URL + "/facebook", {
-      email,
-      facebookId,
+  facebookLogin(access_token) {
+    return axios.post(API_URL + "/facebook/token", {
+      access_token,
     });
   }
 }

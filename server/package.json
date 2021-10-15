@@ -17,6 +17,8 @@
     "mongoose": "^6.0.8",
     "nodemon": "^2.0.13",
     "passport": "^0.5.0",
+    "passport-facebook-token": "^4.0.0",
+    "passport-google-token": "^0.1.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
   }

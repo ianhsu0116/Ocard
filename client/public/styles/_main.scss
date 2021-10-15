@@ -65,9 +65,11 @@ div.main-con {
                 margin: 0.1rem 0;
                 &:hover {
                   background: rgba(0, 0, 0, 0.1);
+                  color: $OcardLightButtonBlue;
                 }
                 &:focus {
                   background: rgba(0, 0, 0, 0.1);
+                  color: $OcardLightButtonBlue;
                 }
               }
             }
@@ -143,9 +145,9 @@ div.main-con {
               position: relative;
               width: 100%;
               div.article_title {
-                font-size: 1.15rem;
+                font-size: 110%;
                 font-weight: bolder;
-                width: 55%;
+                width: 65%;
                 padding: 0.3rem 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -153,7 +155,7 @@ div.main-con {
               }
               div.article_content {
                 color: $colorMidGray;
-                font-size: 0.9rem;
+                font-size: 90%;
                 max-height: 25px;
                 width: 95%;
                 overflow: hidden;

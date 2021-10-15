@@ -168,7 +168,7 @@ div.header-con .header .header-right button {
   height: 27px;
   border: none;
   background: none;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   cursor: not-allowed;
 }
 
@@ -583,10 +583,12 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:hover {
   background: rgba(0, 0, 0, 0.1);
+  color: #3397cf;
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:focus {
   background: rgba(0, 0, 0, 0.1);
+  color: #3397cf;
 }
 
 div.main-con div.d-flex div.main div.main_nav .main_nav-middle-mobile {
@@ -690,9 +692,9 @@ div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid {
 }
 
 div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_title {
-  font-size: 1.15rem;
+  font-size: 110%;
   font-weight: bolder;
-  width: 55%;
+  width: 65%;
   padding: 0.3rem 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -701,7 +703,7 @@ div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div
 
 div.main-con div.d-flex div.main div.article_con div.middle div.left div.mid div.article_content {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 0.9rem;
+  font-size: 90%;
   max-height: 25px;
   width: 95%;
   overflow: hidden;
@@ -1812,7 +1814,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 .ProfileModal .ProfileModal-con {
   width: 500px;
   max-width: 1200px;
-  height: 600px;
+  height: 80vh;
   border-radius: 20px;
   background: white;
   -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
@@ -1830,7 +1832,7 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
 
 .ProfileModal .ProfileModal-con .ProfileData-con {
   margin: 1rem 2rem;
-  height: 450px;
+  height: 80%;
   position: relative;
 }
 

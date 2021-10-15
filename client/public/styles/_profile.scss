@@ -12,7 +12,7 @@
   .ProfileModal-con {
     width: 500px;
     max-width: 1200px;
-    height: 600px;
+    height: 80vh;
     border-radius: 20px;
     background: rgb(255, 255, 255);
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
@@ -28,7 +28,7 @@
 
     .ProfileData-con {
       margin: 1rem 2rem;
-      height: 450px;
+      height: 80%;
       position: relative;
 
       .ProfileAvator-box {

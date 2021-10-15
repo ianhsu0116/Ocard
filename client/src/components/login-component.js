@@ -62,12 +62,10 @@ const LoginComponent = (props) => {
   // google登入、註冊
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const responseGoogle = (response) => {
-    //console.log(response);
-    let { googleId } = response;
-    let email = response.it.Tt;
-
-    AuthService.googleLogin(email, googleId)
+    //console.log(response.accessToken);
+    AuthService.googleLogin(response.accessToken)
       .then((response) => {
+        //console.log(response);
         if (response.data.token) {
           // webStorage存入當前user資料
           localStorage.setItem("user", JSON.stringify(response.data));
@@ -77,21 +75,21 @@ const LoginComponent = (props) => {
 
           // 導回首頁
           history.push("/");
+        } else {
+          window.alert(response.data.message);
         }
       })
       .catch((err) => {
-        //console.log(err.response);
-        //window.alert("登入失敗(google)！ 問題正在努力修復中。");
-        window.alert(err.response.data.message);
+        console.log(err);
+        window.alert("登入失敗(google)！ 問題正在努力修復中。");
       });
   };
 
   // Facebook登入、註冊
   const FACEBOOK_CLIENT_ID = process.env.REACT_APP_FACEBOOK_CLIENT_ID;
   const responseFacebook = (response) => {
-    //console.log(response);
-    let { email, userID } = response;
-    AuthService.facebookLogin(email, userID)
+    //console.log(response.accessToken);
+    AuthService.facebookLogin(response.accessToken)
       .then((response) => {
         if (response.data.token) {
           // webStorage存入當前user資料
@@ -102,12 +100,13 @@ const LoginComponent = (props) => {
 
           // 導回首頁
           history.push("/");
+        } else {
+          window.alert(response.data.message);
         }
       })
       .catch((err) => {
-        //console.log(err.response);
-        //window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
-        window.alert(err.response.data.message);
+        console.log(err);
+        window.alert("登入失敗(facebook)！ 問題正在努力修復中。");
       });
   };
 
