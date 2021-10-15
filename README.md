@@ -1,7 +1,7 @@
 # Ocard
 
 <center>一個致敬 Dcard(台灣最大的大學生網路論壇)所寫出來的練習用作品</center>
-
+<br />
 <center>This is a social media website, platforms allow users to have conversations, share information and create web content, enjoy it.</center>
 
 ## Front-End Fundamental
