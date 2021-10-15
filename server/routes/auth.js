@@ -110,63 +110,6 @@ router.post(
   }
 );
 
-// router.post("/google", (req, res) => {
-//   let { email, googleId } = req.body;
-//   if (!email || !googleId) {
-//     return res.status(400).send("email 或是 googleId未正確送達！");
-//   }
-
-//   User.findOne({ email }, async function (err, user) {
-//     if (err) return res.status(400).send(err);
-
-//     // 如果是新用戶 就註冊
-//     if (!user) {
-//       let newUser = new User({
-//         email,
-//         password: "00000000",
-//         googleId,
-//       });
-
-//       newUser
-//         .save()
-//         .then((msg) => {
-//           let { _id, email } = msg;
-//           const tokenObject = { _id, email };
-//           const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
-
-//           res.status(200).send({
-//             seccess: true,
-//             token: "JWT " + token,
-//             user: msg,
-//           });
-//         })
-//         .catch((err) => {
-//           res.status(400).send(err);
-//         });
-//     }
-
-//     // 如果已註冊過且有googleId，就登入
-//     else if (user && user.googleId === googleId) {
-//       const tokenObject = { _id: user._id, email: user.email };
-//       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
-
-//       res.status(200).send({
-//         seccess: true,
-//         token: "JWT " + token,
-//         user,
-//       });
-//     }
-
-//     // 如果有此email 卻沒有googleId，但表已被local註冊過
-//     else {
-//       res.status(400).send({
-//         seccess: false,
-//         message: "此Google帳號的email已被註冊過囉！",
-//       });
-//     }
-//   });
-// });
-
 // Facebook登入 註冊
 router.post(
   "/facebook/token",
@@ -175,62 +118,6 @@ router.post(
     res.send(req.user);
   }
 );
-// router.post("/facebook", (req, res) => {
-//   let { email, facebookId } = req.body;
-//   if (!email || !facebookId) {
-//     return res.status(400).send("email 或是 facebookId未正確送達！");
-//   }
-
-//   User.findOne({ email }, async function (err, user) {
-//     if (err) return res.status(400).send(err);
-
-//     // 如果是新用戶 就註冊
-//     if (!user) {
-//       let newUser = new User({
-//         email,
-//         password: "00000000",
-//         facebookId,
-//       });
-
-//       newUser
-//         .save()
-//         .then((msg) => {
-//           let { _id, email } = msg;
-//           const tokenObject = { _id, email };
-//           const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
-
-//           res.status(200).send({
-//             seccess: true,
-//             token: "JWT " + token,
-//             user: msg,
-//           });
-//         })
-//         .catch((err) => {
-//           res.status(400).send(err);
-//         });
-//     }
-
-//     // 如果已註冊過且有facebookId，就登入
-//     else if (user && user.facebookId === facebookId) {
-//       const tokenObject = { _id: user._id, email: user.email };
-//       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
-
-//       res.status(200).send({
-//         seccess: true,
-//         token: "JWT " + token,
-//         user,
-//       });
-//     }
-
-//     // 如果有此email 卻沒有facebookId，但表已被local註冊過
-//     else {
-//       res.status(400).send({
-//         seccess: false,
-//         message: "此Facebook帳號綁定email已被註冊過囉！",
-//       });
-//     }
-//   });
-// });
 
 // user edit route （目前只能更新性別）
 router.put("/edit", (req, res) => {

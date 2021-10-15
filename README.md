@@ -1,6 +1,8 @@
 # Ocard
 
-一個致敬 Dcard(台灣最大的大學生網路論壇)所寫出來的個人練習用作品
+<center>一個致敬 Dcard(台灣最大的大學生網路論壇)所寫出來的練習用作品</center>
+
+<center>This is a social media website, platforms allow users to have conversations, share information and create web content, enjoy it.</center>
 
 ## Front-End Fundamental
 
@@ -18,7 +20,7 @@ React Router
 
 Google Auth  
 Facebook Auth  
-Passport-jwt
+Json Web Token
 
 ## Tool for Development
 
@@ -28,9 +30,16 @@ Prettier
 
 ## Back-End Fundamental
 
-Node  
+Node.JS  
 Express
 
 ## Database
 
 MongoDB(mongodb atlas)
+
+## Conteact
+
+If you got any problem when using Ocard, or had any suggestion about it. Please feel free to contact with me via email.
+
+- Author: Ian, Hsu
+- Email: ianhsu0116@gmail.com
