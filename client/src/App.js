@@ -13,7 +13,7 @@ function App() {
   let [currentData2, setCurrentData2] = useState(); // 備用的allData(搜尋或是切換看板用的)
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
   let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  let [currentSidebarBoard, setCurrentSidebarBoard] = useState(null); // 當前在哪個看板
+  let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
   let [boards, setBoards] = useState([
     "NBA",
     "健身",

@@ -170,18 +170,6 @@ const HomeComponent = (props) => {
           window.alert("當前看板還沒有文章歐！");
         }
       }
-    } else {
-      // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
-      if (currentData2) {
-        // 直接將備用的data render出來，直接減去拿資料的時間
-        // 一樣要確認當前是哪個排列方式，排好再放入currentData
-        if (sortMethod === "熱門") {
-          setCurrentData(currentData2);
-        } else if (sortMethod === "最新") {
-          let sortedData = mergeSortFormula.timeMergeSort(currentData2);
-          setCurrentData(sortedData);
-        }
-      }
     }
     // 清空當前Search，防止切換看板後搜尋內容相同時，因currentSearch內容沒變，無法觸發useEffect
     setCurrentSearch("");
@@ -253,9 +241,10 @@ const HomeComponent = (props) => {
         )}
         <SidebarComponent
           boards={boards}
+          sortMethod={sortMethod}
           currentSidebarBoard={currentSidebarBoard}
           setCurrentSidebarBoard={setCurrentSidebarBoard}
-          currentData={currentData}
+          currentData2={currentData2}
           setCurrentData={setCurrentData}
           mobileSidebarOpen={mobileSidebarOpen}
           setMobileSidebarOpen={setMobileSidebarOpen}

@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import mergeSortFormula from "./sortFormula/mergeSort-Formula";
 import NavigationIcons from "./icons/NavigationIcons";
 import CloseButtonIcon from "./icons/CloseButtonIcon";
 
 const SidebarComponent = (props) => {
   let {
     boards,
+    sortMethod,
+    currentData2,
+    setCurrentData,
     currentSidebarBoard,
     setCurrentSidebarBoard,
     mobileSidebarOpen,
@@ -28,6 +32,18 @@ const SidebarComponent = (props) => {
   const handleBackToAllBoard = () => {
     // 清空當前已選看板
     setCurrentSidebarBoard("");
+
+    // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
+    if (currentData2) {
+      // 直接將備用的data render出來，直接減去拿資料的時間
+      // 一樣要確認當前是哪個排列方式，排好再放入currentData
+      if (sortMethod === "熱門") {
+        setCurrentData(currentData2);
+      } else if (sortMethod === "最新") {
+        let sortedData = mergeSortFormula.timeMergeSort(currentData2);
+        setCurrentData(sortedData);
+      }
+    }
 
     // 選好看板後 如果是手機版的話 => 關閉sidebar
     if (windowWidth <= 800) {
