@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import EditService from "../services/edit.service";
 import AuthService from "../services/auth.service";
@@ -8,6 +8,13 @@ const ProfileComponent = (props) => {
   let { currentUser, setCurrentUser } = props;
   let [currentGender, setCurrentGender] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    if (!currentUser) {
+      window.alert("請先登入歐歐歐！！！！");
+      history.push("/login");
+    }
+  }, []);
 
   // 即時抓到修改的gender
   const handleChangeGender = (e) => {

@@ -2,6 +2,12 @@ const router = require("express").Router();
 const Article = require("../models").articleModel;
 const articleValidation = require("../validation").articleValidation;
 const commentValidation = require("../validation").commentValidation;
+const { uploadFile, getFileStream } = require("../config/aws-s3");
+const fs = require("fs");
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 router.use((req, res, next) => {
   console.log("A request is coming in article-route");
@@ -16,18 +22,6 @@ router.get("/testAPI", (req, res) => {
   return res.json(msgObj);
 });
 
-// 拿到所有文章
-// router.get("/", (req, res) => {
-//   Article.find({})
-//     .populate("author", ["email"])
-//     .then((article) => {
-//       res.status(200).send(article);
-//     })
-//     .catch((err) => {
-//       res.status(500).send("can not find any article");
-//     });
-// });
-
 // 依照文章ID
 router.get("/:_id", (req, res) => {
   let { _id } = req.params;
@@ -40,19 +34,6 @@ router.get("/:_id", (req, res) => {
       res.status(500).send("can not find any article");
     });
 });
-
-// 依照board拿到文章
-// router.get("/board/:board_name", (req, res) => {
-//   let { board_name } = req.params;
-//   Article.find({ board: board_name })
-//     .populate("author", ["email"])
-//     .then((article) => {
-//       res.status(200).send(article);
-//     })
-//     .catch((err) => {
-//       res.status(500).send("can not find any article");
-//     });
-// });
 
 // 依照user_id拿到所有他發布的文章
 router.get("/user/:_user_id", (req, res) => {
@@ -68,20 +49,30 @@ router.get("/user/:_user_id", (req, res) => {
 });
 
 // post新文章
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   // validate the input before making a new article
   const { error } = articleValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let { board, title, content, author, image } = req.body;
+  // 抓到formData內的image file
+  let result;
+  const file = req.file;
+  if (file) {
+    // 上傳至AWS S3
+    result = await uploadFile(file);
+    // 刪除暫存檔案
+    await unlinkFile(file.path);
+  }
+
+  let { board, title, content, author } = req.body;
   let newArticle;
-  if (req.body.hasOwnProperty("image")) {
+  if (result) {
     newArticle = new Article({
       board,
       title,
       content,
       author,
-      image,
+      image: result.Location,
     });
   } else {
     newArticle = new Article({
@@ -101,20 +92,30 @@ router.post("/", async (req, res) => {
 });
 
 // 新增文章留言
-router.post("/comment/:_id", async (req, res) => {
+router.post("/comment/:_id", upload.single("image"), async (req, res) => {
   // validate the input before making a new comment
   const { error } = commentValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
+  // 抓到formData內的image file
+  let result;
+  const file = req.file;
+  if (file) {
+    // 上傳至AWS S3
+    result = await uploadFile(file);
+    // 刪除暫存檔案
+    await unlinkFile(file.path);
+  }
+
   let { _id } = req.params;
-  let { comment_id, user_id, text, date, image } = req.body;
+  let { comment_id, user_id, text, date } = req.body;
   let newComment;
-  if (req.body.hasOwnProperty("image")) {
+  if (result) {
     newComment = {
       comment_id,
       user_id,
       text,
-      image,
+      image: result.Location,
       date,
     };
   } else {

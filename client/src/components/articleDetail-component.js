@@ -15,8 +15,9 @@ const ArticleDetailComponent = (prop) => {
     setCurrentDetailData,
   } = prop;
   let [currentComment, setCurrentComment] = useState("");
-  let [buttonStatus, setButtonStatus] = useState("disabled");
-  let [currentImage, setCurrentImage] = useState(null);
+  let [buttonStatus, setButtonStatus] = useState("disabled"); // 送出button狀態
+  let [currentImage, setCurrentImage] = useState(null); // 即時顯示所選圖檔(二元編碼)
+  let [awsFile, setAwsFile] = useState(null); // 儲存要送到server, 存入AWS S3的image file
   let [likeWhichComment, setLikeWhichComment] = useState([]);
   let [isArticleLike, setIsArticleLike] = useState(false);
   let [isNeedEditArticleLike, setIsNeedEditArticleLike] = useState(false);
@@ -68,7 +69,7 @@ const ArticleDetailComponent = (prop) => {
     setCurrentComment(e.target.value);
   };
 
-  // 即時顯示圖片
+  // 即時抓取上傳的圖片
   const handleFileChange = (e) => {
     let readFile = new FileReader(); //constructor 建構子(函數); 功能: 給初值
     let file = e.target.files[0];
@@ -76,20 +77,25 @@ const ArticleDetailComponent = (prop) => {
 
     // 格式符合就顯示，否則提醒
     if (file) {
-      if (file.type.match(imageType) && file.size < 75000) {
+      if (file.type.match(imageType) && file.size < 4000000) {
+        // 將圖裝入，等待送到後端
+        setAwsFile(file);
+
+        // 抓到二元編碼，即時顯示
         readFile.readAsDataURL(file);
         readFile.addEventListener("load", function () {
           setCurrentImage(readFile.result);
         });
       } else {
-        window.alert("只能上傳圖片歐！(目前情況檔案大小須小於75kb)");
+        window.alert("只能上傳圖片歐！(檔案大小須小於4mb)");
       }
     }
   };
 
-  // 手動刪除圖片
+  // 刪除暫存圖片(即時顯示)
   const handleCloseImage = () => {
     setCurrentImage(null);
+    setAwsFile(null);
   };
 
   // 送出留言
@@ -99,6 +105,10 @@ const ArticleDetailComponent = (prop) => {
       history.push("/login");
       return;
     }
+
+    // 防止多次按壓，會有bug
+    setButtonStatus("disabled");
+
     let comment_id = uuidv4();
     let _id = e.target.dataset.articleid;
     let user_id = currentUser.user._id;
@@ -110,7 +120,7 @@ const ArticleDetailComponent = (prop) => {
       user_id,
       currentComment,
       now,
-      currentImage
+      awsFile
     )
       .then(() => {
         window.alert("新增成功！");
@@ -119,20 +129,20 @@ const ArticleDetailComponent = (prop) => {
         setCurrentComment("");
         setCurrentImage(null);
 
-        // 成功的話，即時顯示新留言
+        // 成功的話，即時顯示新留言（重新fetch一次當前文章詳細資料）
         ArticleService.getById(currentDetailData._id)
           .then((data) => {
             //console.log(data.data);
             setCurrentDetailData(data.data);
           })
           .catch((err) => {
-            window.alert("發生錯誤，正在處理中！(post article comment)");
+            window.alert("發生錯誤，正在處理中！(新增留言)");
             //console.log(err);
           });
       })
       .catch((err) => {
         console.log(err.response);
-        window.alert(err.response.data);
+        window.alert("新增留言異常，正在處理中！");
       });
   };
 

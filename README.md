@@ -35,6 +35,7 @@ Express
 ## Database
 
 MongoDB(mongodb atlas)
+Amazon S3 (Simple Storage Service)
 
 ## Conteact
 

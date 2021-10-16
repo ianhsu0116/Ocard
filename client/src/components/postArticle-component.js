@@ -13,7 +13,8 @@ const PostArticleComponent = (props) => {
   let [currentBoard, setCurrentBoard] = useState("點此選擇發文看板");
   let [currentTitle, setCurrentTitle] = useState("");
   let [currentContent, setCurrentContent] = useState("");
-  let [currentImage, setCurrentImage] = useState(null);
+  let [currentImage, setCurrentImage] = useState(null); // 即時顯示所選圖檔(二元編碼)
+  let [awsFile, setAwsFile] = useState(null); // 儲存要送到server, 存入AWS S3的image file
   let [buttonStatus, setButtonStatus] = useState("disabled"); // 送出按鈕狀態
   let [now, setNow] = useState(
     date.toLocaleDateString() + " " + date.toLocaleTimeString()
@@ -65,11 +66,13 @@ const PostArticleComponent = (props) => {
   const handleChangeTitle = (e) => {
     setCurrentTitle(e.target.value);
   };
+
   // 即時抓取content
   const handleChangeContent = (e) => {
     setCurrentContent(e.target.value);
   };
-  // 即時抓取上傳的圖片  error
+
+  // 即時抓取上傳的圖片
   const handleFileChange = (e) => {
     let readFile = new FileReader(); //constructor 建構子(函數); 功能: 給初值
     let file = e.target.files[0];
@@ -77,21 +80,26 @@ const PostArticleComponent = (props) => {
 
     // 格式符合就顯示，否則提醒
     if (file) {
-      if (file.type.match(imageType) && file.size < 75000) {
+      if (file.type.match(imageType) && file.size < 4000000) {
+        // 將圖裝入，等待送到後端
+        setAwsFile(file);
+
+        // 抓到二元編碼，即時顯示
         readFile.readAsDataURL(file);
         readFile.addEventListener("load", function () {
           setCurrentImage(readFile.result);
         });
       } else {
-        window.alert("只能上傳圖片歐！(目前情況檔案須小於75kb)");
+        window.alert("只能上傳圖片歐！(檔案須小於4mb)");
       }
     }
   };
 
-  // 刪除暫存圖片
+  // 刪除暫存圖片(即時顯示)
   const handleCloseImage = () => {
     console.log("delete");
     setCurrentImage(null);
+    setAwsFile(null);
   };
 
   // 送出文章
@@ -102,7 +110,7 @@ const PostArticleComponent = (props) => {
     let board = currentBoard;
     let title = currentTitle;
     let content = currentContent;
-    let image = currentImage;
+    let image = awsFile;
 
     // 有圖片的情況
     if (currentImage) {
@@ -112,7 +120,7 @@ const PostArticleComponent = (props) => {
           history.push("/");
         })
         .catch((err) => {
-          //console.log(err);
+          console.log(err.response);
           //console.log("postArticleError1");
           window.alert(err.response.data);
         });
@@ -125,7 +133,7 @@ const PostArticleComponent = (props) => {
           history.push("/");
         })
         .catch((err) => {
-          //console.log(err);
+          console.log(err.response);
           //console.log("postArticleError2");
           window.alert(err.response.data);
         });

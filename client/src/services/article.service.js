@@ -12,22 +12,19 @@ class ArticleService {
       token = "";
     }
 
+    const formData = new FormData();
+    formData.append("board", board);
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("author", author);
+    formData.append("image", image);
+
     if (image) {
-      return axios.post(
-        API_URL + "/",
-        {
-          board,
-          title,
-          content,
-          author,
-          image,
+      return axios.post(API_URL + "/", formData, {
+        headers: {
+          Authorization: token,
         },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      });
     } else {
       return axios.post(
         API_URL + "/",
@@ -82,23 +79,20 @@ class ArticleService {
       token = "";
     }
 
+    const formData = new FormData();
+    formData.append("comment_id", comment_id);
+    formData.append("user_id", user_id);
+    formData.append("text", text);
+    formData.append("date", date);
+    formData.append("image", image);
+
     // 判斷有無圖片
     if (image) {
-      return axios.post(
-        API_URL + "/comment/" + _id,
-        {
-          comment_id,
-          user_id,
-          text,
-          image,
-          date,
+      return axios.post(API_URL + "/comment/" + _id, formData, {
+        headers: {
+          Authorization: token,
         },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      });
     } else {
       return axios.post(
         API_URL + "/comment/" + _id,
