@@ -1,6 +1,6 @@
 # Ocard
 
-<p align="center">一個致敬 Dcard(台灣最大的大學生網路論壇)所寫出來的練習用作品</p>
+<p align="center">一個致敬 Dcard(台灣最熱門的大學生網路論壇) 所寫出來的個人練習用作品</p>
 <p align="center">This is a social media website, platforms allow users to have conversations, share information and create web content, enjoy it.</p>
 
 ## Front-End Fundamental
@@ -43,3 +43,7 @@ If you got any problem when using Ocard, or had any suggestion about it. Please 
 
 - Author: Ian, Hsu
 - Email: ianhsu0116@gmail.com
+
+<br />
+<hr />
+<p align="center">若是有任何侵權疑慮，煩請email告知，謝謝！</p>
