@@ -6,7 +6,9 @@
 
 
 ## Login Demonstration
-https://user-images.githubusercontent.com/82724318/138204946-3f7a90d2-df9b-4187-bbb5-ff0a97de2fe5.mov
+https://user-images.githubusercontent.com/82724318/138205206-025142f0-fc7b-490f-961f-ff0bf1fb09d7.mov
+
+
 
 
 
@@ -45,6 +47,9 @@ Express
 
 MongoDB(mongodb atlas)
 Amazon S3 (Simple Storage Service)
+
+## 2021/10/21
+I am still learning how to use Amazon EC2, the website will be live as soon as possible!
 
 ## Conteact
 
