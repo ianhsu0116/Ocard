@@ -45,11 +45,13 @@ Express
 
 ## Database
 
-MongoDB(mongodb atlas)
-Amazon S3 (Simple Storage Service)
+MongoDB  
+Amazon S3  
+
 
 ## 2021/10/21
 I am still learning how to use Amazon EC2, the website will be live as soon as possible!
+
 
 ## Conteact
 
