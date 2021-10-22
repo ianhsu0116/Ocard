@@ -67,3 +67,7 @@ Move all images to Amazon S3
 
 - 2021/10/12
 Google / Facebook Login complete
+
+<br />
+<hr />
+<p align="center">若是有任何侵權疑慮，煩請email告知，謝謝！</p>
