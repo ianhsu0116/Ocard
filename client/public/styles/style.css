@@ -570,7 +570,7 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
   padding: 0.25rem;
   -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
           box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
-  background: white;
+  background-color: white;
   border-radius: 10px;
 }
 
@@ -587,7 +587,7 @@ div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-rig
 }
 
 div.main-con div.d-flex div.main div.main_nav div.middle div.main_nav-middle-right div.sortSelector-con button:focus {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 67, 143, 0.2);
   color: #3397cf;
 }
 

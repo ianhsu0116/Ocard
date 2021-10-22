@@ -56,7 +56,7 @@ div.main-con {
               min-width: 10vw;
               padding: 0.25rem;
               box-shadow: 3px 3px 5px $colorMidGray;
-              background: white;
+              background-color: white;
               border-radius: 10px;
               & button {
                 padding: 0.25rem 0.75rem;
@@ -68,7 +68,7 @@ div.main-con {
                   color: $OcardLightButtonBlue;
                 }
                 &:focus {
-                  background: rgba(0, 0, 0, 0.1);
+                  background: rgba(0, 67, 143, 0.2);
                   color: $OcardLightButtonBlue;
                 }
               }
