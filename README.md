@@ -1,6 +1,5 @@
-[<img src="https://user-images.githubusercontent.com/82724318/138928955-57146cae-1e69-4504-b602-8b539e758b86.png">](https://ocard-forumweb.herokuapp.com/)
-[<strong align="center">Go to Ocard! »</strong>](https://ocard-forumweb.herokuapp.com/)
-
+[<img align="center" src="https://user-images.githubusercontent.com/82724318/138928955-57146cae-1e69-4504-b602-8b539e758b86.png">](https://ocard-forumweb.herokuapp.com/)  
+[<strong align="center">Go to Ocard! »</strong>](https://ocard-forumweb.herokuapp.com/)  
 
 
 <p align="center">一個致敬 Dcard(台灣最熱門的大學生網路論壇) 所寫出來的個人練習用作品</p>
