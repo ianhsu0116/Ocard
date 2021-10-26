@@ -1,4 +1,4 @@
-<center>[<img src="https://user-images.githubusercontent.com/82724318/138928955-57146cae-1e69-4504-b602-8b539e758b86.png">](https://ocard-forumweb.herokuapp.com/)</center>
+[<img src="https://user-images.githubusercontent.com/82724318/138928955-57146cae-1e69-4504-b602-8b539e758b86.png">](https://ocard-forumweb.herokuapp.com/)
 [<strong align="center">Go to Ocard! »</strong>](https://ocard-forumweb.herokuapp.com/)
 
 
