@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +6,22 @@
           box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  overflow: -moz-hidden-unscrollable;
+  /*注意！若只打 hidden，chrome 的其它 hidden 會出問題*/
+  height: 100%;
+}
+
 body {
   font-family: "Noto Sans TC", sans-serif;
   background: #00324e;
+  -ms-overflow-style: none;
+  height: 100%;
+  overflow: auto;
 }
 
 a {
@@ -42,7 +56,7 @@ div.header-con {
           justify-content: center;
   z-index: 10;
   background-color: #006aa6;
-  width: 100vw;
+  width: 100%;
 }
 
 div.header-con .header {
@@ -259,8 +273,6 @@ div.header-con .header .header-right .profile-btn svg {
   min-width: 200px;
   margin: 2rem 7rem;
   margin-right: 0;
-  max-height: 85vh;
-  overflow: scroll;
 }
 
 .sidebar .sidbar-header {
@@ -385,6 +397,8 @@ div.header-con .header .header-right .profile-btn svg {
     min-height: 100vh;
     background: white;
     z-index: 20;
+    max-height: 100vh;
+    overflow: scroll;
   }
   .sidebar .sidbar-header {
     display: -webkit-box;
@@ -1534,10 +1548,11 @@ div.LoginComponent div.login-con div.login-right div.form-con div.button-con .re
   position: relative;
   overflow: hidden;
   margin: 1rem 0;
+  max-height: 70vh;
 }
 
 .articleDetail .articleDetail-con .articleDetail-content .articleDetail-text .articleDetail-img-con img {
-  height: 100%;
+  max-height: 100%;
   max-width: 100%;
 }
 

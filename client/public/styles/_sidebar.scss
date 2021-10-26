@@ -6,8 +6,8 @@
   min-width: 200px;
   margin: 2rem 7rem;
   margin-right: 0;
-  max-height: 85vh;
-  overflow: scroll;
+  // max-height: 85vh;
+  // overflow: scroll;
 
   .sidbar-header {
     display: none;
@@ -102,10 +102,6 @@
   }
 }
 @media screen and (max-width: 800px) {
-  // .sidebar {
-  //   display: none;
-  // }
-
   .sidebar {
     position: fixed;
     top: 0;
@@ -115,6 +111,8 @@
     min-height: 100vh;
     background: rgb(255, 255, 255);
     z-index: 20;
+    max-height: 100vh;
+    overflow: scroll;
 
     .sidbar-header {
       display: flex;
