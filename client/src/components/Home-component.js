@@ -177,7 +177,13 @@ const HomeComponent = (props) => {
 
   // 顯示文章詳細內容
   function handleShowDetail(e) {
+    // 開啟 ArticleDetail-component
     setArticleDetailOpen(true);
+
+    // 使 body 無法滾動
+    document.querySelector("body").classList.add("stopScroll");
+
+    // 拿到當下點擊文章的文章id
     let article_id = e.currentTarget.dataset.articleid;
 
     ArticleService.getById(article_id)

@@ -10,9 +10,9 @@ import ProfileComponent from "./components/Profile-component";
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   let [currentData, setCurrentData] = useState([]); // 當前首頁fatch到的資料所有
-  let [currentData2, setCurrentData2] = useState(); // 備用的allData(搜尋或是切換看板用的)
+  let [currentData2, setCurrentData2] = useState([]); // 備用的allData(搜尋或是切換看板用的)
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
-  let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // 控制手機版sidebar起閉
   let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
   let [boards, setBoards] = useState([
     "NBA",

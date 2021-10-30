@@ -18,6 +18,11 @@ $likesActiveRed: rgb(234, 92, 92);
   display: none;
 }
 
+// 開啟 floating box 時防止 scroll event 傳導致下層
+.stopScroll {
+  overflow: hidden;
+}
+
 html {
   overflow: -moz-hidden-unscrollable; /*注意！若只打 hidden，chrome 的其它 hidden 會出問題*/
   height: 100%;

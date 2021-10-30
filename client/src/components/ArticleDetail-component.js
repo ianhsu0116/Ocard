@@ -106,7 +106,7 @@ const ArticleDetailComponent = (prop) => {
       return;
     }
 
-    // 防止多次按壓，會有bug
+    // 防止多次按壓submit btn，會有bug
     setButtonStatus("disabled");
 
     let comment_id = uuidv4();
@@ -213,7 +213,12 @@ const ArticleDetailComponent = (prop) => {
   const handleClose = () => {
     // 控制ArticleDetail的這個element的開啟關閉
     setArticleDetailOpen(false);
+
+    // 移除當前的文章內容
     setCurrentDetailData(null);
+
+    // 使 root 無法滾動
+    document.querySelector("body").classList.remove("stopScroll");
 
     // 目前有人登入的話，確認有無要送出的按讚(留言的)
     if (currentUser) {

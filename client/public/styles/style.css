@@ -10,6 +10,10 @@
   display: none;
 }
 
+.stopScroll {
+  overflow: hidden;
+}
+
 html {
   overflow: -moz-hidden-unscrollable;
   /*注意！若只打 hidden，chrome 的其它 hidden 會出問題*/
