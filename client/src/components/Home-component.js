@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ArticleService from "../services/article.service";
 import SidebarComponent from "./Sidebar-component";
 import ArticleDetailComponent from "./ArticleDetail-component";
@@ -19,9 +20,10 @@ const HomeComponent = (props) => {
     setCurrentData,
     currentData2,
     setCurrentData2,
-    currentSidebarBoard,
-    setCurrentSidebarBoard,
+    // currentSidebarBoard,
+    // setCurrentSidebarBoard,
   } = props;
+  let [isInitRender, setIsIninRender] = useState(true);
   let [currentDetailData, setCurrentDetailData] = useState(null);
   let [articleDetailOpen, setArticleDetailOpen] = useState(false); // 文章內頁開啟狀態
   let [isSortConOpen, setIsSortConOpen] = useState(false); // 控制sortCon開關（電腦版）
@@ -31,6 +33,9 @@ const HomeComponent = (props) => {
     setWindowWidth(window.window.innerWidth);
   });
 
+  // 拿到當前網址列的params （ex. http://localhost7777/心情）
+  let { boardPath } = useParams();
+
   // 進入網頁立即顯示文章
   useEffect(() => {
     ArticleService.get()
@@ -39,14 +44,26 @@ const HomeComponent = (props) => {
 
         // 先將順序排列成熱門優先，再放入currentData
         let sortedData = mergeSortFormula.hotMergeSort(data.data);
-        setCurrentData(sortedData);
-
         // 備用data存放區, 用途：在點擊所有文章時 不用重新render資料 直接從備用的拿
         setCurrentData2(sortedData);
 
         if (data.data.length === 0) {
           window.alert("Ocard內還沒有任何文章歐，幫我新增一篇吧！");
         }
+
+        // 判斷此次進來的網址是否有包含看板類別
+        if (boardPath) {
+          let boardData = otherFormula.boardSort(boardPath, sortedData);
+          setCurrentData(boardData);
+
+          //將當前看板設定到此網址列的看板(這樣sidebar才會有active效果)
+          //setCurrentSidebarBoard(boardPath);
+        } else {
+          setCurrentData(sortedData);
+        }
+
+        //首次render後就設定成false
+        setIsIninRender(false);
       })
       .catch((err) => {
         console.log(err.response);
@@ -58,25 +75,7 @@ const HomeComponent = (props) => {
     //  判斷當前是否有搜尋條件
     if (currentSearch) {
       // 判斷現在是否有在看板分類中
-      if (!currentSidebarBoard) {
-        // 下方comment out 的是原fetch Data的方式（太慢）
-        // ArticleService.getBySearch(currentSearch)
-        //   .then((data) => {
-        //     //console.log(data.data);
-
-        //     // 先將順序排列成熱門優先，再放入currentData
-        //     let sortedData = mergeSortFormula.hotMergeSort(data.data);
-        //     setCurrentData(sortedData);
-
-        //     setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
-        //     if (data.data.length === 0) {
-        //       window.alert("沒有相符的文章喔！！");
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     console.log(err.response);
-        //   });
-
+      if (!boardPath) {
         // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
         if (currentData2) {
           let searchData = otherFormula.searchSort(currentSearch, currentData2);
@@ -88,29 +87,11 @@ const HomeComponent = (props) => {
           }
         }
       } else {
-        // 下方comment out 的是原fetch Data的方式（太慢）
-        // ArticleService.getBySearch(currentSearch, currentSidebarBoard)
-        //   .then((data) => {
-        //     //console.log(data.data);
-
-        //     // 先將順序排列成熱門優先，再放入currentData
-        //     let sortedData = mergeSortFormula.hotMergeSort(data.data);
-        //     setCurrentData(sortedData);
-
-        //     setCurrentSearch(""); // 搜尋完後就清空當前搜尋條件
-        //     if (data.data.length === 0) {
-        //       window.alert("此看板沒有相符的文章喔！！");
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     console.log(err.response);
-        //   });
-
         // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
         if (currentData) {
           let searchData = otherFormula.searchSortWithBoard(
             currentSearch,
-            currentSidebarBoard,
+            boardPath,
             currentData2
           );
           //console.log(searchData);
@@ -126,37 +107,13 @@ const HomeComponent = (props) => {
 
   // 切換板板時重新render頁面
   useEffect(() => {
-    if (currentSidebarBoard) {
-      // 下方comment out 的是原fetch Data的方式（太慢）
-      // ArticleService.getByBoard(currentSidebarBoard)
-      //   .then((data) => {
-      //     //console.log(data.data);
-
-      //     // 確認當前是哪個排列方式，排好再放入currentData
-      //     if (sortMethod === "熱門") {
-      //       let sortedData = mergeSortFormula.hotMergeSort(data.data);
-      //       setCurrentData(sortedData);
-      //     } else if (sortMethod === "最新") {
-      //       let sortedData = mergeSortFormula.timeMergeSort(data.data);
-      //       setCurrentData(sortedData);
-      //     }
-
-      //     if (data.data.length === 0) {
-      //       window.alert("當前看板還沒有文章歐！");
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //     console.log(1);
-      //   });
-
+    if (boardPath && !isInitRender) {
       // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
       if (currentData2) {
         // 從currentData2中篩選出來，符合當前board的data
-        let boardData = otherFormula.boardSort(
-          currentSidebarBoard,
-          currentData2
-        );
+        let boardData = otherFormula.boardSort(boardPath, currentData2);
+
+        //setCurrentSidebarBoard(boardPath);
 
         // 確認當前是哪個排列方式，排好再放入currentData
         if (sortMethod === "熱門") {
@@ -173,7 +130,7 @@ const HomeComponent = (props) => {
     }
     // 清空當前Search，防止切換看板後搜尋內容相同時，因currentSearch內容沒變，無法觸發useEffect
     setCurrentSearch("");
-  }, [currentSidebarBoard]);
+  }, [boardPath]);
 
   // 顯示文章詳細內容
   function handleShowDetail(e) {
@@ -248,8 +205,8 @@ const HomeComponent = (props) => {
         <SidebarComponent
           boards={boards}
           sortMethod={sortMethod}
-          currentSidebarBoard={currentSidebarBoard}
-          setCurrentSidebarBoard={setCurrentSidebarBoard}
+          // currentSidebarBoard={currentSidebarBoard}
+          // setCurrentSidebarBoard={setCurrentSidebarBoard}
           currentData2={currentData2}
           setCurrentData={setCurrentData}
           mobileSidebarOpen={mobileSidebarOpen}

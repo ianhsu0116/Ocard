@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import mergeSortFormula from "./sortFormula/mergeSort-Formula";
 import NavigationIcons from "./icons/NavigationIcons";
 import CloseButtonIcon from "./icons/CloseButtonIcon";
@@ -10,17 +10,20 @@ const SidebarComponent = (props) => {
     sortMethod,
     currentData2,
     setCurrentData,
-    currentSidebarBoard,
-    setCurrentSidebarBoard,
+    // currentSidebarBoard,
+    // setCurrentSidebarBoard,
     mobileSidebarOpen,
     setMobileSidebarOpen,
     windowWidth,
   } = props;
 
+  // 拿到當前網址列的params （ex. http://localhost7777/心情）
+  let { boardPath } = useParams();
+
   const handleBoardChange = (e) => {
     //console.log(e.currentTarget.dataset.board);
     // 更新當前看板
-    setCurrentSidebarBoard(e.currentTarget.dataset.board);
+    //setCurrentSidebarBoard(e.currentTarget.dataset.board);
 
     // 如果是手機版的話選好看板後 關閉sidebar
     if (windowWidth <= 800) {
@@ -31,7 +34,7 @@ const SidebarComponent = (props) => {
   // 回到所有看板
   const handleBackToAllBoard = () => {
     // 清空當前已選看板
-    setCurrentSidebarBoard("");
+    //setCurrentSidebarBoard("");
 
     // 先確認currentData2內是否有東西（防止還沒fatch到資料時，使用者先點擊換看板的按鈕）
     if (currentData2) {
@@ -97,11 +100,12 @@ const SidebarComponent = (props) => {
       </div>
 
       {boards.map((board, index) => (
-        <a
+        <Link
+          to={`/${board}`}
           key={index}
           onClick={handleBoardChange}
           data-board={board}
-          className={currentSidebarBoard === board && "active"}
+          className={boardPath === board && "active"}
         >
           <div>
             <div className="board-icon-con2">
@@ -112,7 +116,7 @@ const SidebarComponent = (props) => {
             </div>
             <span>{board}</span>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );

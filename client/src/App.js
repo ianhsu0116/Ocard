@@ -13,7 +13,7 @@ function App() {
   let [currentData2, setCurrentData2] = useState([]); // 備用的allData(搜尋或是切換看板用的)
   let [currentSearch, setCurrentSearch] = useState(""); // 當前搜尋欄位內容
   let [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // 控制手機版sidebar起閉
-  let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
+  // let [currentSidebarBoard, setCurrentSidebarBoard] = useState(""); // 當前在哪個看板
   let [boards, setBoards] = useState([
     "NBA",
     "健身",
@@ -49,26 +49,9 @@ function App() {
         setMobileSidebarOpen={setMobileSidebarOpen}
         setCurrentData={setCurrentData}
         setCurrentData2={setCurrentData2}
-        setCurrentSidebarBoard={setCurrentSidebarBoard}
+        // setCurrentSidebarBoard={setCurrentSidebarBoard}
       />
       <Switch>
-        <Route path="/" exact>
-          <HomeComponent
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-            boards={boards}
-            currentSearch={currentSearch}
-            setCurrentSearch={setCurrentSearch}
-            mobileSidebarOpen={mobileSidebarOpen}
-            setMobileSidebarOpen={setMobileSidebarOpen}
-            currentData={currentData}
-            setCurrentData={setCurrentData}
-            currentData2={currentData2}
-            setCurrentData2={setCurrentData2}
-            currentSidebarBoard={currentSidebarBoard}
-            setCurrentSidebarBoard={setCurrentSidebarBoard}
-          />
-        </Route>
         <Route path="/login" exact>
           <LoginComponent
             currentUser={currentUser}
@@ -82,6 +65,23 @@ function App() {
           <ProfileComponent
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
+          />
+        </Route>
+        <Route path="/:boardPath?" exact>
+          <HomeComponent
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            boards={boards}
+            currentSearch={currentSearch}
+            setCurrentSearch={setCurrentSearch}
+            mobileSidebarOpen={mobileSidebarOpen}
+            setMobileSidebarOpen={setMobileSidebarOpen}
+            currentData={currentData}
+            setCurrentData={setCurrentData}
+            currentData2={currentData2}
+            setCurrentData2={setCurrentData2}
+            // currentSidebarBoard={currentSidebarBoard}
+            // setCurrentSidebarBoard={setCurrentSidebarBoard}
           />
         </Route>
       </Switch>

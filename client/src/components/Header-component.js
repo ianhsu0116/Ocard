@@ -14,7 +14,7 @@ const HeaderComponent = (props) => {
     setMobileSidebarOpen,
     setCurrentData,
     setCurrentData2,
-    setCurrentSidebarBoard,
+    // setCurrentSidebarBoard,
   } = props;
   let [searchInput, setSearchInput] = useState("");
   const history = useHistory();
@@ -54,7 +54,7 @@ const HeaderComponent = (props) => {
       });
 
     // 按下logo等同於回到所有看板，故將當前所在看板位置回歸預設
-    setCurrentSidebarBoard("");
+    //setCurrentSidebarBoard("");
   };
 
   // 即時抓取search input value
