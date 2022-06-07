@@ -35,7 +35,9 @@ app.use(
   articleRoute
 );
 
+const PORT = 80;
+
 // port listen
-app.listen(7777, () => {
-  console.log("Server running on port 7777");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

@@ -47,6 +47,9 @@ Amazon S3
 
 ### added
 
+- 2022/06/07
+  Dockerize !!!
+
 - 2021/10/17
   Useing Amazon S3 to store upload images
 
@@ -61,6 +64,21 @@ Amazon S3
 - 2021-10-30
   Disabled background body scroll when article modal is showing
 
+### How to start the app
+
+- Client
+  ```
+  $ cd client
+  $ docker build -t ocard-client  .
+  $ docker run -it -p 3000:3000 ocard-client
+  ```
+
+- Server
+  ```
+  $ cd server
+  $ docker build -t ocard-server  .
+  $ docker run -p 7777:80 ocard-server 
+  ```
 ## Conteact
 
 If you got any problem when using Ocard, or had any suggestion about it. Please feel free to contact with me via email.
